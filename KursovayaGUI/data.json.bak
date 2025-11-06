@@ -1,0 +1,11 @@
+{
+  "bookings": [],
+  "clients": [],
+  "nextIds": {
+    "booking": 1,
+    "client": 3,
+    "room": 2
+  },
+  "rooms": [],
+  "version": 1
+}
