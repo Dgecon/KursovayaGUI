@@ -23,6 +23,7 @@ enum IDs {
     ID_AddAmenity = 5,
     ID_ListOfBookings = 6,
     ID_AddBooking = 7,
+    ID_EditClient = 11,
 	ID_DeleteBooking = 8,
 	ID_DeleteRoom = 9,
 	ID_DeleteClient = 10
@@ -37,70 +38,75 @@ EVT_BUTTON(ID_AddBooking, MainFrame::OnAddBooking)
 EVT_BUTTON(ID_DeleteBooking, MainFrame::OnDeleteBooking)
 EVT_BUTTON(ID_DeleteRoom, MainFrame::OnDeleteRoom)
 EVT_BUTTON(ID_DeleteClient, MainFrame::OnDeleteClient)
+EVT_BUTTON(ID_EditClient, MainFrame::OnEditClient)
 EVT_CLOSE(MainFrame::OnClose)
 wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString& title)
-    : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
+ : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800,600))
 {
-    wxPanel* panel = new wxPanel(this, wxID_ANY);
-    wxStaticText* clientsLabel = new wxStaticText(panel, wxID_ANY, "Клиенты", wxPoint(320, 10), wxSize(100, 20));
-    wxStaticText* roomsLabel = new wxStaticText(panel, wxID_ANY, "Комнаты", wxPoint(680, 10), wxSize(50, 20));
-    wxButton* AddClientButton = new wxButton(panel, ID_AddClient, "Добавить клиента", wxPoint(20, 30), wxSize(140, 30));
-    wxButton* AddRoomButton = new wxButton(panel, ID_AddRoom, "Добавить комнату", wxPoint(20, 70), wxSize(140, 30));
-    wxButton* AddAmenityButton = new wxButton(panel, ID_AddAmenity, "Добавить удобства", wxPoint(750,0), wxSize(130, 30));
-    wxButton* AddBookingButton = new wxButton(panel, ID_AddBooking, "Добавить бронирование", wxPoint(10, 470), wxSize(150, 30));
-	wxButton* DeleteBookingButton = new wxButton(panel, ID_DeleteBooking, "Удалить бронирование", wxPoint(10, 510), wxSize(140, 30));
-	wxButton* DeleteRoomButton = new wxButton(panel, ID_DeleteRoom, "Удалить комнату", wxPoint(20, 150), wxSize(130, 30));
-	wxButton* DeleteClientButton = new wxButton(panel, ID_DeleteClient, "Удалить клиента", wxPoint(20, 110), wxSize(130, 30));
-    listOfClients = new wxListBox(panel, ID_ListOfClients, wxPoint(170, 30), wxSize(350, 400));
-    listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxPoint(530, 30), wxSize(350, 400));
-    listOfBookings = new wxListBox(panel, ID_ListOfBookings, wxPoint(170, 470), wxSize(660, 120));
-    listOfClients->SetBackgroundColour(wxColour(240, 240, 240));
-    listOfRooms->SetBackgroundColour(wxColour(240, 240, 240));
-    listOfBookings->SetBackgroundColour(wxColour(240, 240, 240));
-	DeleteBookingButton->SetBackgroundColour(wxColour(255, 153, 153));
-	DeleteRoomButton->SetBackgroundColour(wxColour(255, 153, 153));
-	DeleteClientButton->SetBackgroundColour(wxColour(255, 153, 153));
+ wxPanel* panel = new wxPanel(this, wxID_ANY);
+ wxStaticText* clientsLabel = new wxStaticText(panel, wxID_ANY, "Клиенты", wxPoint(320,10), wxSize(100,20));
+ wxStaticText* roomsLabel = new wxStaticText(panel, wxID_ANY, "Комнаты", wxPoint(680,10), wxSize(50,20));
+ wxButton* AddClientButton = new wxButton(panel, ID_AddClient, "Добавить клиента", wxPoint(20,30), wxSize(140,30));
+ wxButton* EditClientButton = new wxButton(panel, ID_EditClient, "Редактировать клиента", wxPoint(20,70), wxSize(140,30));
+ // Bind explicitly to ensure the button triggers the handler
+ EditClientButton->Bind(wxEVT_BUTTON, &MainFrame::OnEditClient, this, ID_EditClient);
+ wxButton* DeleteClientButton = new wxButton(panel, ID_DeleteClient, "Удалить клиента", wxPoint(20,110), wxSize(140,30));
+ wxButton* AddRoomButton = new wxButton(panel, ID_AddRoom, "Добавить комнату", wxPoint(20,150), wxSize(140,30));
+ wxButton* DeleteRoomButton = new wxButton(panel, ID_DeleteRoom, "Удалить комнату", wxPoint(20,190), wxSize(130,30));
+ wxButton* AddAmenityButton = new wxButton(panel, ID_AddAmenity, "Добавить удобства", wxPoint(750,0), wxSize(130,30));
+ wxButton* AddBookingButton = new wxButton(panel, ID_AddBooking, "Добавить бронирование", wxPoint(10,470), wxSize(150,30));
+ wxButton* DeleteBookingButton = new wxButton(panel, ID_DeleteBooking, "Удалить бронирование", wxPoint(10,510), wxSize(140,30));
 
-    std::vector<Client> tclients;
-    std::vector<Room> trooms;
-    std::vector<Booking> tbookings;
-    int nextC = IdGenerator::getNextClientId();
-    int nextR = IdGenerator::getNextRoomId();
-    int nextB = IdGenerator::getNextBookingId();
-    std::string loadErr;
-    if (LoadData("data.json", tclients, trooms, tbookings, nextC, nextR, nextB, loadErr)) {
-        clients = std::move(tclients);
-        rooms = std::move(trooms);
-        bookings = std::move(tbookings);
-        IdGenerator::setNextIds(nextC, nextR, nextB);
-    } else {
-        if (!loadErr.empty()) wxLogError(loadErr);
-    }
+ listOfClients = new wxListBox(panel, ID_ListOfClients, wxPoint(170,30), wxSize(350,400));
+ listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxPoint(530,30), wxSize(350,400));
+ listOfBookings = new wxListBox(panel, ID_ListOfBookings, wxPoint(170,470), wxSize(660,120));
+ listOfClients->SetBackgroundColour(wxColour(240,240,240));
+ listOfRooms->SetBackgroundColour(wxColour(240,240,240));
+ listOfBookings->SetBackgroundColour(wxColour(240,240,240));
+ DeleteBookingButton->SetBackgroundColour(wxColour(255,153,153));
+ DeleteRoomButton->SetBackgroundColour(wxColour(255,153,153));
+ DeleteClientButton->SetBackgroundColour(wxColour(255,153,153));
 
-    refreshClientsList();
-    refreshRoomsList();
-    refreshBookingsList();
+ std::vector<Client> tclients;
+ std::vector<Room> trooms;
+ std::vector<Booking> tbookings;
+ int nextC = IdGenerator::getNextClientId();
+ int nextR = IdGenerator::getNextRoomId();
+ int nextB = IdGenerator::getNextBookingId();
+ std::string loadErr;
+ if (LoadData("data.json", tclients, trooms, tbookings, nextC, nextR, nextB, loadErr)) {
+ clients = std::move(tclients);
+ rooms = std::move(trooms);
+ bookings = std::move(tbookings);
+ IdGenerator::setNextIds(nextC, nextR, nextB);
+ } else {
+ if (!loadErr.empty()) wxLogError(loadErr);
+ }
+
+ refreshClientsList();
+ refreshRoomsList();
+ refreshBookingsList();
 }
 
 MainFrame::~MainFrame() {
-    if (!SaveData("data.json", clients, rooms, bookings,
-        IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId()))
-    {
-        wxLogError("Не удалось сохранить данные при закрытии");
-    }
+ if (!SaveData("data.json", clients, rooms, bookings,
+ IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId()))
+ {
+ wxLogError("Не удалось сохранить данные при закрытии");
+ }
 }
 
 void MainFrame::OnClose(wxCloseEvent& event) {
-    // Save data
-    if (!SaveData("data.json", clients, rooms, bookings,
-        IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId()))
-    {
-        wxLogError("Не удалось сохранить данные");
-    }
+ // Save data
+ if (!SaveData("data.json", clients, rooms, bookings,
+ IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId()))
+ {
+ wxLogError("Не удалось сохранить данные");
+ }
 
-    event.Skip();
+ event.Skip();
 }
 
 void MainFrame::OnAddBooking(wxCommandEvent& event) {
@@ -356,6 +362,32 @@ void MainFrame::OnDeleteClient(wxCommandEvent& event) {
         wxLogError("Не могу найти клиента по ID для удаления");
     }
 }
+void MainFrame::OnEditClient(wxCommandEvent& event) {
+ long sel = listOfClients->GetSelection();
+ if (sel == wxNOT_FOUND) {
+ wxMessageBox("Пожалуйста, выберите клиента для редактирования.", "Информация", wxOK | wxICON_INFORMATION, this);
+ return;
+ }
+ void* data = listOfClients->GetClientData(sel);
+ if (!data) { wxLogError("Нет client data для выбранного элемента"); return; }
+ int clientId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ Client* client = findClientById(clientId);
+ if (!client) { wxLogError("Клиент не найден"); return; }
+
+ AddClientDialog dlg(this);
+ dlg.setValues(*client);
+ if (dlg.ShowModal() != wxID_OK) return;
+
+ // update client fields: first, last, phone, passport
+ client->setFirstName(std::string(dlg.getFirstName().ToUTF8().data()));
+ client->setLastName(std::string(dlg.getLastName().ToUTF8().data()));
+ client->setPhone(std::string(dlg.getPhone().ToUTF8().data()));
+ Passport p = dlg.getPassport();
+ client->setPassport(p);
+
+ refreshClientsList();
+}
+
 Room* MainFrame::findRoomById(int roomId) {
     for (auto& room : rooms) {
         if (room.getId() == roomId) {

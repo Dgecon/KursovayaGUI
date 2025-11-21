@@ -1,4 +1,5 @@
 #include "AddClientDialog.h"
+#include "Client.h"
 
 AddClientDialog::AddClientDialog(wxWindow* parent)
  : wxDialog(parent, wxID_ANY, "Добавить клиента", wxDefaultPosition, wxSize(520,360))
@@ -20,6 +21,7 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  m_phone = new wxTextCtrl(this, wxID_ANY);
  grid->Add(m_phone,1, wxEXPAND);
 
+ // Passport fields
  grid->Add(new wxStaticText(this, wxID_ANY, "Паспорт - серия:"),0, wxALIGN_CENTER_VERTICAL);
  m_series = new wxTextCtrl(this, wxID_ANY);
  grid->Add(m_series,1, wxEXPAND);
@@ -67,6 +69,7 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
 
  SetSizerAndFit(topsizer);
 
+ // Bind OK to validation
  Bind(wxEVT_BUTTON, &AddClientDialog::OnOk, this, wxID_OK);
 }
 
@@ -99,6 +102,7 @@ Passport AddClientDialog::getPassport() const {
 }
 
 void AddClientDialog::OnOk(wxCommandEvent& evt) {
+ // Basic validation: names not empty, series/number numeric, issue/birth dates valid
  if (m_first->GetValue().IsEmpty() || m_last->GetValue().IsEmpty()) {
  wxMessageBox("Введите имя и фамилию", "Ошибка", wxOK | wxICON_ERROR, this);
  return;
@@ -121,5 +125,23 @@ void AddClientDialog::OnOk(wxCommandEvent& evt) {
  wxMessageBox("Неверная дата выдачи или дата рождения", "Ошибка", wxOK | wxICON_ERROR, this);
  return;
  }
+ // all good
  EndModal(wxID_OK);
+}
+
+void AddClientDialog::setValues(const Client& client) {
+ m_first->SetValue(wxString::FromUTF8(client.getFirstName().c_str()));
+ m_last->SetValue(wxString::FromUTF8(client.getLastName().c_str()));
+ m_phone->SetValue(wxString::FromUTF8(client.getPhone().c_str()));
+ Passport p = client.getPassport();
+ m_series->SetValue(wxString::Format("%d", p.getSeries()));
+ m_number->SetValue(wxString::Format("%d", p.getNumber()));
+ m_givenBy->SetValue(wxString::FromUTF8(p.getGivenBy().c_str()));
+ m_issueDay->SetValue(wxString::Format("%d", p.getDateOfIssue().getDay()));
+ m_issueMonth->SetValue(wxString::Format("%d", p.getDateOfIssue().getMonth()));
+ m_issueYear->SetValue(wxString::Format("%d", p.getDateOfIssue().getYear()));
+ m_code->SetValue(wxString::FromUTF8(p.getCode().c_str()));
+ m_birthDay->SetValue(wxString::Format("%d", p.getDateOfBirth().getDay()));
+ m_birthMonth->SetValue(wxString::Format("%d", p.getDateOfBirth().getMonth()));
+ m_birthYear->SetValue(wxString::Format("%d", p.getDateOfBirth().getYear()));
 }

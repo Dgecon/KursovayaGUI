@@ -18,6 +18,7 @@ private:
 	void OnDeleteRoom(wxCommandEvent& event);
 	void OnDeleteClient(wxCommandEvent& event);
 
+    // handle window close to save data
     void OnClose(wxCloseEvent& event);
 
     wxListBox* listOfClients = nullptr;
@@ -30,9 +31,13 @@ private:
 
     wxDECLARE_EVENT_TABLE();
 
+    // вспомогательные методы
     Room* findRoomById(int roomId);
     Client* findClientById(int clientId);
     void refreshRoomsList();
     void refreshClientsList();
     void refreshBookingsList();
+
+    // Edit client
+    void OnEditClient(wxCommandEvent& event);
 };

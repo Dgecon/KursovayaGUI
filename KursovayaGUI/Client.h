@@ -21,6 +21,12 @@ public:
     std::string getLastName() const { return lastName; }
     std::string getPhone() const { return phone; }
     Passport getPassport() const { return passport; }
+
+    // setters for editing
+    void setFirstName(const std::string& fn) { firstName = fn; }
+    void setLastName(const std::string& ln) { lastName = ln; }
+    void setPhone(const std::string& ph) { phone = ph; }
+    void setPassport(const Passport& p) { passport = p; }
 };
 
 #endif // CLIENT_H

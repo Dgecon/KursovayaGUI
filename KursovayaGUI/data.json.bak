@@ -1,74 +1,33 @@
 {
-  "bookings": [
-    {
-      "checkIn": {
-        "day": 1,
-        "month": 1,
-        "year": 2024
-      },
-      "checkOut": {
-        "day": 1,
-        "month": 1,
-        "year": 2024
-      },
-      "clientId": 2,
-      "id": 1,
-      "roomId": 1,
-      "status": 0,
-      "totalPrice": 0.0
-    }
-  ],
+  "bookings": [],
   "clients": [
     {
-      "firstName": "s",
-      "id": 1,
-      "lastName": "s",
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
       "passport": {
         "birth": {
           "day": 1,
-          "month": 1,
+          "month": 2,
           "year": 2024
         },
-        "code": "s",
-        "fio": "s s",
-        "givenBy": "s",
+        "code": "2121",
+        "fio": "вы аавав",
+        "givenBy": "ывывы",
         "issue": {
           "day": 1,
-          "month": 1,
+          "month": 2,
           "year": 2024
         },
-        "number": 4,
-        "series": 5
+        "number": 23323,
+        "series": 3232
       },
-      "phone": "s"
-    },
-    {
-      "firstName": "Danya",
-      "id": 2,
-      "lastName": "danin",
-      "passport": {
-        "birth": {
-          "day": 7,
-          "month": 8,
-          "year": 2024
-        },
-        "code": "54555",
-        "fio": "Danya danin",
-        "givenBy": "kkk",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 545,
-        "series": 788
-      },
-      "phone": "555"
+      "phone": "232323"
     }
   ],
   "nextIds": {
     "booking": 2,
-    "client": 3,
+    "client": 4,
     "room": 2
   },
   "rooms": [
@@ -78,7 +37,7 @@
       "id": 1,
       "pricePerNight": 55.0,
       "roomNumber": 4,
-      "status": "Забронирована"
+      "status": "Уборка"
     }
   ],
   "version": 1

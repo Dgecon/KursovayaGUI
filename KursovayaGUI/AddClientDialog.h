@@ -2,6 +2,7 @@
 
 #include <wx/wx.h>
 #include "Passport.h"
+class Client;
 
 class AddClientDialog : public wxDialog
 {
@@ -11,12 +12,18 @@ public:
  wxString getFirstName() const;
  wxString getLastName() const;
  wxString getPhone() const;
+ // returns constructed Passport
  Passport getPassport() const;
+
+ // prefill dialog from existing client
+ void setValues(const Client& client);
 
 private:
  wxTextCtrl* m_first;
  wxTextCtrl* m_last;
  wxTextCtrl* m_phone;
+
+ // passport fields
  wxTextCtrl* m_series;
  wxTextCtrl* m_number;
  wxTextCtrl* m_givenBy;
