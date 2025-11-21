@@ -6,6 +6,8 @@
 #include "Booking.h"
 #include "IdGenerator.h"
 #include "Persistence.h"
+#include "AddClientDialog.h"
+#include "AddRoomDialog.h"
 #include <vector>
 #include <wx/listbox.h>
 #include <wx/textdlg.h>
@@ -98,7 +100,6 @@ void MainFrame::OnClose(wxCloseEvent& event) {
         wxLogError("Не удалось сохранить данные");
     }
 
-    // Allow default processing to destroy the window
     event.Skip();
 }
 
@@ -171,41 +172,35 @@ void MainFrame::OnDeleteBooking(wxCommandEvent& event) {
     refreshBookingsList();
 }
 void MainFrame::OnAddRoom(wxCommandEvent& event) {
-    wxTextEntryDialog dlgRoomNumber(this, "Введите номер комнаты:", "Новая комната");
-    if (dlgRoomNumber.ShowModal() != wxID_OK) return;
+ AddRoomDialog dlg(this);
+ if (dlg.ShowModal() != wxID_OK) return;
 
-    wxTextEntryDialog dlgCategory(this, "Введите категорию комнаты:", "Новая комната");
-    if (dlgCategory.ShowModal() != wxID_OK) return;
+ wxString wxRoomNumber = dlg.getRoomNumber();
+ wxString wxCategory = dlg.getCategory();
+ wxString wxPrice = dlg.getPrice();
 
-    wxTextEntryDialog dlgPrice(this, "Введите цену за ночь:", "Новая комната");
-    if (dlgPrice.ShowModal() != wxID_OK) return;
+ long roomNumber =0;
+ double price =0.0;
 
-    wxString wxRoomNumber = dlgRoomNumber.GetValue();
-    wxString wxCategory = dlgCategory.GetValue();
-    wxString wxPrice = dlgPrice.GetValue();
+ bool okNumber = wxRoomNumber.ToLong(&roomNumber);
+ bool okPrice = wxPrice.ToDouble(&price);
 
-    long roomNumber = 0; 
-    double price = 0.0;
+ if (!okNumber) {
+ wxMessageBox("Некорректный номер комнаты.", "Ошибка", wxOK | wxICON_ERROR, this);
+ return;
+ }
+ if (!okPrice) {
+ wxMessageBox("Некорректная цена.", "Ошибка", wxOK | wxICON_ERROR, this);
+ return;
+ }
 
-    bool okNumber = wxRoomNumber.ToLong(&roomNumber);
-    bool okPrice = wxPrice.ToDouble(&price);
+ std::string category = std::string(wxCategory.ToUTF8().data());
+ std::vector<std::string> amenities;
 
-    if (!okNumber) {
-        wxMessageBox("Некорректный номер комнаты.", "Ошибка", wxOK | wxICON_ERROR, this);
-        return;
-    }
-    if (!okPrice) {
-        wxMessageBox("Некорректная цена.", "Ошибка", wxOK | wxICON_ERROR, this);
-        return;
-    }
+ int roomId = IdGenerator::generateRoomId();
+ rooms.emplace_back(roomId, static_cast<int>(roomNumber), category, price, RoomStatus::AVAILABLE, amenities);
 
-    std::string category = std::string(wxCategory.ToUTF8().data());
-    std::vector<std::string> amenities;
-
-    int roomId = IdGenerator::generateRoomId();
-    rooms.emplace_back(roomId, static_cast<int>(roomNumber), category, price, RoomStatus::AVAILABLE, amenities);
-
-    refreshRoomsList();
+ refreshRoomsList();
 }
 
 void MainFrame::OnDeleteRoom(wxCommandEvent& event) {
@@ -294,32 +289,22 @@ void MainFrame::OnAddAmenity(wxCommandEvent& event) {
 }
 
 void MainFrame::OnAddClient(wxCommandEvent& event) {
-    wxTextEntryDialog dlgFirst(this, "Введите имя:", "Новый клиент");
-    if (dlgFirst.ShowModal() != wxID_OK) return;
+ AddClientDialog dlg(this);
+ if (dlg.ShowModal() != wxID_OK) return;
 
-    wxTextEntryDialog dlgLast(this, "Введите фамилию:", "Новый клиент");
-    if (dlgLast.ShowModal() != wxID_OK) return;
+ wxString wxFirst = dlg.getFirstName();
+ wxString wxLast = dlg.getLastName();
+ wxString wxPhone = dlg.getPhone();
+ Passport passport = dlg.getPassport();
 
-    wxTextEntryDialog dlgPhone(this, "Введите телефон:", "Новый клиент");
-    if (dlgPhone.ShowModal() != wxID_OK) return;
+ std::string first = std::string(wxFirst.ToUTF8().data());
+ std::string last = std::string(wxLast.ToUTF8().data());
+ std::string phone = std::string(wxPhone.ToUTF8().data());
 
-    wxTextEntryDialog dlgPassport(this, "Введите паспорт:", "Новый клиент");
-    if (dlgPassport.ShowModal() != wxID_OK) return;
+ int clientId = IdGenerator::generateClientId();
+ clients.emplace_back(clientId, first, last, phone, passport);
 
-    wxString wxFirst = dlgFirst.GetValue();
-    wxString wxLast = dlgLast.GetValue();
-    wxString wxPhone = dlgPhone.GetValue();
-    wxString wxPassport = dlgPassport.GetValue();
-
-    std::string first = std::string(wxFirst.ToUTF8().data());
-    std::string last = std::string(wxLast.ToUTF8().data());
-    std::string phone = std::string(wxPhone.ToUTF8().data());
-    std::string passport = std::string(wxPassport.ToUTF8().data());
-
-    int clientId = IdGenerator::generateClientId();
-    clients.emplace_back(clientId, first, last, phone, passport);
-
-    refreshClientsList();
+ refreshClientsList();
 }
 void MainFrame::OnDeleteClient(wxCommandEvent& event) {
     if (!listOfClients) {
@@ -406,41 +391,41 @@ void MainFrame::refreshRoomsList() {
 }
 
 void MainFrame::refreshClientsList() {
-    if (!listOfClients) return;
-    listOfClients->Clear();
-    for (const auto& client : clients) {
-        wxString display = wxString::Format("%d. %s %s, Тел: %s, Паспорт: %s",
-            client.getId(),
-            wxString::FromUTF8(client.getFirstName().c_str()),
-            wxString::FromUTF8(client.getLastName().c_str()),
-            wxString::FromUTF8(client.getPhone().c_str()),
-            wxString::FromUTF8(client.getPassport().c_str()));
-        listOfClients->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(client.getId())));
-    }
-    listOfClients->Refresh();
-    listOfClients->Update();
+ if (!listOfClients) return;
+ listOfClients->Clear();
+ for (const auto& client : clients) {
+ wxString display = wxString::Format("%d. %s %s, Тел: %s, Паспорт: %s",
+ client.getId(),
+ wxString::FromUTF8(client.getFirstName().c_str()),
+ wxString::FromUTF8(client.getLastName().c_str()),
+ wxString::FromUTF8(client.getPhone().c_str()),
+ wxString::FromUTF8(client.getPassport().toString().c_str()));
+ listOfClients->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(client.getId())));
+ }
+ listOfClients->Refresh();
+ listOfClients->Update();
 }
 
 void MainFrame::refreshBookingsList() {
-    if (!listOfBookings) return;
-    listOfBookings->Clear();
-    for (const auto& booking : bookings) {
-        Room* room = findRoomById(booking.getRoomId());
-        Client* client = findClientById(booking.getClientId());
+ if (!listOfBookings) return;
+ listOfBookings->Clear();
+ for (const auto& booking : bookings) {
+ Room* room = findRoomById(booking.getRoomId());
+ Client* client = findClientById(booking.getClientId());
 
-        wxString roomInfo = room ? wxString::Format("Комната %d", room->getRoomNumber()) : "Комната не найдена";
-        wxString clientInfo = client ? wxString::FromUTF8(client->getFullName().c_str()) : "Клиент не найден";
+ wxString roomInfo = room ? wxString::Format("Комната %d", room->getRoomNumber()) : "Комната не найдена";
+ wxString clientInfo = client ? wxString::FromUTF8(client->getFullName().c_str()) : "Клиент не найден";
 
-        wxString display = wxString::Format("Бронирование #%d: %s, %s, %s - %s, %.2f руб.",
-            booking.getId(),
-            roomInfo,
-            clientInfo,
-            wxString::FromUTF8(booking.getCheckInDate().toString().c_str()),
-            wxString::FromUTF8(booking.getCheckOutDate().toString().c_str()),
-            booking.getTotalPrice());
+ wxString display = wxString::Format("Бронирование #%d: %s, %s, %s - %s, %.2f руб.",
+ booking.getId(),
+ roomInfo,
+ clientInfo,
+ wxString::FromUTF8(booking.getCheckInDate().toString().c_str()),
+ wxString::FromUTF8(booking.getCheckOutDate().toString().c_str()),
+ booking.getTotalPrice());
 
-        listOfBookings->Append(display);
-    }
-    listOfBookings->Refresh();
-    listOfBookings->Update();
+ listOfBookings->Append(display);
+ }
+ listOfBookings->Refresh();
+ listOfBookings->Update();
 }

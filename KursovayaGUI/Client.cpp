@@ -1,7 +1,7 @@
 #include "Client.h"
 #include <string>
 
-Client::Client(int id, const std::string& firstName, const std::string& lastName, const std::string& phone, const std::string& passport)
+Client::Client(int id, const std::string& firstName, const std::string& lastName, const std::string& phone, const Passport& passport)
     : id(id), firstName(firstName), lastName(lastName), phone(phone), passport(passport)
 {
 }

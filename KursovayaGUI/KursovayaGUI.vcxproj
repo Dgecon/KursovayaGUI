@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddClientDialog.h" />
+    <ClInclude Include="AddRoomDialog.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Booking.h" />
     <ClInclude Include="BookingStatus.h" />
@@ -26,11 +28,14 @@
     <ClInclude Include="Date.h" />
     <ClInclude Include="IdGenerator.h" />
     <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="Passport.h" />
     <ClInclude Include="Persistence.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="RoomStatus.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddClientDialog.cpp" />
+    <ClCompile Include="AddRoomDialog.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Booking.cpp" />
     <ClCompile Include="BookingStatus.cpp" />
@@ -38,6 +43,7 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="IdGenerator.cpp" />
     <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="Passport.cpp" />
     <ClCompile Include="Persistence.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="RoomStatus.cpp" />

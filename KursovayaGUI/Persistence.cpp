@@ -4,16 +4,17 @@
 #include "Booking.h"
 #include "RoomStatus.h"
 #include "Date.h"
+#include "Passport.h"
 #include <fstream>
 #include <cstdio>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 
-// Преобразование RoomStatus <-> string
+// Преобразование RoomStatus в string
 static std::string RoomStatusToStr(RoomStatus s) { return RoomStatusToString(s); }
 static RoomStatus RoomStatusFromStr(const std::string& s) {
-    // Простейшая реализация — сравниваем строки
+
     if (s == "Доступна" || s == u8"Доступна" || s == "AVAILABLE") return RoomStatus::AVAILABLE;
     if (s == "Забронирована" || s == u8"Забронирована" || s == "BOOKED") return RoomStatus::BOOKED;
     if (s == "Занята" || s == u8"Занята" || s == "OCCUPIED") return RoomStatus::OCCUPIED;
@@ -36,12 +37,24 @@ bool SaveData(const std::string& path,
         // clients
         j["clients"] = json::array();
         for (const auto& c : clients) {
+            // serialize passport
+            Passport p = c.getPassport();
+            json jp = {
+                {"series", p.getSeries()},
+                {"number", p.getNumber()},
+                {"givenBy", p.getGivenBy()},
+                {"issue", { {"day", p.getDateOfIssue().getDay()}, {"month", p.getDateOfIssue().getMonth()}, {"year", p.getDateOfIssue().getYear()} }},
+                {"code", p.getCode()},
+                {"fio", p.getFio()},
+                {"birth", { {"day", p.getDateOfBirth().getDay()}, {"month", p.getDateOfBirth().getMonth()}, {"year", p.getDateOfBirth().getYear()} }}
+            };
+
             j["clients"].push_back({
                 {"id", c.getId()},
                 {"firstName", c.getFirstName()},
                 {"lastName", c.getLastName()},
                 {"phone", c.getPhone()},
-                {"passport", c.getPassport()}
+                {"passport", jp}
             });
         }
 
@@ -113,11 +126,36 @@ bool LoadData(const std::string& path,
         clients.clear();
         if (j.contains("clients")) {
             for (auto& jc : j["clients"]) {
-                clients.emplace_back(jc.value("id", 0),
+                // passport
+                Passport p;
+                if (jc.contains("passport")) {
+                    auto jp = jc["passport"];
+                    p.setSeries(jp.value("series",0));
+                    p.setNumber(jp.value("number",0));
+                    p.setGivenBy(jp.value("givenBy", std::string()));
+                    if (jp.contains("issue")) {
+                        Date d;
+                        d.setDay(jp["issue"].value("day",1));
+                        d.setMonth(jp["issue"].value("month",1));
+                        d.setYear(jp["issue"].value("year",2024));
+                        p.setDateOfIssue(d);
+                    }
+                    p.setCode(jp.value("code", std::string()));
+                    p.setFio(jp.value("fio", std::string()));
+                    if (jp.contains("birth")) {
+                        Date d;
+                        d.setDay(jp["birth"].value("day",1));
+                        d.setMonth(jp["birth"].value("month",1));
+                        d.setYear(jp["birth"].value("year",2000));
+                        p.setDateOfBirth(d);
+                    }
+                }
+
+                clients.emplace_back(jc.value("id",0),
                                      jc.value("firstName", std::string()),
                                      jc.value("lastName", std::string()),
                                      jc.value("phone", std::string()),
-                                     jc.value("passport", std::string()));
+                                     p);
             }
         }
 
@@ -125,10 +163,10 @@ bool LoadData(const std::string& path,
         rooms.clear();
         if (j.contains("rooms")) {
             for (auto& jr : j["rooms"]) {
-                int id = jr.value("id", 0);
-                int roomNumber = jr.value("roomNumber", 0);
+                int id = jr.value("id",0);
+                int roomNumber = jr.value("roomNumber",0);
                 std::string category = jr.value("category", std::string());
-                double price = jr.value("pricePerNight", 0.0);
+                double price = jr.value("pricePerNight",0.0);
                 RoomStatus status = RoomStatusFromStr(jr.value("status", std::string()));
                 std::vector<std::string> amenities;
                 if (jr.contains("amenities")) for (auto& a : jr["amenities"]) amenities.push_back(a.get<std::string>());
@@ -140,22 +178,22 @@ bool LoadData(const std::string& path,
         bookings.clear();
         if (j.contains("bookings")) {
             for (auto& jb : j["bookings"]) {
-                int id = jb.value("id", 0);
-                int roomId = jb.value("roomId", 0);
-                int clientId = jb.value("clientId", 0);
+                int id = jb.value("id",0);
+                int roomId = jb.value("roomId",0);
+                int clientId = jb.value("clientId",0);
                 Date ci, co;
                 if (jb.contains("checkIn")) {
-                    ci.setDay(jb["checkIn"].value("day", 1));
-                    ci.setMonth(jb["checkIn"].value("month", 1));
-                    ci.setYear(jb["checkIn"].value("year", 2024));
+                    ci.setDay(jb["checkIn"].value("day",1));
+                    ci.setMonth(jb["checkIn"].value("month",1));
+                    ci.setYear(jb["checkIn"].value("year",2024));
                 }
                 if (jb.contains("checkOut")) {
-                    co.setDay(jb["checkOut"].value("day", 1));
-                    co.setMonth(jb["checkOut"].value("month", 1));
-                    co.setYear(jb["checkOut"].value("year", 2024));
+                    co.setDay(jb["checkOut"].value("day",1));
+                    co.setMonth(jb["checkOut"].value("month",1));
+                    co.setYear(jb["checkOut"].value("year",2024));
                 }
                 bookings.emplace_back(id, roomId, clientId, ci, co);
-                if (jb.contains("totalPrice")) bookings.back().setTotalPrice(jb.value("totalPrice", 0.0));
+                if (jb.contains("totalPrice")) bookings.back().setTotalPrice(jb.value("totalPrice",0.0));
                 if (jb.contains("status")) bookings.back().setStatus(static_cast<BookingStatus>(jb.value("status", (int)BookingStatus::CONFIRMED)));
             }
         }
