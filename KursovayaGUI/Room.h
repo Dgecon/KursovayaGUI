@@ -29,4 +29,8 @@ public:
     std::string toString() const;
     bool isActive() const { return active; }
     void setActive(bool val) { active = val; }
+
+    // setters for editing
+    void setRoomNumber(int num) { roomNumber = num; }
+    void setCategory(const std::string& cat) { category = cat; }
 };

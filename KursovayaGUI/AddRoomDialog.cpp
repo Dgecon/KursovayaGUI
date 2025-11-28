@@ -27,3 +27,9 @@ AddRoomDialog::AddRoomDialog(wxWindow* parent)
 wxString AddRoomDialog::getRoomNumber() const { return m_roomNumber->GetValue(); }
 wxString AddRoomDialog::getCategory() const { return m_category->GetValue(); }
 wxString AddRoomDialog::getPrice() const { return m_price->GetValue(); }
+
+void AddRoomDialog::setValues(int roomNumber, const wxString& category, double price) {
+ m_roomNumber->SetValue(wxString::Format("%d", roomNumber));
+ m_category->SetValue(category);
+ m_price->SetValue(wxString::Format("%.2f", price));
+}

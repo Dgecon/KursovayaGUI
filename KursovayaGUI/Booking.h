@@ -4,13 +4,14 @@
 #include "Date.h"
 #include "BookingStatus.h"
 #include <string>
+#include <vector>
 
 class Booking
 {
 private:
     int id;
-    int roomId;     // ID комнаты для бронирования
-    int clientId;   // ID клиента для бронирования
+    int roomId;                   // ID комнаты для бронирования
+    std::vector<int> clientIds;   // IDs клиентов для бронирования (группа)
     Date checkInDate;
     Date checkOutDate;
     BookingStatus status;
@@ -18,11 +19,11 @@ private:
     bool active = true;
 
 public:
-    Booking(int bookingId, int roomId, int clientId, const Date& checkIn, const Date& checkOut, bool active = true);
+    Booking(int bookingId, int roomId, const std::vector<int>& clientIds, const Date& checkIn, const Date& checkOut, bool active = true);
 
     int getId() const;
     int getRoomId() const;
-    int getClientId() const;
+    std::vector<int> getClientIds() const;
     Date getCheckInDate() const;
     Date getCheckOutDate() const;
     BookingStatus getStatus() const;

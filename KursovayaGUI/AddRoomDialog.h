@@ -11,6 +11,9 @@ public:
  wxString getCategory() const;
  wxString getPrice() const;
 
+ // prefill values for editing
+ void setValues(int roomNumber, const wxString& category, double price);
+
 private:
  wxTextCtrl* m_roomNumber;
  wxTextCtrl* m_category;

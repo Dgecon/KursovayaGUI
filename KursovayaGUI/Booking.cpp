@@ -3,11 +3,10 @@
 #include <string>
 #include <sstream>
 
-Booking::Booking(int bookingId, int rId, int cId, const Date& checkIn, const Date& checkOut, bool active)
-    : id(bookingId), roomId(rId), clientId(cId), checkInDate(checkIn),
+Booking::Booking(int bookingId, int rId, const std::vector<int>& cIds, const Date& checkIn, const Date& checkOut, bool active)
+    : id(bookingId), roomId(rId), clientIds(cIds), checkInDate(checkIn),
     checkOutDate(checkOut), status(BookingStatus::CONFIRMED), totalPrice(0.0), active(active)
 {
-    // totalPrice будет установлен позже, когда будем знать цену комнаты
 }
 
 int Booking::getId() const {
@@ -16,8 +15,8 @@ int Booking::getId() const {
 int Booking::getRoomId() const {
     return roomId;
 }
-int Booking::getClientId() const {
-    return clientId;
+std::vector<int> Booking::getClientIds() const {
+    return clientIds;
 }
 Date Booking::getCheckInDate() const {
     return checkInDate;
@@ -37,7 +36,11 @@ void Booking::setStatus(BookingStatus newStatus) {
 
 std::string Booking::toString() const {
     std::stringstream ss;
-    ss << "Бронирование #" << id << ": комната(" << roomId << "), клиент("
-        << clientId << "), " << checkInDate.toString() << " - " << checkOutDate.toString();
+    ss << "Бронирование #" << id << ": комната(" << roomId << "), клиенты(";
+    for (size_t i =0; i < clientIds.size(); ++i) {
+        ss << clientIds[i];
+        if (i +1 < clientIds.size()) ss << ",";
+    }
+    ss << "), " << checkInDate.toString() << " - " << checkOutDate.toString();
     return ss.str();
 }

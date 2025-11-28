@@ -40,4 +40,9 @@ private:
 
     // Edit client
     void OnEditClient(wxCommandEvent& event);
+    // Edit room
+    void OnEditRoom(wxCommandEvent& event);
+	// CSV import/export
+	void OnExportCSV(wxCommandEvent& event);
+	void OnImportCSV(wxCommandEvent& event);
 };
