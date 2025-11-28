@@ -3,9 +3,9 @@
 #include <string>
 #include <sstream>
 
-Booking::Booking(int bookingId, int rId, int cId, const Date& checkIn, const Date& checkOut)
+Booking::Booking(int bookingId, int rId, int cId, const Date& checkIn, const Date& checkOut, bool active)
     : id(bookingId), roomId(rId), clientId(cId), checkInDate(checkIn),
-    checkOutDate(checkOut), status(BookingStatus::CONFIRMED), totalPrice(0.0)
+    checkOutDate(checkOut), status(BookingStatus::CONFIRMED), totalPrice(0.0), active(active)
 {
     // totalPrice будет установлен позже, когда будем знать цену комнаты
 }

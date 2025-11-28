@@ -8,6 +8,7 @@
 #include "Persistence.h"
 #include "AddClientDialog.h"
 #include "AddRoomDialog.h"
+#include "AddBookingDialog.h"
 #include <vector>
 #include <wx/listbox.h>
 #include <wx/textdlg.h>
@@ -110,53 +111,65 @@ void MainFrame::OnClose(wxCloseEvent& event) {
 }
 
 void MainFrame::OnAddBooking(wxCommandEvent& event) {
-    if (!listOfBookings) {
-        wxLogError("listOfBookings == nullptr");
-        return;
-    }
+ if (!listOfBookings) {
+ wxLogError("listOfBookings == nullptr");
+ return;
+ }
 
-    long selRoom = listOfRooms->GetSelection();
-    long selClient = listOfClients->GetSelection();
+ long selRoom = listOfRooms->GetSelection();
+ long selClient = listOfClients->GetSelection();
 
-    if (selRoom == wxNOT_FOUND || selClient == wxNOT_FOUND) {
-        wxMessageBox("Пожалуйстa, выберите комнату и клиента.", "Информация", wxOK | wxICON_INFORMATION, this);
-        return;
-    }
+ if (selRoom == wxNOT_FOUND || selClient == wxNOT_FOUND) {
+ wxMessageBox("Пожалуйстa, выберите комнату и клиента.", "Информация", wxOK | wxICON_INFORMATION, this);
+ return;
+ }
 
-    void* roomData = listOfRooms->GetClientData(selRoom);
-    void* clientData = listOfClients->GetClientData(selClient);
-    if (!roomData || !clientData) {
-        wxLogError("Нет client data для выбранного элемента");
-        return;
-    }
+ void* roomData = listOfRooms->GetClientData(selRoom);
+ void* clientData = listOfClients->GetClientData(selClient);
+ if (!roomData || !clientData) {
+ wxLogError("Нет client data для выбранного элемента");
+ return;
+ }
 
-    int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(roomData));
-    int clientId = static_cast<int>(reinterpret_cast<std::intptr_t>(clientData));
+ int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(roomData));
+ int clientId = static_cast<int>(reinterpret_cast<std::intptr_t>(clientData));
 
-    Room* room = findRoomById(roomId);
-    Client* client = findClientById(clientId);
-    if (!room || !client) {
-        wxLogError("Не найден клиент или комната по ID");
-        return;
-    }
+ Room* room = findRoomById(roomId);
+ Client* client = findClientById(clientId);
+ if (!room || !client) {
+ wxLogError("Не найден клиент или комната по ID");
+ return;
+ }
 
-    if (room->getStatus() == RoomStatus::AVAILABLE) {
-        int bookingId = IdGenerator::generateBookingId();
-        Date checkIn; // по умолчанию
-        Date checkOut; // по умолчанию
+ // Show dialog to pick dates
+ AddBookingDialog dlg(this);
+ if (dlg.ShowModal() != wxID_OK) return;
+ Date ci = dlg.getCheckIn();
+ Date co = dlg.getCheckOut();
 
-        bookings.emplace_back(bookingId, room->getId(), client->getId(), checkIn, checkOut);
-        room->setStatus(RoomStatus::BOOKED);
+ // Check for overlapping active bookings for this room
+ for (const auto& b : bookings) {
+ if (!b.isActive()) continue;
+ if (b.getRoomId() != roomId) continue;
+ Date oci = b.getCheckInDate();
+ Date oco = b.getCheckOutDate();
+ // overlap if ci < oco && oci < co
+ if (ci.isBefore(oco) && oci.isBefore(co)) {
+ wxMessageBox("Выбранные даты пересекаются с существующим бронированием для этой комнаты.", "Ошибка", wxOK | wxICON_ERROR, this);
+ return;
+ }
+ }
 
-        int days = checkIn.DifferenceInDays(checkOut);
-        double totalPrice = days * room->getPricePerNight();
-        bookings.back().setTotalPrice(totalPrice);
+ int bookingId = IdGenerator::generateBookingId();
+ bookings.emplace_back(bookingId, room->getId(), client->getId(), ci, co, true);
+ room->setStatus(RoomStatus::BOOKED);
 
-        refreshRoomsList();
-        refreshBookingsList();
-    } else {
-        wxMessageBox("Комната не доступна для бронирования.", "Информация", wxOK | wxICON_INFORMATION, this);
-    }
+ int days = std::abs(ci.DifferenceInDays(co));
+ double totalPrice = days * room->getPricePerNight();
+ bookings.back().setTotalPrice(totalPrice);
+
+ refreshRoomsList();
+ refreshBookingsList();
 }
 void MainFrame::OnDeleteBooking(wxCommandEvent& event) {
     if (!listOfBookings) {
@@ -169,11 +182,14 @@ void MainFrame::OnDeleteBooking(wxCommandEvent& event) {
         return;
     }
     Booking& booking = bookings[sel];
-    Room* room = findRoomById(booking.getRoomId());
-    if (room) {
-        room->setStatus(RoomStatus::CLEANING);
+    // Soft-delete booking
+    for (auto& b : bookings) {
+        if (b.getId() == booking.getId()) { b.setActive(false); break; }
     }
-    bookings.erase(bookings.begin() + sel);
+    // set room status to CLEANING if room still active
+    Room* room = findRoomById(booking.getRoomId());
+    if (room) room->setStatus(RoomStatus::CLEANING);
+
     refreshRoomsList();
     refreshBookingsList();
 }
@@ -227,6 +243,7 @@ void MainFrame::OnDeleteRoom(wxCommandEvent& event) {
     int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
     std::vector<int> blocking;
     for (const auto& b : bookings) {
+        if (!b.isActive()) continue;
         if (b.getRoomId() == roomId) {
             auto st = b.getStatus();
             if (st == BookingStatus::CONFIRMED || st == BookingStatus::CHECKED_IN) {
@@ -245,19 +262,13 @@ void MainFrame::OnDeleteRoom(wxCommandEvent& event) {
         return;
     }
 
-    auto it = std::remove_if(rooms.begin(), rooms.end(),
-        [roomId](const Room& r) { return r.getId() == roomId; });
-    if (it != rooms.end()) {
-        rooms.erase(it, rooms.end());
-
-        bookings.erase(std::remove_if(bookings.begin(), bookings.end(),
-            [roomId](const Booking& b) { return b.getRoomId() == roomId; }), bookings.end());
-
-        refreshRoomsList();
-        refreshBookingsList();
-    } else {
-        wxLogError("Не могу найти комнату по ID для удаления");
+    for (auto& r : rooms) {
+        if (r.getId() == roomId) { r.setActive(false); break; }
     }
+    for (auto& b : bookings) { if (b.getRoomId() == roomId) b.setActive(false); }
+
+    refreshRoomsList();
+    refreshBookingsList();
 }
 
 void MainFrame::OnAddAmenity(wxCommandEvent& event) {
@@ -328,8 +339,10 @@ void MainFrame::OnDeleteClient(wxCommandEvent& event) {
         return;
     }
     int clientId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+    // Check for active bookings
     std::vector<int> blocking;
     for (const auto& b : bookings) {
+        if (!b.isActive()) continue;
         if (b.getClientId() == clientId) {
             auto st = b.getStatus();
             if (st == BookingStatus::CONFIRMED || st == BookingStatus::CHECKED_IN) {
@@ -348,19 +361,21 @@ void MainFrame::OnDeleteClient(wxCommandEvent& event) {
         return;
     }
 
-    auto it = std::remove_if(clients.begin(), clients.end(),
-        [clientId](const Client& c) { return c.getId() == clientId; });
-    if (it != clients.end()) {
-        clients.erase(it, clients.end());
-
-        bookings.erase(std::remove_if(bookings.begin(), bookings.end(),
-            [clientId](const Booking& b) { return b.getClientId() == clientId; }), bookings.end());
-
-        refreshClientsList();
-        refreshBookingsList();
-    } else {
-        wxLogError("Не могу найти клиента по ID для удаления");
+    // Soft-delete: mark inactive
+    for (auto& c : clients) {
+        if (c.getId() == clientId) {
+            c.setActive(false);
+            break;
+        }
     }
+
+    // also mark related bookings as inactive
+    for (auto& b : bookings) {
+        if (b.getClientId() == clientId) b.setActive(false);
+    }
+
+    refreshClientsList();
+    refreshBookingsList();
 }
 void MainFrame::OnEditClient(wxCommandEvent& event) {
  long sel = listOfClients->GetSelection();
@@ -410,6 +425,7 @@ void MainFrame::refreshRoomsList() {
     if (!listOfRooms) return;
     listOfRooms->Clear();
     for (const auto& r : rooms) {
+        if (!r.isActive()) continue;
         wxString display = wxString::Format("ID:%d, Номер:%d, Категория:%s, Цена:%.2f, Статус:%s",
             r.getId(),
             r.getRoomNumber(),
@@ -426,12 +442,12 @@ void MainFrame::refreshClientsList() {
  if (!listOfClients) return;
  listOfClients->Clear();
  for (const auto& client : clients) {
- wxString display = wxString::Format("%d. %s %s, Тел: %s, Паспорт: %s",
+ if (!client.isActive()) continue;
+ wxString display = wxString::Format("%d. %s %s, Тел: %s",
  client.getId(),
  wxString::FromUTF8(client.getFirstName().c_str()),
  wxString::FromUTF8(client.getLastName().c_str()),
- wxString::FromUTF8(client.getPhone().c_str()),
- wxString::FromUTF8(client.getPassport().toString().c_str()));
+ wxString::FromUTF8(client.getPhone().c_str()));
  listOfClients->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(client.getId())));
  }
  listOfClients->Refresh();
@@ -442,6 +458,7 @@ void MainFrame::refreshBookingsList() {
  if (!listOfBookings) return;
  listOfBookings->Clear();
  for (const auto& booking : bookings) {
+ if (!booking.isActive()) continue;
  Room* room = findRoomById(booking.getRoomId());
  Client* client = findClientById(booking.getClientId());
 

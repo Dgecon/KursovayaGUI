@@ -2,9 +2,9 @@
 #include <sstream>
 
 Room::Room(int id, int roomNumber, const std::string& category, double pricePerNight,
-    RoomStatus status, const std::vector<std::string>& amenities)
+    RoomStatus status, const std::vector<std::string>& amenities, bool active)
     : id(id), roomNumber(roomNumber), category(category), pricePerNight(pricePerNight),
-    status(status), amenities(amenities)
+    status(status), amenities(amenities), active(active)
 {
 }
 

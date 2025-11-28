@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddBookingDialog.h" />
     <ClInclude Include="AddClientDialog.h" />
     <ClInclude Include="AddRoomDialog.h" />
     <ClInclude Include="App.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="RoomStatus.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddBookingDialog.cpp" />
     <ClCompile Include="AddClientDialog.cpp" />
     <ClCompile Include="AddRoomDialog.cpp" />
     <ClCompile Include="App.cpp" />
