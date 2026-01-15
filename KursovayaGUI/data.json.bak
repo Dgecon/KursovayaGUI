@@ -2687,6 +2687,88 @@
       "roomId": 1,
       "status": 0,
       "totalPrice": 22000.0
+    },
+    {
+      "active": false,
+      "checkIn": {
+        "day": 3,
+        "month": 5,
+        "year": 2
+      },
+      "checkOut": {
+        "day": 3,
+        "month": 6,
+        "year": 2
+      },
+      "clientIds": [
+        6
+      ],
+      "id": 3,
+      "roomId": 5,
+      "status": 0,
+      "totalPrice": 203010.0
+    },
+    {
+      "active": false,
+      "checkIn": {
+        "day": 1,
+        "month": 1,
+        "year": 1
+      },
+      "checkOut": {
+        "day": 1,
+        "month": 1,
+        "year": 2
+      },
+      "clientIds": [
+        6,
+        7,
+        8
+      ],
+      "id": 4,
+      "roomId": 5,
+      "status": 1,
+      "totalPrice": 2469955.0
+    },
+    {
+      "active": false,
+      "checkIn": {
+        "day": 1,
+        "month": 1,
+        "year": 1
+      },
+      "checkOut": {
+        "day": 1,
+        "month": 1,
+        "year": 2
+      },
+      "clientIds": [
+        6
+      ],
+      "id": 5,
+      "roomId": 5,
+      "status": 1,
+      "totalPrice": 2469955.0
+    },
+    {
+      "active": true,
+      "checkIn": {
+        "day": 1,
+        "month": 1,
+        "year": 1
+      },
+      "checkOut": {
+        "day": 1,
+        "month": 2,
+        "year": 1
+      },
+      "clientIds": [
+        7
+      ],
+      "id": 6,
+      "roomId": 5,
+      "status": 1,
+      "totalPrice": 209777.0
     }
   ],
   "clients": [
@@ -2701,13 +2783,13 @@
           "month": 1,
           "year": 2024
         },
-        "code": "1,1,2024",
+        "code": "2024",
         "fio": "",
         "givenBy": "ывывы",
         "issue": {
           "day": 1,
-          "month": 2024,
-          "year": 2024
+          "month": 1,
+          "year": 1
         },
         "number": 23323,
         "series": 3232
@@ -2725,13 +2807,13 @@
           "month": 1,
           "year": 2024
         },
-        "code": "1,1,2024",
+        "code": "2024",
         "fio": "",
         "givenBy": "оро",
         "issue": {
           "day": 1,
-          "month": 2024,
-          "year": 2024
+          "month": 1,
+          "year": 1
         },
         "number": 27,
         "series": 72
@@ -4214,1542 +4296,6 @@
           "year": 2024
         },
         "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,2,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "4,2,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
         "fio": "",
         "givenBy": "оро",
         "issue": {
@@ -7309,6 +5855,1542 @@
           "month": 1,
           "year": 2024
         },
+        "code": "1,2,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "4,2,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323"
+    },
+    {
+      "active": false,
+      "firstName": "у",
+      "id": 4,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45"
+    },
+    {
+      "active": false,
+      "firstName": "вы",
+      "id": 3,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
         "code": "2024",
         "fio": "",
         "givenBy": "ывывы",
@@ -8833,12 +8915,84 @@
         "series": 72
       },
       "phone": "45"
+    },
+    {
+      "active": true,
+      "firstName": "2",
+      "id": 6,
+      "lastName": "3",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2,2,1",
+        "fio": "",
+        "givenBy": "ы",
+        "issue": {
+          "day": 5,
+          "month": 1,
+          "year": 2
+        },
+        "number": 4,
+        "series": 4
+      },
+      "phone": "3"
+    },
+    {
+      "active": true,
+      "firstName": "ы",
+      "id": 7,
+      "lastName": "ы",
+      "passport": {
+        "birth": {
+          "day": 2,
+          "month": 2,
+          "year": 2
+        },
+        "code": "2",
+        "fio": "ы ы",
+        "givenBy": "ц",
+        "issue": {
+          "day": 1,
+          "month": 2,
+          "year": 2
+        },
+        "number": 2,
+        "series": 1
+      },
+      "phone": "ы"
+    },
+    {
+      "active": true,
+      "firstName": "ы",
+      "id": 8,
+      "lastName": "ы",
+      "passport": {
+        "birth": {
+          "day": 2,
+          "month": 2,
+          "year": 2
+        },
+        "code": "2",
+        "fio": "ы ы",
+        "givenBy": "ы",
+        "issue": {
+          "day": 2,
+          "month": 2,
+          "year": 2
+        },
+        "number": 5,
+        "series": 1
+      },
+      "phone": "ы"
     }
   ],
   "nextIds": {
-    "booking": 3,
-    "client": 6,
-    "room": 5
+    "booking": 7,
+    "client": 9,
+    "room": 6
   },
   "rooms": [
     {
@@ -11144,6 +11298,15 @@
       "pricePerNight": 3000.0,
       "roomNumber": 44,
       "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "ц",
+      "id": 5,
+      "pricePerNight": 6767.0,
+      "roomNumber": 32,
+      "status": "Забронирована"
     }
   ],
   "version": 1

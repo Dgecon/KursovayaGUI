@@ -33,7 +33,10 @@ enum IDs {
 	ID_DeleteClient = 10,
 	ID_EditRoom = 12,
 	ID_ExportCSV = 13,
-	ID_ImportCSV = 14
+	ID_ImportCSV = 14,
+	ID_ChangeRoomStatus = 15,
+	ID_CheckIn = 16,
+	ID_CheckOut = 17
 
 };
 
@@ -47,6 +50,9 @@ EVT_BUTTON(ID_DeleteRoom, MainFrame::OnDeleteRoom)
 EVT_BUTTON(ID_DeleteClient, MainFrame::OnDeleteClient)
 EVT_BUTTON(ID_EditClient, MainFrame::OnEditClient)
 EVT_BUTTON(ID_EditRoom, MainFrame::OnEditRoom)
+EVT_BUTTON(ID_ChangeRoomStatus, MainFrame::OnChangeRoomStatus)
+EVT_BUTTON(ID_CheckIn, MainFrame::OnCheckIn)
+EVT_BUTTON(ID_CheckOut, MainFrame::OnCheckOut)
 EVT_BUTTON(ID_ExportCSV, MainFrame::OnExportCSV)
 EVT_BUTTON(ID_ImportCSV, MainFrame::OnImportCSV)
 EVT_CLOSE(MainFrame::OnClose)
@@ -66,11 +72,17 @@ MainFrame::MainFrame(const wxString& title)
  wxButton* AddRoomButton = new wxButton(panel, ID_AddRoom, "Добавить комнату", wxPoint(20,150), wxSize(140,30));
  wxButton* EditRoomButton = new wxButton(panel, ID_EditRoom, "Редактировать комнату", wxPoint(20,190), wxSize(140,30));
  wxButton* DeleteRoomButton = new wxButton(panel, ID_DeleteRoom, "Удалить комнату", wxPoint(20,230), wxSize(130,30));
+ wxButton* ChangeRoomStatusButton = new wxButton(panel, ID_ChangeRoomStatus, "Изменить статус", wxPoint(20,270), wxSize(140,30));
  wxButton* AddAmenityButton = new wxButton(panel, ID_AddAmenity, "Добавить удобства", wxPoint(750,0), wxSize(130,30));
  wxButton* AddBookingButton = new wxButton(panel, ID_AddBooking, "Добавить бронирование", wxPoint(10,470), wxSize(150,30));
  wxButton* DeleteBookingButton = new wxButton(panel, ID_DeleteBooking, "Удалить бронирование", wxPoint(10,510), wxSize(140,30));
  wxButton* ExportCSVButton = new wxButton(panel, ID_ExportCSV, "Экспорт CSV", wxPoint(10,430), wxSize(150,30));
  wxButton* ImportCSVButton = new wxButton(panel, ID_ImportCSV, "Импорт CSV", wxPoint(10,390), wxSize(150,30));
+ wxButton* CheckInButton = new wxButton(panel, ID_CheckIn, "Заселение (Check-in)", wxPoint(10,350), wxSize(150,30));
+ CheckInButton->SetBackgroundColour(wxColour(180,255,180));
+ wxButton* CheckOutButton = new wxButton(panel, ID_CheckOut, "Выселение (Check-out)", wxPoint(10,310), wxSize(150,30));
+ CheckOutButton->SetBackgroundColour(wxColour(255,200,180));
+
 
  listOfClients = new wxListBox(panel, ID_ListOfClients, wxPoint(170,30), wxSize(350,400),0, nullptr, wxLB_EXTENDED);
  listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxPoint(530,30), wxSize(350,400));
@@ -83,6 +95,7 @@ MainFrame::MainFrame(const wxString& title)
  DeleteClientButton->SetBackgroundColour(wxColour(255,153,153));
  ExportCSVButton->SetBackgroundColour(wxColour(153,204,255));
  ImportCSVButton->SetBackgroundColour(wxColour(153,255,204));
+ CheckInButton->SetBackgroundColour(wxColour(180,255,180));
 
  std::vector<Client> tclients;
  std::vector<Room> trooms;
@@ -182,45 +195,53 @@ void MainFrame::OnAddBooking(wxCommandEvent& event) {
  }
  }
 
+ // compute total price and insert booking
+ int days = std::abs(ci.DifferenceInDays(co));
+
  int bookingId = IdGenerator::generateBookingId();
  bookings.emplace_back(bookingId, room->getId(), clientIds, ci, co, true);
- room->setStatus(RoomStatus::BOOKED);
-
- int days = std::abs(ci.DifferenceInDays(co));
- double totalPrice = days * room->getPricePerNight();
- bookings.back().setTotalPrice(totalPrice);
+ bookings.back().setTotalPrice(days * room->getPricePerNight());
+ // update room status based on bookings
+ updateRoomStatusBasedOnBookings(room->getId());
 
  refreshRoomsList();
  refreshBookingsList();
 }
 void MainFrame::OnDeleteBooking(wxCommandEvent& event) {
-    if (!listOfBookings) {
-        wxLogError("listOfBookings == nullptr");
-        return;
-    }
-    long sel = listOfBookings->GetSelection();
-    if (sel == wxNOT_FOUND) {
-        wxMessageBox("Пожалуйста, выберите бронирование для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
-        return;
-    }
-    void* data = listOfBookings->GetClientData(sel);
-    if (!data) {
-        wxLogError("Нет client data для выбранной строки");
-        return;
-    }
-    int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ if (!listOfBookings) {
+ wxLogError("listOfBookings == nullptr");
+ return;
+ }
+ long sel = listOfBookings->GetSelection();
+ if (sel == wxNOT_FOUND) {
+ wxMessageBox("Пожалуйста, выберите бронирование для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
+ return;
+ }
+ void* data = listOfBookings->GetClientData(sel);
+ if (!data) {
+ wxLogError("Нет client data для выбранной строки");
+ return;
+ }
+ int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
 
-    // Soft-delete booking by id
-    for (auto& b : bookings) {
-        if (b.getId() == bookingId) { b.setActive(false);
-        // set room status to CLEANING if room still active
-        Room* room = findRoomById(b.getRoomId());
-        if (room) room->setStatus(RoomStatus::CLEANING);
-        break; }
-    }
+ int deletedRoomId = -1;
+ // Soft-delete booking by id
+ for (auto& b : bookings) {
+ if (b.getId() == bookingId) {
+ deletedRoomId = b.getRoomId();
+ b.setActive(false);
+ // set room status to CLEANING if room still active
+ Room* room = findRoomById(b.getRoomId());
+ if (room) room->setStatus(RoomStatus::CLEANING);
+ break;
+ }
+ }
 
-    refreshRoomsList();
-    refreshBookingsList();
+ // after soft-delete, update room status depending on remaining bookings
+ if (deletedRoomId != -1) updateRoomStatusBasedOnBookings(deletedRoomId);
+
+ refreshRoomsList();
+ refreshBookingsList();
 }
 void MainFrame::OnAddRoom(wxCommandEvent& event) {
  AddRoomDialog dlg(this);
@@ -529,6 +550,66 @@ void MainFrame::OnEditRoom(wxCommandEvent& event) {
  refreshRoomsList();
 }
 
+void MainFrame::OnCheckIn(wxCommandEvent& event) {
+ if (!listOfBookings) { wxLogError("listOfBookings == nullptr"); return; }
+ long sel = listOfBookings->GetSelection();
+ if (sel == wxNOT_FOUND) { wxMessageBox("Пожалуйста, выберите бронирование для заселения.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
+ void* data = listOfBookings->GetClientData(sel);
+ if (!data) { wxLogError("Нет client data для выбранной строки"); return; }
+ int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ Booking* booking = nullptr;
+ for (auto& b : bookings) if (b.getId() == bookingId) { booking = &b; break; }
+ if (!booking) { wxLogError("Бронирование не найдено"); return; }
+ if (!booking->isActive()) { wxMessageBox("Бронирование не активно.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
+ if (booking->getStatus() == BookingStatus::CHECKED_IN) { wxMessageBox("Клиент уже заселен.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
+ if (booking->getStatus() == BookingStatus::CANCELLED || booking->getStatus() == BookingStatus::COMPLETED) { wxMessageBox("Нельзя заселить по отменённой/завершённой броне.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
+
+ // ensure today's date is within booking range: use system date
+ time_t t = time(nullptr);
+ tm local = *localtime(&t);
+ Date today(local.tm_mday, local.tm_mon +1, local.tm_year +1900);
+ if (today.isBefore(booking->getCheckInDate())) {
+ wxMessageBox("Даты бронирования ещё не наступили. Невозможно заселить раньше заезда.", "Ошибка", wxOK | wxICON_ERROR, this);
+ return;
+ }
+ if (booking->getCheckOutDate().isBefore(today) || booking->getCheckOutDate().equals(today) ) {
+ wxMessageBox("Дата отъезда уже наступила или бронь завершена.", "Ошибка", wxOK | wxICON_ERROR, this);
+ return;
+ }
+
+ // set booking status and update room
+ booking->setStatus(BookingStatus::CHECKED_IN);
+ Room* room = findRoomById(booking->getRoomId());
+ if (room) {
+ room->setStatus(RoomStatus::OCCUPIED);
+ }
+ refreshRoomsList();
+ refreshBookingsList();
+}
+
+void MainFrame::OnCheckOut(wxCommandEvent& event) {
+ if (!listOfBookings) { wxLogError("listOfBookings == nullptr"); return; }
+ long sel = listOfBookings->GetSelection();
+ if (sel == wxNOT_FOUND) { wxMessageBox("Пожалуйста, выберите бронирование для выселения.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
+ void* data = listOfBookings->GetClientData(sel);
+ if (!data) { wxLogError("Нет client data для выбранной строки"); return; }
+ int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ Booking* booking = nullptr;
+ for (auto& b : bookings) if (b.getId() == bookingId) { booking = &b; break; }
+ if (!booking) { wxLogError("Бронирование не найдено"); return; }
+ if (!booking->isActive()) { wxMessageBox("Бронирование не активно.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
+ if (booking->getStatus() == BookingStatus::COMPLETED) { wxMessageBox("Бронирование уже завершено.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
+ if (booking->getStatus() == BookingStatus::CANCELLED) { wxMessageBox("Нельзя выселить по отменённой броне.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
+
+ // perform check-out: mark booking completed and set room to CLEANING
+ booking->setStatus(BookingStatus::COMPLETED);
+ Room* room = findRoomById(booking->getRoomId());
+ if (room) room->setStatus(RoomStatus::CLEANING);
+
+ refreshRoomsList();
+ refreshBookingsList();
+}
+
 void MainFrame::refreshRoomsList() {
     if (!listOfRooms) return;
     listOfRooms->Clear();
@@ -658,4 +739,68 @@ void MainFrame::OnImportCSV(wxCommandEvent& event) {
  refreshRoomsList();
  refreshBookingsList();
  wxMessageBox("Импорт завершён", "Информация", wxOK | wxICON_INFORMATION, this);
+}
+
+void MainFrame::OnChangeRoomStatus(wxCommandEvent& event) {
+ if (!listOfRooms) {
+ wxLogError("listOfRooms == nullptr");
+ return;
+ }
+ long sel = listOfRooms->GetSelection();
+ if (sel == wxNOT_FOUND) {
+ wxMessageBox("Выберите комнату.", "Информация", wxOK | wxICON_INFORMATION, this);
+ return;
+ }
+ void* data = listOfRooms->GetClientData(sel);
+ if (!data) { wxLogError("no client data for room list item"); return; }
+ int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ Room* room = findRoomById(roomId);
+ if (!room) { wxLogError("room not found by id"); return; }
+
+ // build choices
+ std::vector<RoomStatus> statuses = { RoomStatus::AVAILABLE, RoomStatus::BOOKED, RoomStatus::OCCUPIED, RoomStatus::MAINTENANCE, RoomStatus::CLEANING };
+ wxArrayString choices;
+ for (auto s : statuses) choices.Add(wxString::FromUTF8(RoomStatusToString(s).c_str()));
+
+ wxSingleChoiceDialog dlg(this, "Выберите новый статус комнаты:", "Изменить статус", choices);
+ // preselect current
+ int curIndex =0;
+ for (size_t i=0;i<statuses.size();++i) if (statuses[i] == room->getStatus()) { curIndex = (int)i; break; }
+ dlg.SetSelection(curIndex);
+
+ if (dlg.ShowModal() == wxID_OK) {
+ int selIdx = dlg.GetSelection();
+ if (selIdx >=0 && selIdx < (int)statuses.size()) {
+ room->setStatus(statuses[selIdx]);
+ refreshRoomsList();
+ }
+ }
+}
+
+void MainFrame::updateRoomStatusBasedOnBookings(int roomId) {
+ Room* room = findRoomById(roomId);
+ if (!room) return;
+ // find active bookings for this room
+ Booking* current = nullptr;
+ Booking* nextBooking = nullptr;
+ Date today; // default1.1.2024 - but better to compute current system date; keep as is for now
+ // find any booking that covers today's date (occupied) or next upcoming booking (booked)
+ for (auto& b : bookings) {
+ if (!b.isActive()) continue;
+ if (b.getRoomId() != roomId) continue;
+ if (b.getStatus() == BookingStatus::CHECKED_IN) { room->setStatus(RoomStatus::OCCUPIED); return; }
+ if (b.getStatus() == BookingStatus::CONFIRMED) nextBooking = const_cast<Booking*>(&b);
+ if (b.getStatus() == BookingStatus::COMPLETED) current = const_cast<Booking*>(&b);
+ }
+ if (nextBooking) {
+ room->setStatus(RoomStatus::BOOKED);
+ return;
+ }
+ if (room->getStatus() == RoomStatus::MAINTENANCE) return;
+ for (auto it = bookings.rbegin(); it != bookings.rend(); ++it) {
+ if (!it->isActive()) continue;
+ if (it->getRoomId() != roomId) continue;
+ if (it->getStatus() == BookingStatus::COMPLETED) { room->setStatus(RoomStatus::CLEANING); return; }
+ }
+ room->setStatus(RoomStatus::AVAILABLE);
 }

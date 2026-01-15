@@ -42,7 +42,16 @@ private:
     void OnEditClient(wxCommandEvent& event);
     // Edit room
     void OnEditRoom(wxCommandEvent& event);
+    // Change room status
+    void OnChangeRoomStatus(wxCommandEvent& event);
+    // Check-in handler
+    void OnCheckIn(wxCommandEvent& event);
+    // Check-out handler
+    void OnCheckOut(wxCommandEvent& event);
 	// CSV import/export
 	void OnExportCSV(wxCommandEvent& event);
 	void OnImportCSV(wxCommandEvent& event);
+
+    // synchronize room status with current bookings (basic hotel logic)
+    void updateRoomStatusBasedOnBookings(int roomId);
 };

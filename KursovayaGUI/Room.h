@@ -23,7 +23,19 @@ public:
     RoomStatus getStatus() const;
     std::vector<std::string> getAmenities() const;
     void setPricePerNight(double price);
-    void setStatus(RoomStatus newStatus);
+
+    // Try to change room status. Returns true if transition is allowed and applied.
+    // Allowed transitions (typical hotel logic):
+    // AVAILABLE -> BOOKED | MAINTENANCE
+    // BOOKED -> OCCUPIED | AVAILABLE (cancellation) | MAINTENANCE
+    // OCCUPIED -> CLEANING | MAINTENANCE
+    // CLEANING -> AVAILABLE | MAINTENANCE
+    // MAINTENANCE -> AVAILABLE
+    bool setStatus(RoomStatus newStatus);
+
+    // Check if a transition is allowed without applying it
+    bool canTransition(RoomStatus newStatus) const;
+
     void addAmenity(const std::string& amenity);
     bool isAvailable() const;
     std::string toString() const;

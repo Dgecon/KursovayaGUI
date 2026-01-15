@@ -20,8 +20,28 @@ void Room::setPricePerNight(double price) {
     }
 }
 
-void Room::setStatus(RoomStatus newStatus) {
+bool Room::canTransition(RoomStatus newStatus) const {
+    if (status == newStatus) return true;
+    switch (status) {
+    case RoomStatus::AVAILABLE:
+        return newStatus == RoomStatus::BOOKED || newStatus == RoomStatus::MAINTENANCE;
+    case RoomStatus::BOOKED:
+        return newStatus == RoomStatus::OCCUPIED || newStatus == RoomStatus::AVAILABLE || newStatus == RoomStatus::MAINTENANCE;
+    case RoomStatus::OCCUPIED:
+        return newStatus == RoomStatus::CLEANING || newStatus == RoomStatus::MAINTENANCE;
+    case RoomStatus::CLEANING:
+        return newStatus == RoomStatus::AVAILABLE || newStatus == RoomStatus::MAINTENANCE;
+    case RoomStatus::MAINTENANCE:
+        return newStatus == RoomStatus::AVAILABLE;
+    default:
+        return false;
+    }
+}
+
+bool Room::setStatus(RoomStatus newStatus) {
+    if (!canTransition(newStatus)) return false;
     status = newStatus;
+    return true;
 }
 
 void Room::addAmenity(const std::string& amenity) {
