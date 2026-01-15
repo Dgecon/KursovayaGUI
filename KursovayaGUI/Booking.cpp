@@ -14,7 +14,27 @@ Date Booking::getCheckOutDate() const { return checkOutDate; }
 BookingStatus Booking::getStatus() const { return status; }
 double Booking::getTotalPrice() const { return totalPrice; }
 
-void Booking::setStatus(BookingStatus newStatus) { status = newStatus; }
+bool Booking::canTransition(BookingStatus newStatus) const {
+ if (status == newStatus) return true;
+ switch (status) {
+ case BookingStatus::CONFIRMED:
+ return newStatus == BookingStatus::CHECKED_IN || newStatus == BookingStatus::CANCELLED;
+ case BookingStatus::CHECKED_IN:
+ return newStatus == BookingStatus::COMPLETED || newStatus == BookingStatus::CANCELLED;
+ case BookingStatus::COMPLETED:
+ case BookingStatus::CANCELLED:
+ return false;
+ default:
+ return false;
+ }
+}
+
+bool Booking::setStatus(BookingStatus newStatus) {
+ if (!canTransition(newStatus)) return false;
+ status = newStatus;
+ return true;
+}
+
 void Booking::setTotalPrice(double p) { totalPrice = p; }
 bool Booking::isActive() const { return active; }
 void Booking::setActive(bool v) { active = v; }

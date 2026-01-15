@@ -29,7 +29,15 @@ public:
     BookingStatus getStatus() const;
     double getTotalPrice() const;
 
-    void setStatus(BookingStatus newStatus);
+    // Try to change booking status. Returns true if transition is allowed and applied.
+    // Allowed transitions (typical):
+    // CONFIRMED -> CHECKED_IN | CANCELLED
+    // CHECKED_IN -> COMPLETED | CANCELLED
+    // COMPLETED -> (final)
+    // CANCELLED -> (final)
+    bool setStatus(BookingStatus newStatus);
+    bool canTransition(BookingStatus newStatus) const;
+
     void setTotalPrice(double p);
     bool isActive() const;
     void setActive(bool v);
