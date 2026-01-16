@@ -9,64 +9,91 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  wxFlexGridSizer* grid = new wxFlexGridSizer(2,8,8);
  grid->AddGrowableCol(1,1);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Имя:"),0, wxALIGN_CENTER_VERTICAL);
+ // initialize error label pointers
+ m_firstErr = m_passErr = m_birthCertErr = m_foreignerErr = nullptr;
+
+ auto AddRow = [&](const wxString& label, wxWindow* control, wxStaticText** errPtr = nullptr)
+ {
+ grid->Add(new wxStaticText(this, wxID_ANY, label),0, wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT);
+ wxBoxSizer* v = new wxBoxSizer(wxVERTICAL);
+ v->Add(control,0, wxEXPAND);
+ if (errPtr)
+ {
+ *errPtr = new wxStaticText(this, wxID_ANY, "");
+ (*errPtr)->SetForegroundColour(*wxRED);
+ (*errPtr)->Hide();
+ v->Add(*errPtr,0, wxTOP,2);
+ }
+ else
+ {
+ // keep layout consistent
+ v->AddSpacer(0);
+ }
+ grid->Add(v,1, wxEXPAND);
+ };
+
+ // Name
  m_first = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_first,1, wxEXPAND);
+ m_first->SetToolTip("Введите имя клиента");
+ AddRow("Имя:", m_first, &m_firstErr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Фамилия:"),0, wxALIGN_CENTER_VERTICAL);
+ // Last name
  m_last = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_last,1, wxEXPAND);
+ m_last->SetToolTip("Введите фамилию клиента");
+ AddRow("Фамилия:", m_last, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Телефон:"),0, wxALIGN_CENTER_VERTICAL);
+ // Phone
  m_phone = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_phone,1, wxEXPAND);
+ m_phone->SetToolTip("Телефон клиента");
+ AddRow("Телефон:", m_phone, nullptr);
 
- // Passport fields
- grid->Add(new wxStaticText(this, wxID_ANY, "Паспорт - серия:"),0, wxALIGN_CENTER_VERTICAL);
+ // Passport series/number on separate rows but keep passport error next to number
  m_series = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_series,1, wxEXPAND);
+ m_series->SetToolTip("Серия паспорта (цифры)");
+ AddRow("Паспорт - серия:", m_series, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Паспорт - номер:"),0, wxALIGN_CENTER_VERTICAL);
  m_number = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_number,1, wxEXPAND);
+ m_number->SetToolTip("Номер паспорта (цифры)");
+ AddRow("Паспорт - номер:", m_number, &m_passErr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Кем выдан:"),0, wxALIGN_CENTER_VERTICAL);
+ // Given by
  m_givenBy = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_givenBy,1, wxEXPAND);
+ AddRow("Кем выдан:", m_givenBy, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата выдачи:"),0, wxALIGN_CENTER_VERTICAL);
+ // Issue date
  m_issueDate = new wxDatePickerCtrl(this, wxID_ANY);
- grid->Add(m_issueDate,1, wxEXPAND);
+ AddRow("Дата выдачи:", m_issueDate, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Код подразделения:"),0, wxALIGN_CENTER_VERTICAL);
+ // Code
  m_code = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_code,1, wxEXPAND);
+ AddRow("Код подразделения:", m_code, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата рождения:"),0, wxALIGN_CENTER_VERTICAL);
+ // Birth date
  m_birthDate = new wxDatePickerCtrl(this, wxID_ANY);
- grid->Add(m_birthDate,1, wxEXPAND);
+ AddRow("Дата рождения:", m_birthDate, nullptr);
 
- // New controls: child / foreigner
- grid->Add(new wxStaticText(this, wxID_ANY, "Ребёнок? (галочка):"),0, wxALIGN_CENTER_VERTICAL);
+ // Child checkbox
  m_isChild = new wxCheckBox(this, wxID_ANY, "Да");
- grid->Add(m_isChild,1, wxEXPAND);
+ AddRow("Ребёнок? (галочка):", m_isChild, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Иностранное гражданство? (галочка):"),0, wxALIGN_CENTER_VERTICAL);
+ // Foreigner checkbox
  m_isForeigner = new wxCheckBox(this, wxID_ANY, "Да");
- grid->Add(m_isForeigner,1, wxEXPAND);
+ AddRow("Иностранное гражданство? (галочка):", m_isForeigner, nullptr);
 
- // Additional document fields
- grid->Add(new wxStaticText(this, wxID_ANY, "Св-во о рождении (серия и номер) / Номер свидетельства о рождении:"),0, wxALIGN_CENTER_VERTICAL);
+ // Birth certificate
  m_birthCert = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_birthCert,1, wxEXPAND);
+ m_birthCert->SetToolTip("Серия/номер свидетельства о рождении");
+ AddRow("Св-во о рождении (серия и номер) / Номер свидетельства о рождении:", m_birthCert, &m_birthCertErr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Виза (номер):"),0, wxALIGN_CENTER_VERTICAL);
+ // Visa
  m_visa = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_visa,1, wxEXPAND);
+ m_visa->SetToolTip("Номер визы для иностранного гражданина");
+ AddRow("Виза (номер):", m_visa, nullptr);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Международный паспорт (серия и номер):"),0, wxALIGN_CENTER_VERTICAL);
+ // International passport
  m_intlPassport = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_intlPassport,1, wxEXPAND);
+ m_intlPassport->SetToolTip("Международный паспорт (серия и номер)");
+ AddRow("Международный паспорт (серия и номер):", m_intlPassport, &m_foreignerErr);
 
  topsizer->Add(grid,1, wxALL | wxEXPAND,10);
 
@@ -82,10 +109,22 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  m_isChild->Bind(wxEVT_CHECKBOX, &AddClientDialog::OnChildToggle, this);
  m_isForeigner->Bind(wxEVT_CHECKBOX, &AddClientDialog::OnForeignerToggle, this);
 
+ // inline validation binds
+ m_first->Bind(wxEVT_TEXT, &AddClientDialog::OnNameChanged, this);
+ m_series->Bind(wxEVT_TEXT, &AddClientDialog::OnPassportChanged, this);
+ m_number->Bind(wxEVT_TEXT, &AddClientDialog::OnPassportChanged, this);
+ m_birthCert->Bind(wxEVT_TEXT, &AddClientDialog::OnBirthCertChanged, this);
+ m_visa->Bind(wxEVT_TEXT, &AddClientDialog::OnForeignerDocsChanged, this);
+ m_intlPassport->Bind(wxEVT_TEXT, &AddClientDialog::OnForeignerDocsChanged, this);
+
  // initialize state: hide fields not applicable
  m_birthCert->Show(false);
  m_visa->Show(false);
  m_intlPassport->Show(false);
+ if (m_firstErr) m_firstErr->Hide();
+ if (m_passErr) m_passErr->Hide();
+ if (m_birthCertErr) m_birthCertErr->Hide();
+ if (m_foreignerErr) m_foreignerErr->Hide();
 }
 
 wxString AddClientDialog::getFirstName() const { return m_first->GetValue(); }
@@ -123,40 +162,7 @@ std::string AddClientDialog::getVisa() const { return std::string(m_visa->GetVal
 std::string AddClientDialog::getInternationalPassport() const { return std::string(m_intlPassport->GetValue().ToUTF8().data()); }
 
 void AddClientDialog::OnOk(wxCommandEvent& evt) {
- // Basic validation: names not empty, series/number numeric, issue/birth dates valid
- if (m_first->GetValue().IsEmpty() || m_last->GetValue().IsEmpty()) {
- wxMessageBox("Введите имя и фамилию", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- long ser=0, num=0;
- if (!m_series->GetValue().ToLong(&ser) || !m_number->GetValue().ToLong(&num)) {
- wxMessageBox("Серия и номер паспорта должны быть числами", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- Date issue = DateFromWxDate(m_issueDate->GetValue());
- Date birth = DateFromWxDate(m_birthDate->GetValue());
- if (!issue.isValid() || !birth.isValid()) {
- wxMessageBox("Неверная дата выдачи или дата рождения", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // if child is checked, ensure birth certificate provided
- if (m_isChild->IsChecked()) {
- if (m_birthCert->GetValue().IsEmpty()) {
- wxMessageBox("Для детей требуется ввести свидетельство о рождении", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- }
-
- // if foreigner is checked, ensure visa and international passport provided
- if (m_isForeigner->IsChecked()) {
- if (m_visa->GetValue().IsEmpty() || m_intlPassport->GetValue().IsEmpty()) {
- wxMessageBox("Для иностранцев требуется ввести визу и международный паспорт", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- }
-
- // all good
+ if (!ValidateAll()) return;
  EndModal(wxID_OK);
 }
 
@@ -164,6 +170,7 @@ void AddClientDialog::OnChildToggle(wxCommandEvent& evt)
 {
  bool show = m_isChild->IsChecked();
  m_birthCert->Show(show);
+ m_birthCertErr->Show(false);
  // if showing child document, ensure foreigner fields hidden (optional)
  if (show) {
  // keep foreigner checkbox state unchanged, but we may hide their fields
@@ -179,10 +186,48 @@ void AddClientDialog::OnForeignerToggle(wxCommandEvent& evt)
  bool show = m_isForeigner->IsChecked();
  m_visa->Show(show);
  m_intlPassport->Show(show);
+ m_foreignerErr->Show(false);
  // if foreigner, birth cert may still be shown if child is checked
  m_birthCert->Show(m_isChild->IsChecked());
  GetSizer()->Layout();
  GetSizer()->Fit(this);
+}
+
+// validation handlers
+void AddClientDialog::OnNameChanged(wxCommandEvent& evt) {
+ if (!m_first->GetValue().IsEmpty() && !m_last->GetValue().IsEmpty()) { m_firstErr->Show(false); }
+ else { m_firstErr->SetLabel("Имя и фамилия обязательны"); m_firstErr->Show(true); }
+ GetSizer()->Layout();
+}
+
+void AddClientDialog::OnPassportChanged(wxCommandEvent& evt) {
+ long ser=0, num=0;
+ if (m_series->GetValue().ToLong(&ser) && m_number->GetValue().ToLong(&num)) { m_passErr->Show(false); }
+ else { m_passErr->SetLabel("Серия/номер паспорта должны быть числами"); m_passErr->Show(true); }
+ GetSizer()->Layout();
+}
+
+void AddClientDialog::OnBirthCertChanged(wxCommandEvent& evt) {
+ if (!m_birthCert->GetValue().IsEmpty()) { m_birthCertErr->Show(false); }
+ else if (m_isChild->IsChecked()) { m_birthCertErr->SetLabel("Требуется свидетельство для ребёнка"); m_birthCertErr->Show(true); }
+ GetSizer()->Layout();
+}
+
+void AddClientDialog::OnForeignerDocsChanged(wxCommandEvent& evt) {
+ if (!m_visa->GetValue().IsEmpty() && !m_intlPassport->GetValue().IsEmpty()) { m_foreignerErr->Show(false); }
+ else if (m_isForeigner->IsChecked()) { m_foreignerErr->SetLabel("Виза и паспорт обязательны для иностранца"); m_foreignerErr->Show(true); }
+ GetSizer()->Layout();
+}
+
+bool AddClientDialog::ValidateAll() {
+ bool ok = true;
+ if (m_first->GetValue().IsEmpty() || m_last->GetValue().IsEmpty()) { m_firstErr->SetLabel("Имя и фамилия обязательны"); m_firstErr->Show(true); ok = false; }
+ long ser=0, num=0;
+ if (!m_series->GetValue().ToLong(&ser) || !m_number->GetValue().ToLong(&num)) { m_passErr->SetLabel("Серия/номер паспорта должны быть числами"); m_passErr->Show(true); ok = false; }
+ if (m_isChild->IsChecked() && m_birthCert->GetValue().IsEmpty()) { m_birthCertErr->SetLabel("Требуется свидетельство о рождении"); m_birthCertErr->Show(true); ok = false; }
+ if (m_isForeigner->IsChecked() && (m_visa->GetValue().IsEmpty() || m_intlPassport->GetValue().IsEmpty())) { m_foreignerErr->SetLabel("Виза и паспорт обязательны для иностранца"); m_foreignerErr->Show(true); ok = false; }
+ GetSizer()->Layout();
+ return ok;
 }
 
 void AddClientDialog::setValues(const Client& client) {

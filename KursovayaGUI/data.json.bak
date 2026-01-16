@@ -20,108 +20,6 @@
       "roomId": 1,
       "status": 1,
       "totalPrice": 22000.0
-    },
-    {
-      "active": false,
-      "checkIn": {
-        "day": 3,
-        "month": 5,
-        "year": 2
-      },
-      "checkOut": {
-        "day": 3,
-        "month": 6,
-        "year": 2
-      },
-      "clientIds": [
-        6
-      ],
-      "id": 3,
-      "roomId": 5,
-      "status": 1,
-      "totalPrice": 203010.0
-    },
-    {
-      "active": false,
-      "checkIn": {
-        "day": 1,
-        "month": 1,
-        "year": 1
-      },
-      "checkOut": {
-        "day": 1,
-        "month": 1,
-        "year": 2
-      },
-      "clientIds": [
-        6,
-        7,
-        8
-      ],
-      "id": 4,
-      "roomId": 5,
-      "status": 1,
-      "totalPrice": 2469955.0
-    },
-    {
-      "active": false,
-      "checkIn": {
-        "day": 1,
-        "month": 1,
-        "year": 1
-      },
-      "checkOut": {
-        "day": 1,
-        "month": 1,
-        "year": 2
-      },
-      "clientIds": [
-        6
-      ],
-      "id": 5,
-      "roomId": 5,
-      "status": 1,
-      "totalPrice": 2469955.0
-    },
-    {
-      "active": false,
-      "checkIn": {
-        "day": 1,
-        "month": 1,
-        "year": 1
-      },
-      "checkOut": {
-        "day": 1,
-        "month": 2,
-        "year": 1
-      },
-      "clientIds": [
-        7
-      ],
-      "id": 6,
-      "roomId": 5,
-      "status": 1,
-      "totalPrice": 209777.0
-    },
-    {
-      "active": false,
-      "checkIn": {
-        "day": 15,
-        "month": 1,
-        "year": 2026
-      },
-      "checkOut": {
-        "day": 17,
-        "month": 1,
-        "year": 2026
-      },
-      "clientIds": [
-        7
-      ],
-      "id": 7,
-      "roomId": 5,
-      "status": 2,
-      "totalPrice": 13534.0
     }
   ],
   "clients": [
@@ -181,35 +79,6 @@
         "series": 72
       },
       "phone": "45",
-      "visa": ""
-    },
-    {
-      "active": true,
-      "birthCertificate": "",
-      "firstName": "2",
-      "id": 6,
-      "internationalPassport": "",
-      "isChild": false,
-      "isForeigner": false,
-      "lastName": "3",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2,2,1",
-        "fio": "",
-        "givenBy": "ы",
-        "issue": {
-          "day": 5,
-          "month": 1,
-          "year": 2
-        },
-        "number": 4,
-        "series": 4
-      },
-      "phone": "3",
       "visa": ""
     },
     {
@@ -322,15 +191,6 @@
       "id": 2,
       "pricePerNight": 3000.0,
       "roomNumber": 44,
-      "status": "Доступна"
-    },
-    {
-      "active": true,
-      "amenities": [],
-      "category": "ц",
-      "id": 5,
-      "pricePerNight": 6767.0,
-      "roomNumber": 32,
       "status": "Доступна"
     }
   ],

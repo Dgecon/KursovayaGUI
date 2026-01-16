@@ -53,7 +53,21 @@ private:
  wxTextCtrl* m_visa; // visa for foreigner
  wxTextCtrl* m_intlPassport; // international passport for foreigner
 
+ // inline error labels
+ wxStaticText* m_firstErr;
+ wxStaticText* m_passErr;
+ wxStaticText* m_birthCertErr;
+ wxStaticText* m_foreignerErr;
+
  void OnOk(wxCommandEvent& evt);
  void OnChildToggle(wxCommandEvent& evt);
  void OnForeignerToggle(wxCommandEvent& evt);
+
+ // validation handlers
+ void OnNameChanged(wxCommandEvent& evt);
+ void OnPassportChanged(wxCommandEvent& evt);
+ void OnBirthCertChanged(wxCommandEvent& evt);
+ void OnForeignerDocsChanged(wxCommandEvent& evt);
+
+ bool ValidateAll();
 };

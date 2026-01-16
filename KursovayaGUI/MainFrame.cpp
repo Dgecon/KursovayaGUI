@@ -62,46 +62,90 @@ MainFrame::MainFrame(const wxString& title)
  : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800,600))
 {
  wxPanel* panel = new wxPanel(this, wxID_ANY);
- wxStaticText* clientsLabel = new wxStaticText(panel, wxID_ANY, "Клиенты", wxPoint(320,10), wxSize(100,20));
- wxStaticText* roomsLabel = new wxStaticText(panel, wxID_ANY, "Комнаты", wxPoint(680,10), wxSize(50,20));
- wxButton* AddClientButton = new wxButton(panel, ID_AddClient, "Добавить клиента", wxPoint(20,30), wxSize(140,30));
- wxButton* EditClientButton = new wxButton(panel, ID_EditClient, "Редактировать клиента", wxPoint(20,70), wxSize(140,30));
+ // Build responsive layout using sizers
+ // Left vertical toolbar with action buttons
+ wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
+ wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
+ wxBoxSizer* centerSizer = new wxBoxSizer(wxVERTICAL);
+ wxBoxSizer* rightSizer = new wxBoxSizer(wxVERTICAL);
+
+ wxStaticText* clientsLabel = new wxStaticText(panel, wxID_ANY, "Клиенты");
+ wxStaticText* roomsLabel = new wxStaticText(panel, wxID_ANY, "Комнаты");
+ wxButton* AddClientButton = new wxButton(panel, ID_AddClient, "Добавить клиента");
+ wxButton* EditClientButton = new wxButton(panel, ID_EditClient, "Редактировать клиента");
+ wxButton* DeleteClientButton = new wxButton(panel, ID_DeleteClient, "Удалить клиента");
+ wxButton* AddRoomButton = new wxButton(panel, ID_AddRoom, "Добавить комнату");
+ wxButton* EditRoomButton = new wxButton(panel, ID_EditRoom, "Редактировать комнату");
+ wxButton* DeleteRoomButton = new wxButton(panel, ID_DeleteRoom, "Удалить комнату");
+ wxButton* ChangeRoomStatusButton = new wxButton(panel, ID_ChangeRoomStatus, "Изменить статус");
+ wxButton* AddAmenityButton = new wxButton(panel, ID_AddAmenity, "Добавить удобства");
+ wxButton* AddBookingButton = new wxButton(panel, ID_AddBooking, "Добавить бронирование");
+ wxButton* DeleteBookingButton = new wxButton(panel, ID_DeleteBooking, "Удалить бронирование");
+ wxButton* ExportCSVButton = new wxButton(panel, ID_ExportCSV, "Экспорт CSV");
+ wxButton* ImportCSVButton = new wxButton(panel, ID_ImportCSV, "Импорт CSV");
+ wxButton* CheckInButton = new wxButton(panel, ID_CheckIn, "Заселение (Check-in)");
+ wxButton* CheckOutButton = new wxButton(panel, ID_CheckOut, "Выселение (Check-out)");
+
 
  EditClientButton->Bind(wxEVT_BUTTON, &MainFrame::OnEditClient, this, ID_EditClient);
- wxButton* DeleteClientButton = new wxButton(panel, ID_DeleteClient, "Удалить клиента", wxPoint(20,110), wxSize(140,30));
- wxButton* AddRoomButton = new wxButton(panel, ID_AddRoom, "Добавить комнату", wxPoint(20,150), wxSize(140,30));
- wxButton* EditRoomButton = new wxButton(panel, ID_EditRoom, "Редактировать комнату", wxPoint(20,190), wxSize(140,30));
- wxButton* DeleteRoomButton = new wxButton(panel, ID_DeleteRoom, "Удалить комнату", wxPoint(20,230), wxSize(130,30));
- wxButton* ChangeRoomStatusButton = new wxButton(panel, ID_ChangeRoomStatus, "Изменить статус", wxPoint(20,270), wxSize(140,30));
- wxButton* AddAmenityButton = new wxButton(panel, ID_AddAmenity, "Добавить удобства", wxPoint(750,0), wxSize(130,30));
- wxButton* AddBookingButton = new wxButton(panel, ID_AddBooking, "Добавить бронирование", wxPoint(10,470), wxSize(150,30));
- wxButton* DeleteBookingButton = new wxButton(panel, ID_DeleteBooking, "Удалить бронирование", wxPoint(10,510), wxSize(140,30));
- wxButton* ExportCSVButton = new wxButton(panel, ID_ExportCSV, "Экспорт CSV", wxPoint(10,430), wxSize(150,30));
- wxButton* ImportCSVButton = new wxButton(panel, ID_ImportCSV, "Импорт CSV", wxPoint(10,390), wxSize(150,30));
- wxButton* CheckInButton = new wxButton(panel, ID_CheckIn, "Заселение (Check-in)", wxPoint(10,350), wxSize(150,30));
+
  CheckInButton->SetBackgroundColour(wxColour(180,255,180));
- wxButton* CheckOutButton = new wxButton(panel, ID_CheckOut, "Выселение (Check-out)", wxPoint(10,310), wxSize(150,30));
  CheckOutButton->SetBackgroundColour(wxColour(255,200,180));
 
+ // Add controls to left sizer (toolbar)
+ leftSizer->Add(AddClientButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(EditClientButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(DeleteClientButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(AddRoomButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(EditRoomButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(DeleteRoomButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(ChangeRoomStatusButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(AddAmenityButton,0, wxEXPAND | wxALL,4);
+ leftSizer->AddSpacer(10);
+ leftSizer->Add(AddBookingButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(DeleteBookingButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(CheckInButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(CheckOutButton,0, wxEXPAND | wxALL,4);
+ leftSizer->AddSpacer(20);
+ leftSizer->Add(ExportCSVButton,0, wxEXPAND | wxALL,4);
+ leftSizer->Add(ImportCSVButton,0, wxEXPAND | wxALL,4);
 
- listOfClients = new wxListCtrl(panel, ID_ListOfClients, wxPoint(170,30), wxSize(350,400), wxLC_REPORT | wxLC_HRULES | wxLC_VRULES);
+ // create clients list control and bookings list before adding to sizers
+ listOfClients = new wxListCtrl(panel, ID_ListOfClients, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES | wxLC_SINGLE_SEL);
  // setup columns: ID, First, Last, Phone
  listOfClients->InsertColumn(0, "ID", wxLIST_FORMAT_LEFT,50);
  listOfClients->InsertColumn(1, "Имя", wxLIST_FORMAT_LEFT,120);
  listOfClients->InsertColumn(2, "Фамилия", wxLIST_FORMAT_LEFT,120);
  listOfClients->InsertColumn(3, "Телефон", wxLIST_FORMAT_LEFT,120);
 
- listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxPoint(530,30), wxSize(350,400));
- listOfBookings = new wxListBox(panel, ID_ListOfBookings, wxPoint(170,470), wxSize(660,120));
- listOfClients->SetBackgroundColour(wxColour(240,240,240));
- listOfRooms->SetBackgroundColour(wxColour(240,240,240));
- listOfBookings->SetBackgroundColour(wxColour(240,240,240));
- DeleteBookingButton->SetBackgroundColour(wxColour(255,153,153));
- DeleteRoomButton->SetBackgroundColour(wxColour(255,153,153));
- DeleteClientButton->SetBackgroundColour(wxColour(255,153,153));
- ExportCSVButton->SetBackgroundColour(wxColour(153,204,255));
- ImportCSVButton->SetBackgroundColour(wxColour(153,255,204));
- CheckInButton->SetBackgroundColour(wxColour(180,255,180));
+ listOfBookings = new wxListBox(panel, ID_ListOfBookings, wxDefaultPosition, wxDefaultSize);
+
+ // center: clients list (expand)
+ centerSizer->Add(clientsLabel,0, wxLEFT | wxTOP,4);
+ centerSizer->Add(listOfClients,1, wxEXPAND | wxALL,4);
+
+ // right: rooms label + list
+ listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxDefaultPosition, wxDefaultSize);
+ rightSizer->Add(roomsLabel,0, wxLEFT | wxTOP,4);
+ rightSizer->Add(listOfRooms,1, wxEXPAND | wxALL,4);
+
+ // put sizers into main sizer (top row)
+ mainSizer->Add(leftSizer,0, wxEXPAND | wxALL,4);
+ mainSizer->Add(centerSizer,1, wxEXPAND | wxALL,4);
+ mainSizer->Add(rightSizer,1, wxEXPAND | wxALL,4);
+
+ // outer sizer: contains top row and bookings area below spanning full width
+ wxBoxSizer* outerSizer = new wxBoxSizer(wxVERTICAL);
+ outerSizer->Add(mainSizer,1, wxEXPAND | wxALL,0);
+
+ // Bookings area: label + list that spans full width and is taller
+ wxStaticText* bookingsLabel = new wxStaticText(panel, wxID_ANY, "Бронирования");
+ outerSizer->Add(bookingsLabel,0, wxLEFT | wxTOP,4);
+ // make bookings list larger: give it proportion to be taller
+ outerSizer->Add(listOfBookings,2, wxEXPAND | wxALL,4);
+
+ panel->SetSizer(outerSizer);
+ panel->Layout();
 
  std::vector<Client> tclients;
  std::vector<Room> trooms;
