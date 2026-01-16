@@ -244,46 +244,62 @@ bool ExportToCSV(const std::string& dir,
  std::string& error)
 {
  try {
- // clients.csv: id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,passport_issue,passport_code,passport_fio,passport_birth
+ // clients.csv: id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,
+ // passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,
+ // passport_birth_day,passport_birth_month,passport_birth_year,isChild,isForeigner,birthCertificate,visa,internationalPassport
  std::ofstream cf(dir + "/clients.csv");
- cf << "id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,passport_birth_day,passport_birth_month,passport_birth_year\n";
+ cf << "id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,passport_birth_day,passport_birth_month,passport_birth_year,isChild,isForeigner,birthCertificate,visa,internationalPassport\n";
  for (const auto& c: clients) {
  const Passport& p = c.getPassport();
  std::stringstream ss;
- ss << c.getId() << "," << escapeCsv(c.getFirstName()) << "," << escapeCsv(c.getLastName()) << "," << escapeCsv(c.getPhone()) << "," << (c.isActive()?"1":"0") << ",\""
- << p.getSeries() << "\",\"" << p.getNumber() << "\",\"" << escapeCsv(p.getGivenBy()) << "\",\""
- << p.getDateOfIssue().getDay() << "," << p.getDateOfIssue().getMonth() << "," << p.getDateOfIssue().getYear() << "\",\""
- << escapeCsv(p.getCode()) << "\",\"" << escapeCsv(p.getFio()) << "\",\""
- << p.getDateOfBirth().getDay() << "," << p.getDateOfBirth().getMonth() << "," << p.getDateOfBirth().getYear() << "\"";
- cf << ss.str() << "\n";
+ ss << c.getId() << ',';
+ ss << escapeCsv(c.getFirstName()) << ',';
+ ss << escapeCsv(c.getLastName()) << ',';
+ ss << escapeCsv(c.getPhone()) << ',';
+ ss << (c.isActive() ? "1" : "0") << ',';
+ ss << p.getSeries() << ',';
+ ss << p.getNumber() << ',';
+ ss << escapeCsv(p.getGivenBy()) << ',';
+ ss << p.getDateOfIssue().getDay() << ',' << p.getDateOfIssue().getMonth() << ',' << p.getDateOfIssue().getYear() << ',';
+ ss << escapeCsv(p.getCode()) << ',';
+ ss << escapeCsv(p.getFio()) << ',';
+ ss << p.getDateOfBirth().getDay() << ',' << p.getDateOfBirth().getMonth() << ',' << p.getDateOfBirth().getYear() << ',';
+ ss << (c.getIsChild() ? "1" : "0") << ',';
+ ss << (c.getIsForeigner() ? "1" : "0") << ',';
+ ss << escapeCsv(c.getBirthCertificate()) << ',';
+ ss << escapeCsv(c.getVisa()) << ',';
+ ss << escapeCsv(c.getInternationalPassport());
+ cf << ss.str() << '\n';
  }
  cf.close();
 
- // rooms.csv: id,roomNumber,category,pricePerNight,status,amenities(sep by ;),active
+ // rooms.csv
  std::ofstream rf(dir + "/rooms.csv");
  rf << "id,roomNumber,category,pricePerNight,status,amenities,active\n";
  for (const auto& r: rooms) {
  std::stringstream ss;
- ss << r.getId() << "," << r.getRoomNumber() << "," << escapeCsv(r.getCategory()) << "," << std::fixed << std::setprecision(2) << r.getPricePerNight() << "," << escapeCsv(RoomStatusToString(r.getStatus())) << ",\"";
+ ss << r.getId() << ',' << r.getRoomNumber() << ',' << escapeCsv(r.getCategory()) << ',' << std::fixed << std::setprecision(2) << r.getPricePerNight() << ',' << escapeCsv(RoomStatusToString(r.getStatus())) << ',';
+ // amenities as semicolon-separated inside quotes
+ ss << '"';
  bool first=true;
  for (auto &a: r.getAmenities()) { if (!first) ss<<";"; ss<<a; first=false; }
- ss << "\"," << (r.isActive()?"1":"0");
- rf << ss.str() << "\n";
+ ss << '"' << ',' << (r.isActive()?"1":"0");
+ rf << ss.str() << '\n';
  }
  rf.close();
 
- // bookings.csv: id,roomId,clientIds(sep by ;),checkIn_day,checkIn_month,checkIn_year,checkOut_day,checkOut_month,checkOut_year,status,totalPrice,active
+ // bookings.csv
  std::ofstream bf(dir + "/bookings.csv");
  bf << "id,roomId,clientIds,checkIn_day,checkIn_month,checkIn_year,checkOut_day,checkOut_month,checkOut_year,status,totalPrice,active\n";
  for (const auto& b: bookings) {
  std::stringstream ss;
- ss << b.getId() << "," << b.getRoomId() << ",\"";
+ ss << b.getId() << ',' << b.getRoomId() << ',' << '"';
  bool first=true;
  for (int id: b.getClientIds()) { if (!first) ss<<";"; ss<<id; first=false; }
- ss << "\"," << b.getCheckInDate().getDay() << "," << b.getCheckInDate().getMonth() << "," << b.getCheckInDate().getYear()
- << "," << b.getCheckOutDate().getDay() << "," << b.getCheckOutDate().getMonth() << "," << b.getCheckOutDate().getYear()
- << "," << (int)b.getStatus() << "," << std::fixed << std::setprecision(2) << b.getTotalPrice() << "," << (b.isActive()?"1":"0");
- bf << ss.str() << "\n";
+ ss << '"' << ',' << b.getCheckInDate().getDay() << ',' << b.getCheckInDate().getMonth() << ',' << b.getCheckInDate().getYear()
+ << ',' << b.getCheckOutDate().getDay() << ',' << b.getCheckOutDate().getMonth() << ',' << b.getCheckOutDate().getYear()
+ << ',' << (int)b.getStatus() << ',' << std::fixed << std::setprecision(2) << b.getTotalPrice() << ',' << (b.isActive()?"1":"0");
+ bf << ss.str() << '\n';
  }
  bf.close();
 
@@ -412,6 +428,17 @@ bool ImportFromCSV(const std::string& dir,
  Date birth(bday, bmonth, byear);
  p.setDateOfBirth(birth);
  }
+ // new CSV columns indices after existing ones
+ bool isChild = false;
+ bool isForeigner = false;
+ std::string birthCert = std::string();
+ std::string visa = std::string();
+ std::string intlPass = std::string();
+ if (cols.size() >16) isChild = (trimStr(cols[16]) == "1");
+ if (cols.size() >17) isForeigner = (trimStr(cols[17]) == "1");
+ if (cols.size() >18) birthCert = unquote(trimStr(cols[18]));
+ if (cols.size() >19) visa = unquote(trimStr(cols[19]));
+ if (cols.size() >20) intlPass = unquote(trimStr(cols[20]));
  int idx = findClientIndex(id);
  if (idx != -1) {
  // update existing client
@@ -420,11 +447,16 @@ bool ImportFromCSV(const std::string& dir,
  clients[idx].setPhone(phone);
  clients[idx].setPassport(p);
  clients[idx].setActive(active);
+ // update new fields
+ clients[idx].setIsChild(isChild);
+ clients[idx].setIsForeigner(isForeigner);
+ clients[idx].setBirthCertificate(birthCert);
+ clients[idx].setVisa(visa);
+ clients[idx].setInternationalPassport(intlPass);
  nextClientId = std::max(nextClientId, id+1);
  } else {
  // add new client
- // CSV does not contain child/foreigner/document fields currently; use defaults
- clients.emplace_back(id, first, last, phone, p, active, false, false, std::string(), std::string(), std::string());
+ clients.emplace_back(id, first, last, phone, p, active, isChild, isForeigner, birthCert, visa, intlPass);
  nextClientId = std::max(nextClientId, id+1);
  }
  }
