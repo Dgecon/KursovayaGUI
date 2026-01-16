@@ -5,6 +5,8 @@
 #endif
 
 #include <wx/wx.h>
+#include <wx/datectrl.h>
+#include <wx/datetime.h>
 #include "Passport.h"
 class Client;
 
@@ -38,13 +40,9 @@ private:
  wxTextCtrl* m_series;
  wxTextCtrl* m_number;
  wxTextCtrl* m_givenBy;
- wxTextCtrl* m_issueDay;
- wxTextCtrl* m_issueMonth;
- wxTextCtrl* m_issueYear;
+ wxDatePickerCtrl* m_issueDate; // replaced separate fields
  wxTextCtrl* m_code;
- wxTextCtrl* m_birthDay;
- wxTextCtrl* m_birthMonth;
- wxTextCtrl* m_birthYear;
+ wxDatePickerCtrl* m_birthDate; // replaced separate fields
 
  // new: child / foreigner options
  wxCheckBox* m_isChild;

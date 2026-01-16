@@ -3,6 +3,7 @@
 #include "Client.h"
 #include "Room.h"
 #include "Booking.h"
+#include <wx/listctrl.h>
 
 class MainFrame : public wxFrame
 {
@@ -21,7 +22,7 @@ private:
     // handle window close to save data
     void OnClose(wxCloseEvent& event);
 
-    wxListBox* listOfClients = nullptr;
+    wxListCtrl* listOfClients = nullptr;
     wxListBox* listOfRooms = nullptr;
     wxListBox* listOfBookings = nullptr;
 
@@ -31,7 +32,7 @@ private:
 
     wxDECLARE_EVENT_TABLE();
 
-    // вспомогательные методы
+    // helper finders
     Room* findRoomById(int roomId);
     Client* findClientById(int clientId);
     void refreshRoomsList();

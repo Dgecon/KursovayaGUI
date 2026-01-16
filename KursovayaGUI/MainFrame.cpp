@@ -10,7 +10,7 @@
 #include "AddRoomDialog.h"
 #include "AddBookingDialog.h"
 #include <vector>
-#include <wx/listbox.h>
+#include <wx/listctrl.h>
 #include <wx/textdlg.h>
 #include <wx/wx.h>
 #include <sstream>
@@ -84,7 +84,13 @@ MainFrame::MainFrame(const wxString& title)
  CheckOutButton->SetBackgroundColour(wxColour(255,200,180));
 
 
- listOfClients = new wxListBox(panel, ID_ListOfClients, wxPoint(170,30), wxSize(350,400),0, nullptr, wxLB_EXTENDED);
+ listOfClients = new wxListCtrl(panel, ID_ListOfClients, wxPoint(170,30), wxSize(350,400), wxLC_REPORT | wxLC_HRULES | wxLC_VRULES);
+ // setup columns: ID, First, Last, Phone
+ listOfClients->InsertColumn(0, "ID", wxLIST_FORMAT_LEFT,50);
+ listOfClients->InsertColumn(1, "Имя", wxLIST_FORMAT_LEFT,120);
+ listOfClients->InsertColumn(2, "Фамилия", wxLIST_FORMAT_LEFT,120);
+ listOfClients->InsertColumn(3, "Телефон", wxLIST_FORMAT_LEFT,120);
+
  listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxPoint(530,30), wxSize(350,400));
  listOfBookings = new wxListBox(panel, ID_ListOfBookings, wxPoint(170,470), wxSize(660,120));
  listOfClients->SetBackgroundColour(wxColour(240,240,240));
@@ -149,9 +155,13 @@ void MainFrame::OnAddBooking(wxCommandEvent& event) {
  return;
  }
 
- wxArrayInt sels;
- listOfClients->GetSelections(sels);
- if (sels.IsEmpty()) {
+ // collect selected client items from list control
+ std::vector<long> selectedItems;
+ long item = -1;
+ for (item = listOfClients->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); item != -1; item = listOfClients->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) {
+ selectedItems.push_back(item);
+ }
+ if (selectedItems.empty()) {
  wxMessageBox("Пожалуйстa, выберите одного или нескольких клиентов.", "Информация", wxOK | wxICON_INFORMATION, this);
  return;
  }
@@ -164,10 +174,8 @@ void MainFrame::OnAddBooking(wxCommandEvent& event) {
 
  // collect client ids
  std::vector<int> clientIds;
- for (auto idx : sels) {
- void* cd = listOfClients->GetClientData(idx);
- if (!cd) continue;
- int cid = static_cast<int>(reinterpret_cast<std::intptr_t>(cd));
+ for (auto idx : selectedItems) {
+ int cid = static_cast<int>(listOfClients->GetItemData(idx));
  Client* c = findClientById(cid);
  if (c && c->isActive()) clientIds.push_back(cid);
  }
@@ -435,23 +443,21 @@ void MainFrame::OnDeleteClient(wxCommandEvent& event) {
  return;
  }
 
- wxArrayInt sels;
- listOfClients->GetSelections(sels);
- if (sels.IsEmpty()) {
+ // get selected items
+ std::vector<long> sels;
+ long it = -1;
+ for (it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); it != -1; it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) sels.push_back(it);
+ if (sels.empty()) {
  wxMessageBox("Пожалуйста, выберите клиента для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
  return;
  }
- if (sels.GetCount() >1) {
+ if (sels.size() >1) {
  wxMessageBox("Пожалуйста, выберите только одного клиента для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
  return;
  }
- int sel = sels[0];
- void* data = listOfClients->GetClientData(sel);
- if (!data) {
- wxLogError("Нет client data для выбранной строки");
- return;
- }
- int clientId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ long sel = sels[0];
+ int clientId = static_cast<int>(listOfClients->GetItemData(sel));
+
  // Check for active bookings
  std::vector<int> blocking;
  for (const auto& b : bookings) {
@@ -498,11 +504,9 @@ void MainFrame::OnDeleteClient(wxCommandEvent& event) {
  }
 
  // Remove matching items from the list control
- for (int i = (int)listOfClients->GetCount() -1; i >=0; --i) {
- void* cd = listOfClients->GetClientData(i);
- if (!cd) continue;
- int id = static_cast<int>(reinterpret_cast<std::intptr_t>(cd));
- if (id == clientId) listOfClients->Delete(i);
+ for (long i = (long)listOfClients->GetItemCount() -1; i >=0; --i) {
+ long iddata = listOfClients->GetItemData(i);
+ if (static_cast<int>(iddata) == clientId) listOfClients->DeleteItem(i);
  }
 
  refreshClientsList();
@@ -514,21 +518,20 @@ void MainFrame::OnEditClient(wxCommandEvent& event) {
  return;
  }
 
- wxArrayInt sels;
- listOfClients->GetSelections(sels);
- if (sels.IsEmpty()) {
+ std::vector<long> sels;
+ long it = -1;
+ for (it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); it != -1; it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) sels.push_back(it);
+ if (sels.empty()) {
  wxMessageBox("Пожалуйста, выберите клиента для редактирования.", "Информация", wxOK | wxICON_INFORMATION, this);
  return;
  }
- if (sels.GetCount() >1) {
+ if (sels.size() >1) {
  wxMessageBox("Пожалуйста, выберите только одного клиента для редактирования.", "Информация", wxOK | wxICON_INFORMATION, this);
  return;
  }
 
- int sel = sels[0];
- void* data = listOfClients->GetClientData(sel);
- if (!data) { wxLogError("Нет client data для выбранного элемента"); return; }
- int clientId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
+ long sel = sels[0];
+ int clientId = static_cast<int>(listOfClients->GetItemData(sel));
  Client* client = findClientById(clientId);
  if (!client) { wxLogError("Клиент не найден"); return; }
 
@@ -688,15 +691,21 @@ void MainFrame::refreshRoomsList() {
 
 void MainFrame::refreshClientsList() {
  if (!listOfClients) return;
- listOfClients->Clear();
+ listOfClients->DeleteAllItems();
+ long index =0;
  for (const auto& client : clients) {
  if (!client.isActive()) continue;
- wxString display = wxString::Format("%d. %s %s, Тел: %s",
- client.getId(),
- wxString::FromUTF8(client.getFirstName().c_str()),
- wxString::FromUTF8(client.getLastName().c_str()),
- wxString::FromUTF8(client.getPhone().c_str()));
- listOfClients->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(client.getId())));
+ wxString first = wxString::FromUTF8(client.getFirstName().c_str());
+ wxString last = wxString::FromUTF8(client.getLastName().c_str());
+ wxString phone = wxString::FromUTF8(client.getPhone().c_str());
+ wxString idstr = wxString::Format("%d", client.getId());
+ long pos = listOfClients->InsertItem(index, idstr);
+ listOfClients->SetItem(pos,1, first);
+ listOfClients->SetItem(pos,2, last);
+ listOfClients->SetItem(pos,3, phone);
+ // store client id in item data
+ listOfClients->SetItemData(pos, static_cast<long>(client.getId()));
+ ++index;
  }
  listOfClients->Refresh();
  listOfClients->Update();
@@ -705,32 +714,32 @@ void MainFrame::refreshClientsList() {
 void MainFrame::refreshBookingsList() {
  if (!listOfBookings) return;
  listOfBookings->Clear();
- for (const auto& booking : bookings) {
- if (!booking.isActive()) continue;
- Room* room = findRoomById(booking.getRoomId());
+ for (size_t i =0; i < bookings.size(); ++i) {
+ const Booking& b = bookings[i];
+ if (!b.isActive()) continue;
+ Room* room = findRoomById(b.getRoomId());
+ wxString roomInfo = room ? wxString::Format("Room %d", room->getRoomNumber()) : "Room not found";
 
- wxString roomInfo = room ? wxString::Format("Комната %d", room->getRoomNumber()) : "Комната не найдена";
-
- // build clients string
  std::string clientsStr;
- for (int cid : booking.getClientIds()) {
- Client* c = findClientById(cid);
+ std::vector<int> ids = b.getClientIds();
+ for (size_t j =0; j < ids.size(); ++j) {
+ Client* c = findClientById(ids[j]);
  if (c) {
  if (!clientsStr.empty()) clientsStr += ", ";
  clientsStr += c->getFullName();
  }
  }
- if (clientsStr.empty()) clientsStr = "Клиенты не найдены";
+ if (clientsStr.empty()) clientsStr = "Clients not found";
 
- wxString display = wxString::Format("Бронирование #%d: %s, %s, %s - %s, %.2f руб.",
- booking.getId(),
+ wxString display = wxString::Format("Booking #%d: %s, %s, %s - %s, %.2f",
+ b.getId(),
  roomInfo,
  wxString::FromUTF8(clientsStr.c_str()),
- wxString::FromUTF8(booking.getCheckInDate().toString().c_str()),
- wxString::FromUTF8(booking.getCheckOutDate().toString().c_str()),
- booking.getTotalPrice());
+ wxString::FromUTF8(b.getCheckInDate().toString().c_str()),
+ wxString::FromUTF8(b.getCheckOutDate().toString().c_str()),
+ b.getTotalPrice());
 
- listOfBookings->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(booking.getId())));
+ listOfBookings->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(b.getId())));
  }
  listOfBookings->Refresh();
  listOfBookings->Update();

@@ -34,33 +34,17 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  m_givenBy = new wxTextCtrl(this, wxID_ANY);
  grid->Add(m_givenBy,1, wxEXPAND);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата выдачи (дд мм гггг) - день:"),0, wxALIGN_CENTER_VERTICAL);
- m_issueDay = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_issueDay,1, wxEXPAND);
-
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата выдачи - месяц:"),0, wxALIGN_CENTER_VERTICAL);
- m_issueMonth = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_issueMonth,1, wxEXPAND);
-
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата выдачи - год:"),0, wxALIGN_CENTER_VERTICAL);
- m_issueYear = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_issueYear,1, wxEXPAND);
+ grid->Add(new wxStaticText(this, wxID_ANY, "Дата выдачи:"),0, wxALIGN_CENTER_VERTICAL);
+ m_issueDate = new wxDatePickerCtrl(this, wxID_ANY);
+ grid->Add(m_issueDate,1, wxEXPAND);
 
  grid->Add(new wxStaticText(this, wxID_ANY, "Код подразделения:"),0, wxALIGN_CENTER_VERTICAL);
  m_code = new wxTextCtrl(this, wxID_ANY);
  grid->Add(m_code,1, wxEXPAND);
 
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата рождения - день:"),0, wxALIGN_CENTER_VERTICAL);
- m_birthDay = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_birthDay,1, wxEXPAND);
-
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата рождения - месяц:"),0, wxALIGN_CENTER_VERTICAL);
- m_birthMonth = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_birthMonth,1, wxEXPAND);
-
- grid->Add(new wxStaticText(this, wxID_ANY, "Дата рождения - год:"),0, wxALIGN_CENTER_VERTICAL);
- m_birthYear = new wxTextCtrl(this, wxID_ANY);
- grid->Add(m_birthYear,1, wxEXPAND);
+ grid->Add(new wxStaticText(this, wxID_ANY, "Дата рождения:"),0, wxALIGN_CENTER_VERTICAL);
+ m_birthDate = new wxDatePickerCtrl(this, wxID_ANY);
+ grid->Add(m_birthDate,1, wxEXPAND);
 
  // New controls: child / foreigner
  grid->Add(new wxStaticText(this, wxID_ANY, "Ребёнок? (галочка):"),0, wxALIGN_CENTER_VERTICAL);
@@ -108,26 +92,25 @@ wxString AddClientDialog::getFirstName() const { return m_first->GetValue(); }
 wxString AddClientDialog::getLastName() const { return m_last->GetValue(); }
 wxString AddClientDialog::getPhone() const { return m_phone->GetValue(); }
 
+static Date DateFromWxDate(const wxDateTime& dt) {
+ if (!dt.IsValid()) return Date();
+ return Date(dt.GetDay(), dt.GetMonth()+1, dt.GetYear());
+}
+
 Passport AddClientDialog::getPassport() const {
  Passport p;
- long ser=0, num=0, iday=1, imonth=1, iyear=2024, bday=1, bmonth=1, byear=2000;
+ long ser=0, num=0;
  
  m_series->GetValue().ToLong(&ser);
  m_number->GetValue().ToLong(&num);
  p.setSeries((int)ser);
  p.setNumber((int)num);
  p.setGivenBy(std::string(m_givenBy->GetValue().ToUTF8().data()));
- m_issueDay->GetValue().ToLong(&iday);
- m_issueMonth->GetValue().ToLong(&imonth);
- m_issueYear->GetValue().ToLong(&iyear);
- Date issue((int)iday,(int)imonth,(int)iyear);
- p.setDateOfIssue(issue);
+ wxDateTime idt = m_issueDate->GetValue();
+ p.setDateOfIssue(DateFromWxDate(idt));
  p.setCode(std::string(m_code->GetValue().ToUTF8().data()));
- m_birthDay->GetValue().ToLong(&bday);
- m_birthMonth->GetValue().ToLong(&bmonth);
- m_birthYear->GetValue().ToLong(&byear);
- Date birth((int)bday,(int)bmonth,(int)byear);
- p.setDateOfBirth(birth);
+ wxDateTime bdt = m_birthDate->GetValue();
+ p.setDateOfBirth(DateFromWxDate(bdt));
  p.setFio(std::string((m_first->GetValue() + " " + m_last->GetValue()).ToUTF8().data()));
  return p;
 }
@@ -150,15 +133,8 @@ void AddClientDialog::OnOk(wxCommandEvent& evt) {
  wxMessageBox("Серия и номер паспорта должны быть числами", "Ошибка", wxOK | wxICON_ERROR, this);
  return;
  }
- long iday=1, imonth=1, iyear=2024, bday=1, bmonth=1, byear=2000;
- m_issueDay->GetValue().ToLong(&iday);
- m_issueMonth->GetValue().ToLong(&imonth);
- m_issueYear->GetValue().ToLong(&iyear);
- m_birthDay->GetValue().ToLong(&bday);
- m_birthMonth->GetValue().ToLong(&bmonth);
- m_birthYear->GetValue().ToLong(&byear);
- Date issue((int)iday,(int)imonth,(int)iyear);
- Date birth((int)bday,(int)bmonth,(int)byear);
+ Date issue = DateFromWxDate(m_issueDate->GetValue());
+ Date birth = DateFromWxDate(m_birthDate->GetValue());
  if (!issue.isValid() || !birth.isValid()) {
  wxMessageBox("Неверная дата выдачи или дата рождения", "Ошибка", wxOK | wxICON_ERROR, this);
  return;
@@ -217,13 +193,9 @@ void AddClientDialog::setValues(const Client& client) {
  m_series->SetValue(wxString::Format("%d", p.getSeries()));
  m_number->SetValue(wxString::Format("%d", p.getNumber()));
  m_givenBy->SetValue(wxString::FromUTF8(p.getGivenBy().c_str()));
- m_issueDay->SetValue(wxString::Format("%d", p.getDateOfIssue().getDay()));
- m_issueMonth->SetValue(wxString::Format("%d", p.getDateOfIssue().getMonth()));
- m_issueYear->SetValue(wxString::Format("%d", p.getDateOfIssue().getYear()));
+ m_issueDate->SetValue(wxDateTime(p.getDateOfIssue().getDay(), (wxDateTime::Month)(p.getDateOfIssue().getMonth()-1), p.getDateOfIssue().getYear()));
  m_code->SetValue(wxString::FromUTF8(p.getCode().c_str()));
- m_birthDay->SetValue(wxString::Format("%d", p.getDateOfBirth().getDay()));
- m_birthMonth->SetValue(wxString::Format("%d", p.getDateOfBirth().getMonth()));
- m_birthYear->SetValue(wxString::Format("%d", p.getDateOfBirth().getYear()));
+ m_birthDate->SetValue(wxDateTime(p.getDateOfBirth().getDay(), (wxDateTime::Month)(p.getDateOfBirth().getMonth()-1), p.getDateOfBirth().getYear()));
 
  // new fields
  m_isChild->SetValue(client.getIsChild());

@@ -104,7 +104,7 @@
       "totalPrice": 209777.0
     },
     {
-      "active": true,
+      "active": false,
       "checkIn": {
         "day": 15,
         "month": 1,

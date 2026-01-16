@@ -1,6 +1,8 @@
 #pragma once
 
 #include <wx/wx.h>
+#include <wx/datectrl.h>
+#include <wx/datetime.h>
 #include "Date.h"
 
 class AddBookingDialog : public wxDialog {
@@ -9,11 +11,7 @@ public:
  Date getCheckIn() const;
  Date getCheckOut() const;
 private:
- wxTextCtrl* m_ci_day;
- wxTextCtrl* m_ci_month;
- wxTextCtrl* m_ci_year;
- wxTextCtrl* m_co_day;
- wxTextCtrl* m_co_month;
- wxTextCtrl* m_co_year;
+ wxDatePickerCtrl* m_ci_date;
+ wxDatePickerCtrl* m_co_date;
  void OnOk(wxCommandEvent& evt);
 };
