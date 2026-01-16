@@ -416,11 +416,19 @@ void MainFrame::OnAddClient(wxCommandEvent& event) {
  std::string last = std::string(wxLast.ToUTF8().data());
  std::string phone = std::string(wxPhone.ToUTF8().data());
 
+ // additional fields
+ bool isChild = dlg.isChild();
+ bool isForeigner = dlg.isForeigner();
+ std::string birthCert = dlg.getBirthCertificate();
+ std::string visa = dlg.getVisa();
+ std::string intlPass = dlg.getInternationalPassport();
+
  int clientId = IdGenerator::generateClientId();
- clients.emplace_back(clientId, first, last, phone, passport);
+ clients.emplace_back(clientId, first, last, phone, passport, true, isChild, isForeigner, birthCert, visa, intlPass);
 
  refreshClientsList();
 }
+
 void MainFrame::OnDeleteClient(wxCommandEvent& event) {
  if (!listOfClients) {
  wxLogError("listOfClients == nullptr");
@@ -534,6 +542,12 @@ void MainFrame::OnEditClient(wxCommandEvent& event) {
  client->setPhone(std::string(dlg.getPhone().ToUTF8().data()));
  Passport p = dlg.getPassport();
  client->setPassport(p);
+ // update new fields: child/foreigner flags and documents
+ client->setIsChild(dlg.isChild());
+ client->setIsForeigner(dlg.isForeigner());
+ client->setBirthCertificate(dlg.getBirthCertificate());
+ client->setVisa(dlg.getVisa());
+ client->setInternationalPassport(dlg.getInternationalPassport());
 
  refreshClientsList();
 }

@@ -2751,7 +2751,7 @@
       "totalPrice": 2469955.0
     },
     {
-      "active": true,
+      "active": false,
       "checkIn": {
         "day": 1,
         "month": 1,
@@ -2769,13 +2769,37 @@
       "roomId": 5,
       "status": 1,
       "totalPrice": 209777.0
+    },
+    {
+      "active": true,
+      "checkIn": {
+        "day": 15,
+        "month": 1,
+        "year": 2026
+      },
+      "checkOut": {
+        "day": 17,
+        "month": 1,
+        "year": 2026
+      },
+      "clientIds": [
+        7
+      ],
+      "id": 7,
+      "roomId": 5,
+      "status": 2,
+      "totalPrice": 13534.0
     }
   ],
   "clients": [
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -2794,12 +2818,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -2818,12 +2847,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -2842,12 +2876,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -2866,12 +2905,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -2890,12 +2934,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -2914,12 +2963,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -2938,12 +2992,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -2962,12 +3021,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -2986,12 +3050,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3010,12 +3079,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3034,12 +3108,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3058,12 +3137,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3082,12 +3166,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3106,12 +3195,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3130,12 +3224,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3154,12 +3253,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3178,12 +3282,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3202,12 +3311,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3226,12 +3340,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3250,12 +3369,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3274,12 +3398,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3298,12 +3427,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3322,60 +3456,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3394,12 +3485,75 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3418,12 +3572,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3442,12 +3601,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3466,12 +3630,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3490,12 +3659,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3514,12 +3688,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3538,12 +3717,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3562,12 +3746,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3586,12 +3775,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3610,12 +3804,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3634,12 +3833,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3658,12 +3862,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3682,12 +3891,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3706,60 +3920,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3778,12 +3949,75 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3802,12 +4036,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3826,12 +4065,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3850,12 +4094,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3874,12 +4123,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3898,12 +4152,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3922,12 +4181,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3946,12 +4210,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -3970,12 +4239,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -3994,12 +4268,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4018,12 +4297,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4042,12 +4326,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4066,12 +4355,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4090,60 +4384,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4162,12 +4413,75 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4186,12 +4500,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4210,12 +4529,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4234,12 +4558,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4258,12 +4587,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4282,12 +4616,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4306,12 +4645,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4330,12 +4674,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4354,12 +4703,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4378,12 +4732,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4402,12 +4761,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4426,12 +4790,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4450,12 +4819,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4474,60 +4848,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4546,156 +4877,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4714,12 +4906,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4738,12 +4935,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4762,12 +4964,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4786,12 +4993,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4810,12 +5022,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4834,12 +5051,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4858,12 +5080,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -4882,60 +5109,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -4954,156 +5138,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5122,12 +5167,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5146,12 +5196,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5170,12 +5225,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5194,12 +5254,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5218,12 +5283,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5242,12 +5312,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5266,12 +5341,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5290,12 +5370,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5314,12 +5399,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5338,12 +5428,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5362,12 +5457,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5386,12 +5486,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5410,12 +5515,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5434,12 +5544,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5458,12 +5573,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5482,12 +5602,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5506,12 +5631,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5530,12 +5660,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5554,12 +5689,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5578,12 +5718,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5602,12 +5747,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5626,12 +5776,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5650,12 +5805,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5674,12 +5834,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5698,108 +5863,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5818,12 +5892,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5842,12 +5921,597 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 4,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5866,12 +6530,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5890,12 +6559,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5914,12 +6588,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5938,12 +6617,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -5962,12 +6646,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -5986,12 +6675,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6010,60 +6704,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6082,156 +6733,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6250,12 +6762,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6274,12 +6791,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6298,12 +6820,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6322,12 +6849,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6346,12 +6878,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6370,12 +6907,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6394,12 +6936,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6418,60 +6965,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6490,156 +6994,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6658,12 +7023,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6682,12 +7052,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6706,12 +7081,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6730,12 +7110,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6754,12 +7139,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6778,12 +7168,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6802,12 +7197,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6826,12 +7226,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6850,12 +7255,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6874,12 +7284,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6898,12 +7313,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6922,12 +7342,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6946,12 +7371,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -6970,12 +7400,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -6994,12 +7429,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7018,396 +7458,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 4,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7426,12 +7487,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7450,12 +7516,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7474,12 +7545,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7498,12 +7574,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7522,12 +7603,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7546,12 +7632,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7570,12 +7661,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7594,12 +7690,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7618,108 +7719,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7738,12 +7748,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7762,60 +7777,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7834,12 +7806,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7858,12 +7835,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7882,12 +7864,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7906,12 +7893,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -7930,12 +7922,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -7948,66 +7945,23 @@
         "givenBy": "оро",
         "issue": {
           "day": 1,
-          "month": 1,
+          "month": 4,
           "year": 2024
         },
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8026,12 +7980,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8050,12 +8009,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8074,12 +8038,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8098,12 +8067,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8122,12 +8096,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8146,12 +8125,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8170,12 +8154,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8194,60 +8183,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8266,12 +8212,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8290,12 +8241,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8314,12 +8270,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8338,12 +8299,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8362,12 +8328,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8386,204 +8357,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "1,1,2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8602,12 +8386,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8620,162 +8409,23 @@
         "givenBy": "оро",
         "issue": {
           "day": 1,
-          "month": 1,
+          "month": 4,
           "year": 2024
         },
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
-      "lastName": "аавав",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "ывывы",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 23323,
-        "series": 3232
-      },
-      "phone": "232323"
-    },
-    {
-      "active": false,
-      "firstName": "у",
-      "id": 4,
-      "lastName": "в",
-      "passport": {
-        "birth": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "code": "2024",
-        "fio": "",
-        "givenBy": "оро",
-        "issue": {
-          "day": 1,
-          "month": 1,
-          "year": 2024
-        },
-        "number": 27,
-        "series": 72
-      },
-      "phone": "45"
-    },
-    {
-      "active": false,
-      "firstName": "вы",
-      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8794,12 +8444,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8818,12 +8473,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8842,12 +8502,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8866,12 +8531,17 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "вы",
       "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "аавав",
       "passport": {
         "birth": {
@@ -8890,12 +8560,17 @@
         "number": 23323,
         "series": 3232
       },
-      "phone": "232323"
+      "phone": "232323",
+      "visa": ""
     },
     {
       "active": false,
+      "birthCertificate": "",
       "firstName": "у",
       "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "в",
       "passport": {
         "birth": {
@@ -8914,12 +8589,1641 @@
         "number": 27,
         "series": 72
       },
-      "phone": "45"
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "вы",
+      "id": 3,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "аавав",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "ывывы",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 23323,
+        "series": 3232
+      },
+      "phone": "232323",
+      "visa": ""
+    },
+    {
+      "active": false,
+      "birthCertificate": "",
+      "firstName": "у",
+      "id": 4,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "в",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "code": "1,1,2024",
+        "fio": "",
+        "givenBy": "оро",
+        "issue": {
+          "day": 1,
+          "month": 1,
+          "year": 2024
+        },
+        "number": 27,
+        "series": 72
+      },
+      "phone": "45",
+      "visa": ""
     },
     {
       "active": true,
+      "birthCertificate": "",
       "firstName": "2",
       "id": 6,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "3",
       "passport": {
         "birth": {
@@ -8938,12 +10242,17 @@
         "number": 4,
         "series": 4
       },
-      "phone": "3"
+      "phone": "3",
+      "visa": ""
     },
     {
       "active": true,
+      "birthCertificate": "",
       "firstName": "ы",
       "id": 7,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
       "lastName": "ы",
       "passport": {
         "birth": {
@@ -8962,12 +10271,17 @@
         "number": 2,
         "series": 1
       },
-      "phone": "ы"
+      "phone": "ы",
+      "visa": ""
     },
     {
       "active": true,
+      "birthCertificate": "22",
       "firstName": "ы",
       "id": 8,
+      "internationalPassport": "2",
+      "isChild": true,
+      "isForeigner": true,
       "lastName": "ы",
       "passport": {
         "birth": {
@@ -8986,12 +10300,42 @@
         "number": 5,
         "series": 1
       },
-      "phone": "ы"
+      "phone": "ы",
+      "visa": "2"
+    },
+    {
+      "active": true,
+      "birthCertificate": "",
+      "firstName": "2",
+      "id": 10,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "2",
+      "passport": {
+        "birth": {
+          "day": 2,
+          "month": 2,
+          "year": 2
+        },
+        "code": "2",
+        "fio": "2 2",
+        "givenBy": "2",
+        "issue": {
+          "day": 2,
+          "month": 2,
+          "year": 22
+        },
+        "number": 2,
+        "series": 2
+      },
+      "phone": "2",
+      "visa": ""
     }
   ],
   "nextIds": {
-    "booking": 7,
-    "client": 9,
+    "booking": 8,
+    "client": 11,
     "room": 6
   },
   "rooms": [
@@ -9002,7 +10346,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9020,7 +10364,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9038,7 +10382,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9056,7 +10400,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9074,7 +10418,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9092,7 +10436,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9110,7 +10454,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9128,7 +10472,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9146,7 +10490,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9164,7 +10508,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9182,7 +10526,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9200,7 +10544,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9218,7 +10562,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9236,7 +10580,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9254,7 +10598,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9272,7 +10616,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9290,7 +10634,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9308,7 +10652,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9326,7 +10670,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9344,7 +10688,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9362,7 +10706,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9380,7 +10724,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9398,7 +10742,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9416,7 +10760,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9434,7 +10778,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9452,7 +10796,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9470,7 +10814,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9488,7 +10832,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9506,7 +10850,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9524,7 +10868,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9542,7 +10886,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9560,7 +10904,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9578,7 +10922,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9596,7 +10940,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9614,7 +10958,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9632,7 +10976,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9650,7 +10994,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9668,7 +11012,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9686,7 +11030,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9704,7 +11048,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9722,7 +11066,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9740,7 +11084,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9758,7 +11102,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9776,7 +11120,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9794,7 +11138,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9812,7 +11156,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9830,7 +11174,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9848,7 +11192,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9866,7 +11210,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9884,7 +11228,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9902,7 +11246,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9920,7 +11264,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9938,7 +11282,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9956,7 +11300,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9974,7 +11318,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -9992,7 +11336,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10010,7 +11354,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10028,7 +11372,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10046,7 +11390,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10064,7 +11408,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10082,7 +11426,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10100,7 +11444,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10118,7 +11462,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10136,7 +11480,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10154,7 +11498,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10172,7 +11516,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10190,7 +11534,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10208,7 +11552,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10226,7 +11570,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10244,7 +11588,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10262,7 +11606,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10280,7 +11624,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10298,7 +11642,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10316,7 +11660,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10334,7 +11678,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10352,7 +11696,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10370,7 +11714,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10388,7 +11732,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10406,7 +11750,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10424,7 +11768,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10442,7 +11786,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10460,7 +11804,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10478,7 +11822,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10496,7 +11840,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10514,7 +11858,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10532,7 +11876,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10550,7 +11894,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10568,7 +11912,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10586,7 +11930,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10604,7 +11948,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10622,7 +11966,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10640,7 +11984,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10658,7 +12002,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10676,7 +12020,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10694,7 +12038,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10712,7 +12056,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10730,7 +12074,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10748,7 +12092,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10766,7 +12110,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10784,7 +12128,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10802,7 +12146,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10820,7 +12164,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10838,7 +12182,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10856,7 +12200,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10874,7 +12218,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10892,7 +12236,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10910,7 +12254,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10928,7 +12272,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10946,7 +12290,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10964,7 +12308,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -10982,7 +12326,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11000,7 +12344,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11018,7 +12362,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11036,7 +12380,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11054,7 +12398,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11072,7 +12416,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11090,7 +12434,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11108,7 +12452,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11126,7 +12470,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11144,7 +12488,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11162,7 +12506,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11180,7 +12524,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11198,7 +12542,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11216,7 +12560,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11234,7 +12578,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11252,7 +12596,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11270,7 +12614,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11288,7 +12632,7 @@
       "id": 1,
       "pricePerNight": 2000.0,
       "roomNumber": 4,
-      "status": "Уборка"
+      "status": "Доступна"
     },
     {
       "active": false,
@@ -11306,7 +12650,7 @@
       "id": 5,
       "pricePerNight": 6767.0,
       "roomNumber": 32,
-      "status": "Забронирована"
+      "status": "Доступна"
     }
   ],
   "version": 1

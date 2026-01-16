@@ -16,11 +16,11 @@ using json = nlohmann::json;
 
 static std::string RoomStatusToStr(RoomStatus s) { return RoomStatusToString(s); }
 static RoomStatus RoomStatusFromStr(const std::string& s) {
- if (s == "Доступна" || s == u8"Доступна" || s == "AVAILABLE") return RoomStatus::AVAILABLE;
- if (s == "Забронирована" || s == u8"Забронирована" || s == "BOOKED") return RoomStatus::BOOKED;
- if (s == "Занята" || s == u8"Занята" || s == "OCCUPIED") return RoomStatus::OCCUPIED;
- if (s == "На ремонте" || s == u8"На ремонте" || s == "MAINTENANCE") return RoomStatus::MAINTENANCE;
- if (s == "Уборка" || s == u8"Уборка" || s == "CLEANING") return RoomStatus::CLEANING;
+ if (s == "????????" || s == u8"????????" || s == "AVAILABLE") return RoomStatus::AVAILABLE;
+ if (s == "?????????????" || s == u8"?????????????" || s == "BOOKED") return RoomStatus::BOOKED;
+ if (s == "??????" || s == u8"??????" || s == "OCCUPIED") return RoomStatus::OCCUPIED;
+ if (s == "?? ???????" || s == u8"?? ???????" || s == "MAINTENANCE") return RoomStatus::MAINTENANCE;
+ if (s == "??????" || s == u8"??????" || s == "CLEANING") return RoomStatus::CLEANING;
  return RoomStatus::AVAILABLE;
 }
 
@@ -53,7 +53,13 @@ bool SaveData(const std::string& path,
  {"lastName", c.getLastName()},
  {"phone", c.getPhone()},
  {"passport", jp},
- {"active", c.isActive()}
+ {"active", c.isActive()},
+ // new fields
+ {"isChild", c.getIsChild()},
+ {"isForeigner", c.getIsForeigner()},
+ {"birthCertificate", c.getBirthCertificate()},
+ {"visa", c.getVisa()},
+ {"internationalPassport", c.getInternationalPassport()}
  });
  }
 
@@ -109,7 +115,7 @@ bool LoadData(const std::string& path,
  try {
  std::ifstream ifs(path);
  if (!ifs.is_open()) {
- error = "Файл не найден";
+ error = "???? ?? ??????";
  return false;
  }
  json j; ifs >> j;
@@ -147,12 +153,23 @@ bool LoadData(const std::string& path,
  }
  }
  bool active = jc.value("active", true);
+ // new fields
+ bool isChild = jc.value("isChild", false);
+ bool isForeigner = jc.value("isForeigner", false);
+ std::string birthCert = jc.value("birthCertificate", std::string());
+ std::string visa = jc.value("visa", std::string());
+ std::string intlPass = jc.value("internationalPassport", std::string());
  clients.emplace_back(jc.value("id",0),
  jc.value("firstName", std::string()),
  jc.value("lastName", std::string()),
  jc.value("phone", std::string()),
  p,
- active);
+ active,
+ isChild,
+ isForeigner,
+ birthCert,
+ visa,
+ intlPass);
  }
  }
 
@@ -211,7 +228,7 @@ bool LoadData(const std::string& path,
 }
 
 static std::string escapeCsv(const std::string& s) {
- if (s.find(',') == std::string::npos && s.find('\"')==std::string::npos && s.find('\n')==std::string::npos) return s;
+ if (s.find(',') == std::string::npos && s.find('"')==std::string::npos && s.find('\n')==std::string::npos) return s;
  std::string out = "\"";
  for (char c: s) {
  if (c=='\"') out += "\"\""; else out += c;
@@ -406,7 +423,8 @@ bool ImportFromCSV(const std::string& dir,
  nextClientId = std::max(nextClientId, id+1);
  } else {
  // add new client
- clients.emplace_back(id, first, last, phone, p, active);
+ // CSV does not contain child/foreigner/document fields currently; use defaults
+ clients.emplace_back(id, first, last, phone, p, active, false, false, std::string(), std::string(), std::string());
  nextClientId = std::max(nextClientId, id+1);
  }
  }

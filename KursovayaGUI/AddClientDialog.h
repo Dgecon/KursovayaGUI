@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef _CRT_SECURE_WARNINGS
+#define _CRT_SECURE_WARNINGS
+#endif
+
 #include <wx/wx.h>
 #include "Passport.h"
 class Client;
@@ -18,6 +22,13 @@ public:
  // prefill dialog from existing client
  void setValues(const Client& client);
 
+ // new accessors
+ bool isChild() const;
+ bool isForeigner() const;
+ std::string getBirthCertificate() const;
+ std::string getVisa() const;
+ std::string getInternationalPassport() const;
+
 private:
  wxTextCtrl* m_first;
  wxTextCtrl* m_last;
@@ -35,5 +46,16 @@ private:
  wxTextCtrl* m_birthMonth;
  wxTextCtrl* m_birthYear;
 
+ // new: child / foreigner options
+ wxCheckBox* m_isChild;
+ wxCheckBox* m_isForeigner;
+
+ // additional documents
+ wxTextCtrl* m_birthCert; // birth certificate for child
+ wxTextCtrl* m_visa; // visa for foreigner
+ wxTextCtrl* m_intlPassport; // international passport for foreigner
+
  void OnOk(wxCommandEvent& evt);
+ void OnChildToggle(wxCommandEvent& evt);
+ void OnForeignerToggle(wxCommandEvent& evt);
 };
