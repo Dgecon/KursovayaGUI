@@ -2,98 +2,76 @@
 #include "Client.h"
 
 AddClientDialog::AddClientDialog(wxWindow* parent)
- : wxDialog(parent, wxID_ANY, "Добавить клиента", wxDefaultPosition, wxSize(520,420))
+ : wxDialog(parent, wxID_ANY, "Добавить клиента", wxDefaultPosition, wxSize(400,500), wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER)
 {
  wxBoxSizer* topsizer = new wxBoxSizer(wxVERTICAL);
 
  wxFlexGridSizer* grid = new wxFlexGridSizer(2,8,8);
  grid->AddGrowableCol(1,1);
 
- // initialize error label pointers
- m_firstErr = m_passErr = m_birthCertErr = m_foreignerErr = nullptr;
-
- auto AddRow = [&](const wxString& label, wxWindow* control, wxStaticText** errPtr = nullptr)
- {
+ // Helper to add a label + control + optional error label. minWidth allows larger inputs.
+ // Reduced default minWidth so dialog can be narrower.
+ auto AddRow = [&](const wxString& label, wxWindow* control, wxStaticText** errPtr = nullptr, int minWidth =200){
  grid->Add(new wxStaticText(this, wxID_ANY, label),0, wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT);
+ if (minWidth >0) control->SetMinSize(wxSize(minWidth, -1));
  wxBoxSizer* v = new wxBoxSizer(wxVERTICAL);
  v->Add(control,0, wxEXPAND);
- if (errPtr)
- {
+ if (errPtr){
  *errPtr = new wxStaticText(this, wxID_ANY, "");
  (*errPtr)->SetForegroundColour(*wxRED);
  (*errPtr)->Hide();
  v->Add(*errPtr,0, wxTOP,2);
- }
- else
- {
- // keep layout consistent
+ } else {
  v->AddSpacer(0);
  }
  grid->Add(v,1, wxEXPAND);
  };
 
- // Name
+ // Name/Last/Phone
  m_first = new wxTextCtrl(this, wxID_ANY);
- m_first->SetToolTip("Введите имя клиента");
- AddRow("Имя:", m_first, &m_firstErr);
+ AddRow("Имя:", m_first, &m_firstErr,300);
 
- // Last name
  m_last = new wxTextCtrl(this, wxID_ANY);
- m_last->SetToolTip("Введите фамилию клиента");
- AddRow("Фамилия:", m_last, nullptr);
+ AddRow("Фамилия:", m_last, nullptr,300);
 
- // Phone
  m_phone = new wxTextCtrl(this, wxID_ANY);
- m_phone->SetToolTip("Телефон клиента");
- AddRow("Телефон:", m_phone, nullptr);
+ AddRow("Телефон:", m_phone, nullptr,220);
 
- // Passport series/number on separate rows but keep passport error next to number
+ // Passport fields (series/number narrower)
  m_series = new wxTextCtrl(this, wxID_ANY);
- m_series->SetToolTip("Серия паспорта (цифры)");
- AddRow("Паспорт - серия:", m_series, nullptr);
+ AddRow("Паспорт - серия:", m_series, nullptr,100);
 
  m_number = new wxTextCtrl(this, wxID_ANY);
- m_number->SetToolTip("Номер паспорта (цифры)");
- AddRow("Паспорт - номер:", m_number, &m_passErr);
+ AddRow("Паспорт - номер:", m_number, &m_passErr,140);
 
- // Given by
  m_givenBy = new wxTextCtrl(this, wxID_ANY);
- AddRow("Кем выдан:", m_givenBy, nullptr);
+ AddRow("Кем выдан:", m_givenBy, nullptr,280);
 
- // Issue date
  m_issueDate = new wxDatePickerCtrl(this, wxID_ANY);
- AddRow("Дата выдачи:", m_issueDate, nullptr);
+ AddRow("Дата выдачи:", m_issueDate, nullptr,180);
 
- // Code
  m_code = new wxTextCtrl(this, wxID_ANY);
- AddRow("Код подразделения:", m_code, nullptr);
+ AddRow("Код подразделения:", m_code, nullptr,140);
 
- // Birth date
  m_birthDate = new wxDatePickerCtrl(this, wxID_ANY);
- AddRow("Дата рождения:", m_birthDate, nullptr);
+ AddRow("Дата рождения:", m_birthDate, nullptr,180);
 
- // Child checkbox
+ // Child / Foreigner
  m_isChild = new wxCheckBox(this, wxID_ANY, "Да");
- AddRow("Ребёнок? (галочка):", m_isChild, nullptr);
+ AddRow("Ребёнок? (галочка):", m_isChild, nullptr,100);
 
- // Foreigner checkbox
  m_isForeigner = new wxCheckBox(this, wxID_ANY, "Да");
- AddRow("Иностранное гражданство? (галочка):", m_isForeigner, nullptr);
+ AddRow("Иностранное гражданство? (галочка):", m_isForeigner, nullptr,100);
 
- // Birth certificate
+ // Additional document fields
  m_birthCert = new wxTextCtrl(this, wxID_ANY);
- m_birthCert->SetToolTip("Серия/номер свидетельства о рождении");
- AddRow("Св-во о рождении (серия и номер) / Номер свидетельства о рождении:", m_birthCert, &m_birthCertErr);
+ AddRow("Св-во о рождении (серия и номер) / Номер свидетельства о рождении:", m_birthCert, &m_birthCertErr,300);
 
- // Visa
  m_visa = new wxTextCtrl(this, wxID_ANY);
- m_visa->SetToolTip("Номер визы для иностранного гражданина");
- AddRow("Виза (номер):", m_visa, nullptr);
+ AddRow("Виза (номер):", m_visa, nullptr,220);
 
- // International passport
  m_intlPassport = new wxTextCtrl(this, wxID_ANY);
- m_intlPassport->SetToolTip("Международный паспорт (серия и номер)");
- AddRow("Международный паспорт (серия и номер):", m_intlPassport, &m_foreignerErr);
+ AddRow("Международный паспорт (серия и номер):", m_intlPassport, &m_foreignerErr,220);
 
  topsizer->Add(grid,1, wxALL | wxEXPAND,10);
 
@@ -101,6 +79,10 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  topsizer->Add(btns,0, wxEXPAND | wxALL,10);
 
  SetSizerAndFit(topsizer);
+ // Allow sizer to provide min size and enable resizing
+ topsizer->SetSizeHints(this);
+ // Ensure initial size (narrower and taller)
+ SetSize(wxSize(480,500));
 
  // Bind OK to validation
  Bind(wxEVT_BUTTON, &AddClientDialog::OnOk, this, wxID_OK);
