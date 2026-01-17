@@ -11,8 +11,10 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
 
  // Helper to add a label + control + optional error label. minWidth allows larger inputs.
  // Reduced default minWidth so dialog can be narrower.
- auto AddRow = [&](const wxString& label, wxWindow* control, wxStaticText** errPtr = nullptr, int minWidth =200){
- grid->Add(new wxStaticText(this, wxID_ANY, label),0, wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT);
+ auto AddRow = [&](const wxString& label, wxWindow* control, wxStaticText** errPtr = nullptr, int minWidth =200, wxStaticText** labelPtr = nullptr){
+ wxStaticText* lbl = new wxStaticText(this, wxID_ANY, label);
+ if (labelPtr) *labelPtr = lbl;
+ grid->Add(lbl,0, wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT);
  if (minWidth >0) control->SetMinSize(wxSize(minWidth, -1));
  wxBoxSizer* v = new wxBoxSizer(wxVERTICAL);
  v->Add(control,0, wxEXPAND);
@@ -35,23 +37,23 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  AddRow("Фамилия:", m_last, nullptr,300);
 
  m_phone = new wxTextCtrl(this, wxID_ANY);
- AddRow("Телефон:", m_phone, nullptr,220);
+ AddRow("Телефон:", m_phone, nullptr,220, &m_phoneLabel);
 
  // Passport fields (series/number narrower)
  m_series = new wxTextCtrl(this, wxID_ANY);
- AddRow("Паспорт - серия:", m_series, nullptr,100);
+ AddRow("Паспорт - серия:", m_series, nullptr,100, &m_seriesLabel);
 
  m_number = new wxTextCtrl(this, wxID_ANY);
- AddRow("Паспорт - номер:", m_number, &m_passErr,140);
+ AddRow("Паспорт - номер:", m_number, &m_passErr,140, &m_numberLabel);
 
  m_givenBy = new wxTextCtrl(this, wxID_ANY);
- AddRow("Кем выдан:", m_givenBy, nullptr,280);
+ AddRow("Кем выдан:", m_givenBy, nullptr,280, &m_givenByLabel);
 
  m_issueDate = new wxDatePickerCtrl(this, wxID_ANY);
- AddRow("Дата выдачи:", m_issueDate, nullptr,180);
+ AddRow("Дата выдачи:", m_issueDate, nullptr,180, &m_issueDateLabel);
 
  m_code = new wxTextCtrl(this, wxID_ANY);
- AddRow("Код подразделения:", m_code, nullptr,140);
+ AddRow("Код подразделения:", m_code, nullptr,140, &m_codeLabel);
 
  m_birthDate = new wxDatePickerCtrl(this, wxID_ANY);
  AddRow("Дата рождения:", m_birthDate, nullptr,180);
@@ -159,6 +161,25 @@ void AddClientDialog::OnChildToggle(wxCommandEvent& evt)
  m_visa->Show(m_isForeigner->IsChecked());
  m_intlPassport->Show(m_isForeigner->IsChecked());
  }
+ // if client is child, hide phone and passport-related rows (labels + controls + errors)
+ if (m_phoneLabel) m_phoneLabel->Show(!show);
+ m_phone->Show(!show);
+ if (m_seriesLabel) m_seriesLabel->Show(!show);
+ m_series->Show(!show);
+ if (m_numberLabel) m_numberLabel->Show(!show);
+ m_number->Show(!show);
+ if (m_passErr) m_passErr->Show(!show && m_passErr->IsShown());
+ if (m_givenByLabel) m_givenByLabel->Show(!show);
+ m_givenBy->Show(!show);
+ if (m_issueDateLabel) m_issueDateLabel->Show(!show);
+ m_issueDate->Show(!show);
+ if (m_codeLabel) m_codeLabel->Show(!show);
+ m_code->Show(!show);
+ if (show) {
+ m_phone->SetValue("");
+ m_series->SetValue("");
+ m_number->SetValue("");
+ }
  GetSizer()->Layout();
  GetSizer()->Fit(this);
 }
@@ -183,9 +204,11 @@ void AddClientDialog::OnNameChanged(wxCommandEvent& evt) {
 }
 
 void AddClientDialog::OnPassportChanged(wxCommandEvent& evt) {
+ // skip passport validation for child clients
+ if (m_isChild->IsChecked()) { if (m_passErr) m_passErr->Hide(); return; }
  long ser=0, num=0;
- if (m_series->GetValue().ToLong(&ser) && m_number->GetValue().ToLong(&num)) { m_passErr->Show(false); }
- else { m_passErr->SetLabel("Серия/номер паспорта должны быть числами"); m_passErr->Show(true); }
+ if (m_series->GetValue().ToLong(&ser) && m_number->GetValue().ToLong(&num)) { if (m_passErr) m_passErr->Hide(); }
+ else { if (m_passErr) { m_passErr->SetLabel("Серия/номер паспорта должны быть числами"); m_passErr->Show(true); } }
  GetSizer()->Layout();
 }
 
@@ -205,7 +228,11 @@ bool AddClientDialog::ValidateAll() {
  bool ok = true;
  if (m_first->GetValue().IsEmpty() || m_last->GetValue().IsEmpty()) { m_firstErr->SetLabel("Имя и фамилия обязательны"); m_firstErr->Show(true); ok = false; }
  long ser=0, num=0;
+ // passport and phone not required for children
+ if (!m_isChild->IsChecked()) {
  if (!m_series->GetValue().ToLong(&ser) || !m_number->GetValue().ToLong(&num)) { m_passErr->SetLabel("Серия/номер паспорта должны быть числами"); m_passErr->Show(true); ok = false; }
+ if (m_phone->GetValue().IsEmpty()) { if (m_phoneLabel){/* we don't have error label for phone, just mark invalid via message */ } }
+ }
  if (m_isChild->IsChecked() && m_birthCert->GetValue().IsEmpty()) { m_birthCertErr->SetLabel("Требуется свидетельство о рождении"); m_birthCertErr->Show(true); ok = false; }
  if (m_isForeigner->IsChecked() && (m_visa->GetValue().IsEmpty() || m_intlPassport->GetValue().IsEmpty())) { m_foreignerErr->SetLabel("Виза и паспорт обязательны для иностранца"); m_foreignerErr->Show(true); ok = false; }
  GetSizer()->Layout();

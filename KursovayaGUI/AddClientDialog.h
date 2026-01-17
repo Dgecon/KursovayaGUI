@@ -36,6 +36,9 @@ private:
  wxTextCtrl* m_last;
  wxTextCtrl* m_phone;
 
+ // labels for controls (so rows can be hidden)
+ wxStaticText* m_phoneLabel;
+
  // passport fields
  wxTextCtrl* m_series;
  wxTextCtrl* m_number;
@@ -43,6 +46,13 @@ private:
  wxDatePickerCtrl* m_issueDate; // replaced separate fields
  wxTextCtrl* m_code;
  wxDatePickerCtrl* m_birthDate; // replaced separate fields
+
+ // labels for passport controls
+ wxStaticText* m_seriesLabel;
+ wxStaticText* m_numberLabel;
+ wxStaticText* m_givenByLabel;
+ wxStaticText* m_issueDateLabel;
+ wxStaticText* m_codeLabel;
 
  // new: child / foreigner options
  wxCheckBox* m_isChild;
