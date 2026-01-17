@@ -468,10 +468,12 @@ void MainFrame::OnAddClient(wxCommandEvent& event) {
  wxString wxLast = dlg.getLastName();
  wxString wxPhone = dlg.getPhone();
  Passport passport = dlg.getPassport();
+ wxString wxPatronymic = dlg.getPatronymic();
 
  std::string first = std::string(wxFirst.ToUTF8().data());
  std::string last = std::string(wxLast.ToUTF8().data());
  std::string phone = std::string(wxPhone.ToUTF8().data());
+ std::string patronymic = std::string(wxPatronymic.ToUTF8().data());
 
  // additional fields
  bool isChild = dlg.isChild();
@@ -481,7 +483,7 @@ void MainFrame::OnAddClient(wxCommandEvent& event) {
  std::string intlPass = dlg.getInternationalPassport();
 
  int clientId = IdGenerator::generateClientId();
- clients.emplace_back(clientId, first, last, phone, passport, true, isChild, isForeigner, birthCert, visa, intlPass);
+ clients.emplace_back(clientId, first, last, phone, passport, true, isChild, isForeigner, birthCert, visa, intlPass, patronymic);
 
  refreshClientsList();
 }
@@ -592,6 +594,7 @@ void MainFrame::OnEditClient(wxCommandEvent& event) {
  client->setFirstName(std::string(dlg.getFirstName().ToUTF8().data()));
  client->setLastName(std::string(dlg.getLastName().ToUTF8().data()));
  client->setPhone(std::string(dlg.getPhone().ToUTF8().data()));
+ client->setPatronymic(std::string(dlg.getPatronymic().ToUTF8().data()));
  Passport p = dlg.getPassport();
  client->setPassport(p);
  // update new fields: child/foreigner flags and documents

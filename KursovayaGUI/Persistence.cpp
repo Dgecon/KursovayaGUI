@@ -50,6 +50,7 @@ bool SaveData(const std::string& path,
  j["clients"].push_back({
  {"id", c.getId()},
  {"firstName", c.getFirstName()},
+ {"patronymic", c.getPatronymic()},
  {"lastName", c.getLastName()},
  {"phone", c.getPhone()},
  {"passport", jp},
@@ -159,6 +160,8 @@ bool LoadData(const std::string& path,
  std::string birthCert = jc.value("birthCertificate", std::string());
  std::string visa = jc.value("visa", std::string());
  std::string intlPass = jc.value("internationalPassport", std::string());
+ // read patronymic if present
+ std::string patronymic = jc.value("patronymic", std::string());
  clients.emplace_back(jc.value("id",0),
  jc.value("firstName", std::string()),
  jc.value("lastName", std::string()),
@@ -169,7 +172,8 @@ bool LoadData(const std::string& path,
  isForeigner,
  birthCert,
  visa,
- intlPass);
+ intlPass,
+ patronymic);
  }
  }
 
@@ -248,12 +252,13 @@ bool ExportToCSV(const std::string& dir,
  // passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,
  // passport_birth_day,passport_birth_month,passport_birth_year,isChild,isForeigner,birthCertificate,visa,internationalPassport
  std::ofstream cf(dir + "/clients.csv");
- cf << "id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,passport_birth_day,passport_birth_month,passport_birth_year,isChild,isForeigner,birthCertificate,visa,internationalPassport\n";
+ cf << "id,firstName,patronymic,lastName,phone,active,passport_series,passport_number,passport_givenBy,passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,passport_birth_day,passport_birth_month,passport_birth_year,isChild,isForeigner,birthCertificate,visa,internationalPassport\n";
  for (const auto& c: clients) {
  const Passport& p = c.getPassport();
  std::stringstream ss;
  ss << c.getId() << ',';
  ss << escapeCsv(c.getFirstName()) << ',';
+ ss << escapeCsv(c.getPatronymic()) << ',';
  ss << escapeCsv(c.getLastName()) << ',';
  ss << escapeCsv(c.getPhone()) << ',';
  ss << (c.isActive() ? "1" : "0") << ',';
@@ -405,45 +410,47 @@ bool ImportFromCSV(const std::string& dir,
  bool idProvided = (id !=0);
  if (!idProvided) id = nextClientId++;
  std::string first = cols.size() >1 ? unquote(trimStr(cols[1])) : std::string();
- std::string last = cols.size() >2 ? unquote(trimStr(cols[2])) : std::string();
- std::string phone = cols.size() >3 ? unquote(trimStr(cols[3])) : std::string();
- bool active = (cols.size() >4 ? (trimStr(cols[4]) == "1") : true);
+ std::string patronymic = cols.size() >2 ? unquote(trimStr(cols[2])) : std::string();
+ std::string last = cols.size() >3 ? unquote(trimStr(cols[3])) : std::string();
+ std::string phone = cols.size() >4 ? unquote(trimStr(cols[4])) : std::string();
+ bool active = (cols.size() >5 ? (trimStr(cols[5]) == "1") : true);
  Passport p;
- p.setSeries(safeParseInt(cols,5,0));
- p.setNumber(safeParseInt(cols,6,0));
- if (cols.size() >7) p.setGivenBy(unquote(trimStr(cols[7])));
- if (cols.size() >10) {
- int iday = safeParseInt(cols,8,1);
- int imonth = safeParseInt(cols,9,1);
- int iyear = safeParseInt(cols,10,2024);
+ p.setSeries(safeParseInt(cols,6,0));
+ p.setNumber(safeParseInt(cols,7,0));
+ if (cols.size() >8) p.setGivenBy(unquote(trimStr(cols[8])));
+ if (cols.size() >11) {
+ int iday = safeParseInt(cols,9,1);
+ int imonth = safeParseInt(cols,10,1);
+ int iyear = safeParseInt(cols,11,2024);
  Date issue(iday, imonth, iyear);
  p.setDateOfIssue(issue);
  }
- if (cols.size() >11) p.setCode(unquote(trimStr(cols[11])));
- if (cols.size() >12) p.setFio(unquote(trimStr(cols[12])));
- if (cols.size() >15) {
- int bday = safeParseInt(cols,13,1);
- int bmonth = safeParseInt(cols,14,1);
- int byear = safeParseInt(cols,15,2000);
+ if (cols.size() >12) p.setCode(unquote(trimStr(cols[12])));
+ if (cols.size() >13) p.setFio(unquote(trimStr(cols[13])));
+ if (cols.size() >16) {
+ int bday = safeParseInt(cols,14,1);
+ int bmonth = safeParseInt(cols,15,1);
+ int byear = safeParseInt(cols,16,2000);
  Date birth(bday, bmonth, byear);
  p.setDateOfBirth(birth);
  }
- // new CSV columns indices after existing ones
+ // new CSV columns indices after existing ones (shifted by1 for patronymic)
  bool isChild = false;
  bool isForeigner = false;
  std::string birthCert = std::string();
  std::string visa = std::string();
  std::string intlPass = std::string();
- if (cols.size() >16) isChild = (trimStr(cols[16]) == "1");
- if (cols.size() >17) isForeigner = (trimStr(cols[17]) == "1");
- if (cols.size() >18) birthCert = unquote(trimStr(cols[18]));
- if (cols.size() >19) visa = unquote(trimStr(cols[19]));
- if (cols.size() >20) intlPass = unquote(trimStr(cols[20]));
+ if (cols.size() >17) isChild = (trimStr(cols[17]) == "1");
+ if (cols.size() >18) isForeigner = (trimStr(cols[18]) == "1");
+ if (cols.size() >19) birthCert = unquote(trimStr(cols[19]));
+ if (cols.size() >20) visa = unquote(trimStr(cols[20]));
+ if (cols.size() >21) intlPass = unquote(trimStr(cols[21]));
  int idx = findClientIndex(id);
  if (idx != -1) {
  // update existing client
  clients[idx].setFirstName(first);
  clients[idx].setLastName(last);
+ clients[idx].setPatronymic(patronymic);
  clients[idx].setPhone(phone);
  clients[idx].setPassport(p);
  clients[idx].setActive(active);
@@ -456,7 +463,7 @@ bool ImportFromCSV(const std::string& dir,
  nextClientId = std::max(nextClientId, id+1);
  } else {
  // add new client
- clients.emplace_back(id, first, last, phone, p, active, isChild, isForeigner, birthCert, visa, intlPass);
+ clients.emplace_back(id, first, last, phone, p, active, isChild, isForeigner, birthCert, visa, intlPass, patronymic);
  nextClientId = std::max(nextClientId, id+1);
  }
  }

@@ -90,6 +90,7 @@
         "number": 23323,
         "series": 3232
       },
+      "patronymic": "",
       "phone": "232323",
       "visa": ""
     },
@@ -119,18 +120,19 @@
         "number": 27,
         "series": 72
       },
+      "patronymic": "",
       "phone": "45",
       "visa": ""
     },
     {
       "active": true,
       "birthCertificate": "",
-      "firstName": "игорь",
+      "firstName": "Игорь",
       "id": 11,
       "internationalPassport": "",
       "isChild": false,
       "isForeigner": false,
-      "lastName": "шмюков",
+      "lastName": "Шмыков",
       "passport": {
         "birth": {
           "day": 17,
@@ -138,7 +140,7 @@
           "year": 2006
         },
         "code": "300 001",
-        "fio": "игорь шмюков",
+        "fio": "Игорь Алексеевич Шмыков",
         "givenBy": "умвд по белгородской области",
         "issue": {
           "day": 17,
@@ -148,6 +150,7 @@
         "number": 900061,
         "series": 1430
       },
+      "patronymic": "",
       "phone": "89511302659",
       "visa": ""
     },
@@ -167,7 +170,7 @@
           "year": 1983
         },
         "code": "310 002",
-        "fio": "Юрий Гагарин",
+        "fio": "Юрий Владимирович Гагарин",
         "givenBy": "умвд по рязанской области",
         "issue": {
           "day": 12,
@@ -177,6 +180,7 @@
         "number": 5004201,
         "series": 1356
       },
+      "patronymic": "",
       "phone": "81968430420",
       "visa": ""
     },
@@ -196,7 +200,7 @@
           "year": 2015
         },
         "code": "",
-        "fio": "Никита Гагарин",
+        "fio": "Никита Юрьевич Гагарин",
         "givenBy": "",
         "issue": {
           "day": 17,
@@ -206,13 +210,44 @@
         "number": 0,
         "series": 0
       },
+      "patronymic": "Юрьевич",
       "phone": "",
+      "visa": ""
+    },
+    {
+      "active": true,
+      "birthCertificate": "",
+      "firstName": "Светлана",
+      "id": 14,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "Горелова",
+      "passport": {
+        "birth": {
+          "day": 13,
+          "month": 11,
+          "year": 2006
+        },
+        "code": "310 987",
+        "fio": "Светлана Александровна Горелова",
+        "givenBy": "умвд по московской области",
+        "issue": {
+          "day": 1,
+          "month": 12,
+          "year": 2020
+        },
+        "number": 907045,
+        "series": 1430
+      },
+      "patronymic": "Александровна",
+      "phone": "89561340987",
       "visa": ""
     }
   ],
   "nextIds": {
     "booking": 10,
-    "client": 14,
+    "client": 15,
     "room": 8
   },
   "rooms": [

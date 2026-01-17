@@ -18,6 +18,7 @@ public:
  wxString getFirstName() const;
  wxString getLastName() const;
  wxString getPhone() const;
+ wxString getPatronymic() const;
  // returns constructed Passport
  Passport getPassport() const;
 
@@ -33,6 +34,7 @@ public:
 
 private:
  wxTextCtrl* m_first;
+ wxTextCtrl* m_patronymic;
  wxTextCtrl* m_last;
  wxTextCtrl* m_phone;
 
@@ -72,6 +74,9 @@ private:
  void OnOk(wxCommandEvent& evt);
  void OnChildToggle(wxCommandEvent& evt);
  void OnForeignerToggle(wxCommandEvent& evt);
+
+ // update show/hide states for controls based on checkboxes
+ void UpdateVisibility();
 
  // validation handlers
  void OnNameChanged(wxCommandEvent& evt);

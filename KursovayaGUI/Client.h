@@ -9,6 +9,7 @@ class Client
 private:
     int id;
     std::string firstName;
+    std::string patronymic;
     std::string lastName;
     std::string phone;
     Passport passport;
@@ -26,16 +27,19 @@ public:
         bool isChild = false, bool isForeigner = false,
         const std::string& birthCertificate = std::string(),
         const std::string& visa = std::string(),
-        const std::string& internationalPassport = std::string());
+        const std::string& internationalPassport = std::string(),
+        const std::string& patronymic = std::string());
     std::string getFullName() const;
     int getId() const;
     std::string getFirstName() const { return firstName; }
+    std::string getPatronymic() const;
     std::string getLastName() const { return lastName; }
     std::string getPhone() const { return phone; }
     const Passport& getPassport() const { return passport; }
 
     // setters for editing
     void setFirstName(const std::string& fn) { firstName = fn; }
+    void setPatronymic(const std::string& p) { patronymic = p; }
     void setLastName(const std::string& ln) { lastName = ln; }
     void setPhone(const std::string& ph) { phone = ph; }
     void setPassport(const Passport& p) { passport = p; }

@@ -29,9 +29,12 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
  grid->Add(v,1, wxEXPAND);
  };
 
- // Name/Last/Phone
+ // Name / Patronymic / Last / Phone
  m_first = new wxTextCtrl(this, wxID_ANY);
  AddRow("Имя:", m_first, &m_firstErr,300);
+
+ m_patronymic = new wxTextCtrl(this, wxID_ANY);
+ AddRow("Отчество (необязательно):", m_patronymic, nullptr,300);
 
  m_last = new wxTextCtrl(this, wxID_ANY);
  AddRow("Фамилия:", m_last, nullptr,300);
@@ -114,6 +117,7 @@ AddClientDialog::AddClientDialog(wxWindow* parent)
 wxString AddClientDialog::getFirstName() const { return m_first->GetValue(); }
 wxString AddClientDialog::getLastName() const { return m_last->GetValue(); }
 wxString AddClientDialog::getPhone() const { return m_phone->GetValue(); }
+wxString AddClientDialog::getPatronymic() const { return m_patronymic->GetValue(); }
 
 static Date DateFromWxDate(const wxDateTime& dt) {
  if (!dt.IsValid()) return Date();
@@ -134,7 +138,11 @@ Passport AddClientDialog::getPassport() const {
  p.setCode(std::string(m_code->GetValue().ToUTF8().data()));
  wxDateTime bdt = m_birthDate->GetValue();
  p.setDateOfBirth(DateFromWxDate(bdt));
- p.setFio(std::string((m_first->GetValue() + " " + m_last->GetValue()).ToUTF8().data()));
+ // build fio: first [patronymic] last
+ wxString fio = m_first->GetValue();
+ if (!m_patronymic->GetValue().IsEmpty()) fio += " " + m_patronymic->GetValue();
+ fio += " " + m_last->GetValue();
+ p.setFio(std::string(fio.ToUTF8().data()));
  return p;
 }
 
@@ -152,49 +160,56 @@ void AddClientDialog::OnOk(wxCommandEvent& evt) {
 
 void AddClientDialog::OnChildToggle(wxCommandEvent& evt)
 {
- bool show = m_isChild->IsChecked();
- m_birthCert->Show(show);
- m_birthCertErr->Show(false);
- // if showing child document, ensure foreigner fields hidden (optional)
- if (show) {
- // keep foreigner checkbox state unchanged, but we may hide their fields
- m_visa->Show(m_isForeigner->IsChecked());
- m_intlPassport->Show(m_isForeigner->IsChecked());
- }
- // if client is child, hide phone and passport-related rows (labels + controls + errors)
- if (m_phoneLabel) m_phoneLabel->Show(!show);
- m_phone->Show(!show);
- if (m_seriesLabel) m_seriesLabel->Show(!show);
- m_series->Show(!show);
- if (m_numberLabel) m_numberLabel->Show(!show);
- m_number->Show(!show);
- if (m_passErr) m_passErr->Show(!show && m_passErr->IsShown());
- if (m_givenByLabel) m_givenByLabel->Show(!show);
- m_givenBy->Show(!show);
- if (m_issueDateLabel) m_issueDateLabel->Show(!show);
- m_issueDate->Show(!show);
- if (m_codeLabel) m_codeLabel->Show(!show);
- m_code->Show(!show);
- if (show) {
- m_phone->SetValue("");
- m_series->SetValue("");
- m_number->SetValue("");
- }
- GetSizer()->Layout();
- GetSizer()->Fit(this);
+ UpdateVisibility();
 }
 
 void AddClientDialog::OnForeignerToggle(wxCommandEvent& evt)
 {
- bool show = m_isForeigner->IsChecked();
- m_visa->Show(show);
- m_intlPassport->Show(show);
- m_foreignerErr->Show(false);
- // if foreigner, birth cert may still be shown if child is checked
- m_birthCert->Show(m_isChild->IsChecked());
+ UpdateVisibility();
+}
+
+void AddClientDialog::UpdateVisibility()
+{
+ bool isChild = m_isChild->IsChecked();
+ bool isForeigner = m_isForeigner->IsChecked();
+
+ // birth certificate visibility
+ m_birthCert->Show(isChild);
+ if (m_birthCertErr) m_birthCertErr->Show(false);
+
+ // foreigner docs visibility
+ m_visa->Show(isForeigner);
+ m_intlPassport->Show(isForeigner);
+ if (m_foreignerErr) m_foreignerErr->Show(false);
+
+ // passport & phone hidden for children
+ bool showPassportPhone = !isChild;
+ if (m_phoneLabel) m_phoneLabel->Show(showPassportPhone);
+ if (m_phone) m_phone->Show(showPassportPhone);
+ if (m_seriesLabel) m_seriesLabel->Show(showPassportPhone);
+ if (m_series) m_series->Show(showPassportPhone);
+ if (m_numberLabel) m_numberLabel->Show(showPassportPhone);
+ if (m_number) m_number->Show(showPassportPhone);
+ if (m_passErr) {
+ if (!showPassportPhone) m_passErr->Hide();
+ }
+ if (m_givenByLabel) m_givenByLabel->Show(showPassportPhone);
+ if (m_givenBy) m_givenBy->Show(showPassportPhone);
+ if (m_issueDateLabel) m_issueDateLabel->Show(showPassportPhone);
+ if (m_issueDate) m_issueDate->Show(showPassportPhone);
+ if (m_codeLabel) m_codeLabel->Show(showPassportPhone);
+ if (m_code) m_code->Show(showPassportPhone);
+
+ if (!showPassportPhone) {
+ if (m_phone) m_phone->SetValue("");
+ if (m_series) m_series->SetValue("");
+ if (m_number) m_number->SetValue("");
+ }
+
  GetSizer()->Layout();
  GetSizer()->Fit(this);
 }
+
 
 // validation handlers
 void AddClientDialog::OnNameChanged(wxCommandEvent& evt) {
@@ -241,6 +256,7 @@ bool AddClientDialog::ValidateAll() {
 
 void AddClientDialog::setValues(const Client& client) {
  m_first->SetValue(wxString::FromUTF8(client.getFirstName().c_str()));
+ m_patronymic->SetValue(wxString::FromUTF8(client.getPatronymic().c_str()));
  m_last->SetValue(wxString::FromUTF8(client.getLastName().c_str()));
  m_phone->SetValue(wxString::FromUTF8(client.getPhone().c_str()));
  Passport p = client.getPassport();
@@ -258,8 +274,8 @@ void AddClientDialog::setValues(const Client& client) {
  m_visa->SetValue(wxString::FromUTF8(client.getVisa().c_str()));
  m_intlPassport->SetValue(wxString::FromUTF8(client.getInternationalPassport().c_str()));
  // Update visibility directly and relayout
- m_birthCert->Show(client.getIsChild());
- m_visa->Show(client.getIsForeigner());
- m_intlPassport->Show(client.getIsForeigner());
+ // Ensure UI respects child/foreigner state (hide phone/passport for child)
+ // Trigger the same logic as toggles bound to the checkboxes
+ UpdateVisibility();
  if (GetSizer()) { GetSizer()->Layout(); GetSizer()->Fit(this); }
 }
