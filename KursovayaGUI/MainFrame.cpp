@@ -37,6 +37,7 @@ enum IDs {
  ID_ChangeRoomStatus =15,
  ID_CheckIn =16,
  ID_CheckOut =17
+ ,ID_Help =18
 
 };
 
@@ -55,6 +56,7 @@ EVT_BUTTON(ID_CheckIn, MainFrame::OnCheckIn)
 EVT_BUTTON(ID_CheckOut, MainFrame::OnCheckOut)
 EVT_BUTTON(ID_ExportCSV, MainFrame::OnExportCSV)
 EVT_BUTTON(ID_ImportCSV, MainFrame::OnImportCSV)
+EVT_BUTTON(ID_Help, MainFrame::OnHelp)
 EVT_CLOSE(MainFrame::OnClose)
 wxEND_EVENT_TABLE()
 
@@ -85,6 +87,7 @@ MainFrame::MainFrame(const wxString& title)
  wxButton* ImportCSVButton = new wxButton(panel, ID_ImportCSV, "Импорт CSV");
  wxButton* CheckInButton = new wxButton(panel, ID_CheckIn, "Заселение (Check-in)");
  wxButton* CheckOutButton = new wxButton(panel, ID_CheckOut, "Выселение (Check-out)");
+ wxButton* HelpButton = new wxButton(panel, ID_Help, "? Справка");
 
 
  EditClientButton->Bind(wxEVT_BUTTON, &MainFrame::OnEditClient, this, ID_EditClient);
@@ -109,9 +112,11 @@ MainFrame::MainFrame(const wxString& title)
  leftSizer->AddSpacer(20);
  leftSizer->Add(ExportCSVButton,0, wxEXPAND | wxALL,4);
  leftSizer->Add(ImportCSVButton,0, wxEXPAND | wxALL,4);
+ leftSizer->AddSpacer(6);
+ leftSizer->Add(HelpButton,0, wxEXPAND | wxALL,4);
 
  // create clients list control and bookings list before adding to sizers
- listOfClients = new wxListCtrl(panel, ID_ListOfClients, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES | wxLC_SINGLE_SEL);
+ listOfClients = new wxListCtrl(panel, ID_ListOfClients, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES);
  // setup columns: ID, First, Last, Phone
  listOfClients->InsertColumn(0, "ID", wxLIST_FORMAT_LEFT,50);
  listOfClients->InsertColumn(1, "Имя", wxLIST_FORMAT_LEFT,120);
@@ -939,4 +944,18 @@ void MainFrame::updateRoomStatusBasedOnBookings(int roomId) {
  if (!room->setStatus(RoomStatus::AVAILABLE)) {
  wxLogWarning("Не удалось установить AVAILABLE для комнаты %d", room->getId());
  }
+}
+void MainFrame::OnHelp(wxCommandEvent& event) {
+ // Brief help text with CSV schema reference
+ wxString helpText =
+ "Справка по приложению:\n\n"
+ "- Чтобы создать клиента/комнату/бронирование, используйте соответствующие кнопки слева.\n"
+ "- Для множественного выбора клиентов используйте Ctrl/Shift при клике на списке клиентов.\n"
+ "- Экспорт/импорт CSV: сохраняются/читаются файлы clients.csv, rooms.csv, bookings.csv в выбранной папке.\n\n"
+ "CSV схема (clients.csv): id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,"
+ "passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,passport_birth_day,passport_birth_month,passport_birth_year,"
+ "isChild,isForeigner,birthCertificate,visa,internationalPassport\n"
+ "Если при импорте обнаружены несовместимости, приложение покажет предупреждения.";
+
+ wxMessageBox(helpText, "Справка", wxOK | wxICON_INFORMATION, this);
 }

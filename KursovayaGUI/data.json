@@ -40,6 +40,27 @@
       "roomId": 6,
       "status": 2,
       "totalPrice": 10000.0
+    },
+    {
+      "active": true,
+      "checkIn": {
+        "day": 19,
+        "month": 1,
+        "year": 2026
+      },
+      "checkOut": {
+        "day": 1,
+        "month": 2,
+        "year": 2026
+      },
+      "clientIds": [
+        12,
+        13
+      ],
+      "id": 9,
+      "roomId": 7,
+      "status": 1,
+      "totalPrice": 26000.0
     }
   ],
   "clients": [
@@ -158,11 +179,40 @@
       },
       "phone": "81968430420",
       "visa": ""
+    },
+    {
+      "active": true,
+      "birthCertificate": "42163850219",
+      "firstName": "Никита",
+      "id": 13,
+      "internationalPassport": "",
+      "isChild": true,
+      "isForeigner": false,
+      "lastName": "Гагарин",
+      "passport": {
+        "birth": {
+          "day": 1,
+          "month": 5,
+          "year": 2015
+        },
+        "code": "",
+        "fio": "Никита Гагарин",
+        "givenBy": "",
+        "issue": {
+          "day": 17,
+          "month": 1,
+          "year": 2026
+        },
+        "number": 0,
+        "series": 0
+      },
+      "phone": "",
+      "visa": ""
     }
   ],
   "nextIds": {
-    "booking": 9,
-    "client": 13,
+    "booking": 10,
+    "client": 14,
     "room": 8
   },
   "rooms": [
@@ -186,7 +236,9 @@
     },
     {
       "active": true,
-      "amenities": [],
+      "amenities": [
+        "чайник"
+      ],
       "category": "люкс",
       "id": 6,
       "pricePerNight": 5000.0,

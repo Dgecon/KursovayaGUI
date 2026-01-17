@@ -52,6 +52,8 @@ private:
 	// CSV import/export
 	void OnExportCSV(wxCommandEvent& event);
 	void OnImportCSV(wxCommandEvent& event);
+	// Help/About
+	void OnHelp(wxCommandEvent& event);
 
     // synchronize room status with current bookings (basic hotel logic)
     void updateRoomStatusBasedOnBookings(int roomId);
