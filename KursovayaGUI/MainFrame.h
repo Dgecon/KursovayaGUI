@@ -6,6 +6,7 @@
 #include <wx/notebook.h>
 #include <wx/statline.h>
 #include <wx/timer.h>
+#include <wx/srchctrl.h>
 #include <vector>
 #include "Client.h"
 #include "Room.h"
@@ -46,10 +47,38 @@ private:
     void SaveDataNow();  // Немедленное сохранение
     void MarkDataChanged();  // Пометить что данные изменились
 
+    // Sorting handlers
+    void OnClientColumnClick(wxListEvent& event);
+    void OnRoomColumnClick(wxListEvent& event);
+    void OnBookingColumnClick(wxListEvent& event);
+
+    // Search handlers
+    void OnSearchClients(wxCommandEvent& event);
+    void OnSearchRooms(wxCommandEvent& event);
+    void OnSearchBookings(wxCommandEvent& event);
+
     // UI components
     wxListCtrl* listOfClients = nullptr;
     wxListCtrl* listOfRooms = nullptr;
     wxListCtrl* listOfBookings = nullptr;
+
+    // Search controls
+    wxSearchCtrl* m_clientSearch = nullptr;
+    wxSearchCtrl* m_roomSearch = nullptr;
+    wxSearchCtrl* m_bookingSearch = nullptr;
+
+    // Sort state
+    int m_clientSortColumn = -1;
+    bool m_clientSortAsc = true;
+    int m_roomSortColumn = -1;
+    bool m_roomSortAsc = true;
+    int m_bookingSortColumn = -1;
+    bool m_bookingSortAsc = true;
+
+    // Search filters
+    wxString m_clientFilter;
+    wxString m_roomFilter;
+    wxString m_bookingFilter;
 
     // Auto-save timer
     wxTimer* m_autoSaveTimer = nullptr;
@@ -69,6 +98,11 @@ private:
     void refreshBookingsList();
     void updateStatusBar();
     void updateRoomStatusBasedOnBookings(int roomId);
+
+    // Sorting helpers
+    void sortClients();
+    void sortRooms();
+    void sortBookings();
 
     // UI setup helpers
     void CreateMenuBar();

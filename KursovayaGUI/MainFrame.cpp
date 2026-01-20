@@ -16,6 +16,7 @@
 #include <wx/filename.h>
 #include <wx/artprov.h>
 #include <wx/scrolwin.h>
+#include <wx/srchctrl.h>
 #include <sstream>
 #include <cstdint>
 #include <algorithm>
@@ -43,41 +44,51 @@ enum IDs {
     ID_ListOfClients,
     ID_ListOfRooms,
     ID_ListOfBookings,
-    ID_AutoSaveTimer
+    ID_AutoSaveTimer,
+    ID_SearchClients,
+    ID_SearchRooms,
+    ID_SearchBookings
 };
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_BUTTON(ID_AddClient, MainFrame::OnAddClient)
     EVT_BUTTON(ID_EditClient, MainFrame::OnEditClient)
     EVT_BUTTON(ID_DeleteClient, MainFrame::OnDeleteClient)
-    EVT_BUTTON(ID_AddRoom, MainFrame::OnAddRoom)
-  EVT_BUTTON(ID_EditRoom, MainFrame::OnEditRoom)
+ EVT_BUTTON(ID_AddRoom, MainFrame::OnAddRoom)
+    EVT_BUTTON(ID_EditRoom, MainFrame::OnEditRoom)
     EVT_BUTTON(ID_DeleteRoom, MainFrame::OnDeleteRoom)
     EVT_BUTTON(ID_ChangeRoomStatus, MainFrame::OnChangeRoomStatus)
     EVT_BUTTON(ID_AddAmenity, MainFrame::OnAddAmenity)
     EVT_BUTTON(ID_AddBooking, MainFrame::OnAddBooking)
     EVT_BUTTON(ID_DeleteBooking, MainFrame::OnDeleteBooking)
-  EVT_BUTTON(ID_CheckIn, MainFrame::OnCheckIn)
-    EVT_BUTTON(ID_CheckOut, MainFrame::OnCheckOut)
+    EVT_BUTTON(ID_CheckIn, MainFrame::OnCheckIn)
+EVT_BUTTON(ID_CheckOut, MainFrame::OnCheckOut)
     EVT_BUTTON(ID_ExportCSV, MainFrame::OnExportCSV)
-    EVT_BUTTON(ID_ImportCSV, MainFrame::OnImportCSV)
+  EVT_BUTTON(ID_ImportCSV, MainFrame::OnImportCSV)
     EVT_BUTTON(ID_Help, MainFrame::OnHelp)
-  EVT_LIST_ITEM_ACTIVATED(ID_ListOfClients, MainFrame::OnClientDblClick)
-    EVT_LISTBOX_DCLICK(ID_ListOfRooms, MainFrame::OnRoomDblClick)
-    EVT_LISTBOX_DCLICK(ID_ListOfBookings, MainFrame::OnBookingDblClick)
+    EVT_LIST_ITEM_ACTIVATED(ID_ListOfClients, MainFrame::OnClientDblClick)
+    EVT_LIST_COL_CLICK(ID_ListOfClients, MainFrame::OnClientColumnClick)
+    EVT_LIST_COL_CLICK(ID_ListOfRooms, MainFrame::OnRoomColumnClick)
+    EVT_LIST_COL_CLICK(ID_ListOfBookings, MainFrame::OnBookingColumnClick)
+    EVT_SEARCHCTRL_SEARCH_BTN(ID_SearchClients, MainFrame::OnSearchClients)
+    EVT_TEXT(ID_SearchClients, MainFrame::OnSearchClients)
+    EVT_SEARCHCTRL_SEARCH_BTN(ID_SearchRooms, MainFrame::OnSearchRooms)
+    EVT_TEXT(ID_SearchRooms, MainFrame::OnSearchRooms)
+    EVT_SEARCHCTRL_SEARCH_BTN(ID_SearchBookings, MainFrame::OnSearchBookings)
+    EVT_TEXT(ID_SearchBookings, MainFrame::OnSearchBookings)
     EVT_TIMER(ID_AutoSaveTimer, MainFrame::OnAutoSaveTimer)
     EVT_CLOSE(MainFrame::OnClose)
 wxEND_EVENT_TABLE()
 
 // ============================================================================
-// Helper: Create styled button (компактный размер)
+// Helper: Create styled button
 // ============================================================================
 static wxButton* CreateStyledButton(wxWindow* parent, wxWindowID id, const wxString& label,
-     const wxColour& bgColor = wxNullColour,
+         const wxColour& bgColor = wxNullColour,
             const wxColour& fgColor = *wxBLACK)
 {
     wxButton* btn = new wxButton(parent, id, label, wxDefaultPosition, wxSize(-1, 28));
-if (bgColor.IsOk()) {
+    if (bgColor.IsOk()) {
         btn->SetBackgroundColour(bgColor);
     }
     btn->SetForegroundColour(fgColor);
@@ -89,7 +100,7 @@ if (bgColor.IsOk()) {
 // ============================================================================
 static wxStaticBoxSizer* CreateSection(wxWindow* parent, const wxString& title, wxOrientation orient = wxVERTICAL)
 {
-    wxStaticBox* box = new wxStaticBox(parent, wxID_ANY, title);
+ wxStaticBox* box = new wxStaticBox(parent, wxID_ANY, title);
     wxFont font = box->GetFont();
     font.SetWeight(wxFONTWEIGHT_BOLD);
     box->SetFont(font);
@@ -107,32 +118,31 @@ MainFrame::MainFrame(const wxString& title)
     wxPanel* mainPanel = new wxPanel(this, wxID_ANY);
     mainPanel->SetBackgroundColour(wxColour(245, 245, 250));
     
-    // ========== SCROLLABLE TOOLBAR PANEL (Left side) ==========
+ // ========== SCROLLABLE TOOLBAR PANEL ==========
     wxScrolledWindow* toolbarScroll = new wxScrolledWindow(mainPanel, wxID_ANY, 
         wxDefaultPosition, wxDefaultSize, wxVSCROLL);
     toolbarScroll->SetBackgroundColour(wxColour(52, 73, 94));
- toolbarScroll->SetMinSize(wxSize(210, -1));
-    toolbarScroll->SetScrollRate(0, 10);  // Только вертикальная прокрутка
+    toolbarScroll->SetMinSize(wxSize(210, -1));
+    toolbarScroll->SetScrollRate(0, 10);
     
     wxBoxSizer* toolbarSizer = new wxBoxSizer(wxVERTICAL);
     
-    // App title
-    wxStaticText* appTitle = new wxStaticText(toolbarScroll, wxID_ANY, wxT("Гостиница"));
+  wxStaticText* appTitle = new wxStaticText(toolbarScroll, wxID_ANY, wxT("Гостиница"));
     wxFont titleFont = appTitle->GetFont();
     titleFont.SetPointSize(14);
     titleFont.SetWeight(wxFONTWEIGHT_BOLD);
-    appTitle->SetFont(titleFont);
+  appTitle->SetFont(titleFont);
     appTitle->SetForegroundColour(*wxWHITE);
     toolbarSizer->Add(appTitle, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
     
     wxStaticText* appSubtitle = new wxStaticText(toolbarScroll, wxID_ANY, wxT("Система управления"));
-appSubtitle->SetForegroundColour(wxColour(189, 195, 199));
+    appSubtitle->SetForegroundColour(wxColour(189, 195, 199));
     toolbarSizer->Add(appSubtitle, 0, wxBOTTOM | wxALIGN_CENTER_HORIZONTAL, 10);
- 
+    
     toolbarSizer->Add(new wxStaticLine(toolbarScroll, wxID_ANY, wxDefaultPosition, wxSize(-1, 1)), 
-     0, wxEXPAND | wxLEFT | wxRIGHT, 8);
+        0, wxEXPAND | wxLEFT | wxRIGHT, 8);
     toolbarSizer->AddSpacer(8);
-  
+    
     // --- CLIENTS section ---
     wxStaticText* clientsHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("КЛИЕНТЫ"));
     clientsHeader->SetForegroundColour(wxColour(149, 165, 166));
@@ -141,51 +151,51 @@ appSubtitle->SetForegroundColour(wxColour(189, 195, 199));
     clientsHeader->SetFont(headerFont);
     toolbarSizer->Add(clientsHeader, 0, wxLEFT | wxBOTTOM, 8);
     
-    wxButton* btnAddClient = CreateStyledButton(toolbarScroll, ID_AddClient, wxT("+ Добавить клиента"), wxColour(46, 204, 113), *wxWHITE);
+    wxButton* btnAddClient = CreateStyledButton(toolbarScroll, ID_AddClient, wxT("+ Добавить"), wxColour(46, 204, 113), *wxWHITE);
     wxButton* btnEditClient = CreateStyledButton(toolbarScroll, ID_EditClient, wxT("Редактировать"));
     wxButton* btnDelClient = CreateStyledButton(toolbarScroll, ID_DeleteClient, wxT("Удалить"), wxColour(231, 76, 60), *wxWHITE);
     
     toolbarSizer->Add(btnAddClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnEditClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
-toolbarSizer->Add(btnDelClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
-  
+  toolbarSizer->Add(btnDelClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
+    
     // --- ROOMS section ---
     wxStaticText* roomsHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("КОМНАТЫ"));
     roomsHeader->SetForegroundColour(wxColour(149, 165, 166));
-  roomsHeader->SetFont(headerFont);
-    toolbarSizer->Add(roomsHeader, 0, wxLEFT | wxBOTTOM, 8);
+    roomsHeader->SetFont(headerFont);
+toolbarSizer->Add(roomsHeader, 0, wxLEFT | wxBOTTOM, 8);
     
-    wxButton* btnAddRoom = CreateStyledButton(toolbarScroll, ID_AddRoom, wxT("+ Добавить комнату"), wxColour(46, 204, 113), *wxWHITE);
+    wxButton* btnAddRoom = CreateStyledButton(toolbarScroll, ID_AddRoom, wxT("+ Добавить"), wxColour(46, 204, 113), *wxWHITE);
     wxButton* btnEditRoom = CreateStyledButton(toolbarScroll, ID_EditRoom, wxT("Редактировать"));
     wxButton* btnDelRoom = CreateStyledButton(toolbarScroll, ID_DeleteRoom, wxT("Удалить"), wxColour(231, 76, 60), *wxWHITE);
     wxButton* btnStatus = CreateStyledButton(toolbarScroll, ID_ChangeRoomStatus, wxT("Изменить статус"));
-    wxButton* btnAmenity = CreateStyledButton(toolbarScroll, ID_AddAmenity, wxT("Добавить удобства"));
-    
+    wxButton* btnAmenity = CreateStyledButton(toolbarScroll, ID_AddAmenity, wxT("Удобства"));
+  
     toolbarSizer->Add(btnAddRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
-  toolbarSizer->Add(btnEditRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnEditRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnDelRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnStatus, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnAmenity, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
-    
+  
     // --- BOOKINGS section ---
     wxStaticText* bookingsHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("БРОНИРОВАНИЯ"));
     bookingsHeader->SetForegroundColour(wxColour(149, 165, 166));
     bookingsHeader->SetFont(headerFont);
     toolbarSizer->Add(bookingsHeader, 0, wxLEFT | wxBOTTOM, 8);
     
-    wxButton* btnAddBooking = CreateStyledButton(toolbarScroll, ID_AddBooking, wxT("+ Новое бронирование"), wxColour(52, 152, 219), *wxWHITE);
-    wxButton* btnDelBooking = CreateStyledButton(toolbarScroll, ID_DeleteBooking, wxT("Удалить бронирование"));
- wxButton* btnCheckIn = CreateStyledButton(toolbarScroll, ID_CheckIn, wxT("Заселение"), wxColour(39, 174, 96), *wxWHITE);
-  wxButton* btnCheckOut = CreateStyledButton(toolbarScroll, ID_CheckOut, wxT("Выселение"), wxColour(230, 126, 34), *wxWHITE);
+    wxButton* btnAddBooking = CreateStyledButton(toolbarScroll, ID_AddBooking, wxT("+ Бронирование"), wxColour(52, 152, 219), *wxWHITE);
+    wxButton* btnDelBooking = CreateStyledButton(toolbarScroll, ID_DeleteBooking, wxT("Удалить"));
+    wxButton* btnCheckIn = CreateStyledButton(toolbarScroll, ID_CheckIn, wxT("Заселение"), wxColour(39, 174, 96), *wxWHITE);
+    wxButton* btnCheckOut = CreateStyledButton(toolbarScroll, ID_CheckOut, wxT("Выселение"), wxColour(230, 126, 34), *wxWHITE);
     
-  toolbarSizer->Add(btnAddBooking, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+toolbarSizer->Add(btnAddBooking, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnDelBooking, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnCheckIn, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnCheckOut, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
     
-    // --- IMPORT/EXPORT section ---
+    // --- DATA section ---
     toolbarSizer->Add(new wxStaticLine(toolbarScroll, wxID_ANY, wxDefaultPosition, wxSize(-1, 1)), 
-        0, wxEXPAND | wxLEFT | wxRIGHT, 8);
+    0, wxEXPAND | wxLEFT | wxRIGHT, 8);
     toolbarSizer->AddSpacer(8);
     
     wxStaticText* dataHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("ДАННЫЕ"));
@@ -196,13 +206,13 @@ toolbarSizer->Add(btnDelClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
     wxButton* btnExport = CreateStyledButton(toolbarScroll, ID_ExportCSV, wxT("Экспорт CSV"));
     wxButton* btnImport = CreateStyledButton(toolbarScroll, ID_ImportCSV, wxT("Импорт CSV"));
     wxButton* btnHelp = CreateStyledButton(toolbarScroll, ID_Help, wxT("? Справка"));
-    
+  
     toolbarSizer->Add(btnExport, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnImport, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
     toolbarSizer->Add(btnHelp, 0, wxEXPAND | wxALL, 5);
     
     toolbarScroll->SetSizer(toolbarSizer);
-    toolbarScroll->FitInside();  // Вычислить размер содержимого для прокрутки
+    toolbarScroll->FitInside();
     
     // ========== CONTENT PANEL ==========
     wxPanel* contentPanel = new wxPanel(mainPanel, wxID_ANY);
@@ -210,62 +220,78 @@ toolbarSizer->Add(btnDelClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
     
     wxBoxSizer* contentSizer = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer* topRowSizer = new wxBoxSizer(wxHORIZONTAL);
- 
+    
     // --- Clients panel ---
-    wxStaticBoxSizer* clientsSection = CreateSection(contentPanel, wxT(" Клиенты (Ctrl+Click для выбора нескольких) "));
+    wxStaticBoxSizer* clientsSection = CreateSection(contentPanel, wxT(" Клиенты (клик по заголовку = сортировка) "));
+    
+    // Search for clients
+    m_clientSearch = new wxSearchCtrl(clientsSection->GetStaticBox(), ID_SearchClients, wxEmptyString,
+ wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    m_clientSearch->SetDescriptiveText(wxT("Поиск клиентов..."));
+    clientsSection->Add(m_clientSearch, 0, wxEXPAND | wxALL, 5);
     
     listOfClients = new wxListCtrl(clientsSection->GetStaticBox(), ID_ListOfClients,
-   wxDefaultPosition, wxDefaultSize,
-           wxLC_REPORT | wxBORDER_NONE);
+        wxDefaultPosition, wxDefaultSize,
+        wxLC_REPORT | wxBORDER_NONE);
     listOfClients->SetBackgroundColour(*wxWHITE);
     
-listOfClients->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
-    listOfClients->InsertColumn(1, wxT("Имя"), wxLIST_FORMAT_LEFT, 100);
-    listOfClients->InsertColumn(2, wxT("Отчество"), wxLIST_FORMAT_LEFT, 120);
-    listOfClients->InsertColumn(3, wxT("Фамилия"), wxLIST_FORMAT_LEFT, 120);
-    listOfClients->InsertColumn(4, wxT("Телефон"), wxLIST_FORMAT_LEFT, 120);
-    listOfClients->InsertColumn(5, wxT("Тип"), wxLIST_FORMAT_LEFT, 80);
+    listOfClients->InsertColumn(0, wxT("ID ↕"), wxLIST_FORMAT_LEFT, 50);
+    listOfClients->InsertColumn(1, wxT("Имя ↕"), wxLIST_FORMAT_LEFT, 90);
+    listOfClients->InsertColumn(2, wxT("Отчество"), wxLIST_FORMAT_LEFT, 100);
+    listOfClients->InsertColumn(3, wxT("Фамилия ↕"), wxLIST_FORMAT_LEFT, 100);
+    listOfClients->InsertColumn(4, wxT("Телефон"), wxLIST_FORMAT_LEFT, 100);
+    listOfClients->InsertColumn(5, wxT("Тип"), wxLIST_FORMAT_LEFT, 70);
     
-    clientsSection->Add(listOfClients, 1, wxEXPAND | wxALL, 5);
+  clientsSection->Add(listOfClients, 1, wxEXPAND | wxALL, 5);
     topRowSizer->Add(clientsSection, 1, wxEXPAND | wxALL, 5);
     
     // --- Rooms panel ---
     wxStaticBoxSizer* roomsSection = CreateSection(contentPanel, wxT(" Комнаты "));
     
+    m_roomSearch = new wxSearchCtrl(roomsSection->GetStaticBox(), ID_SearchRooms, wxEmptyString,
+        wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    m_roomSearch->SetDescriptiveText(wxT("Поиск комнат..."));
+  roomsSection->Add(m_roomSearch, 0, wxEXPAND | wxALL, 5);
+    
     listOfRooms = new wxListCtrl(roomsSection->GetStaticBox(), ID_ListOfRooms,
-          wxDefaultPosition, wxDefaultSize,
-      wxLC_REPORT | wxLC_SINGLE_SEL | wxBORDER_NONE);
+      wxDefaultPosition, wxDefaultSize,
+ wxLC_REPORT | wxLC_SINGLE_SEL | wxBORDER_NONE);
     listOfRooms->SetBackgroundColour(*wxWHITE);
     
-    listOfRooms->InsertColumn(0, wxT("№"), wxLIST_FORMAT_LEFT, 50);
-    listOfRooms->InsertColumn(1, wxT("Категория"), wxLIST_FORMAT_LEFT, 120);
-    listOfRooms->InsertColumn(2, wxT("Цена/ночь"), wxLIST_FORMAT_RIGHT, 100);
-    listOfRooms->InsertColumn(3, wxT("Статус"), wxLIST_FORMAT_LEFT, 110);
-  listOfRooms->InsertColumn(4, wxT("Удобства"), wxLIST_FORMAT_LEFT, 150);
+    listOfRooms->InsertColumn(0, wxT("№ ↕"), wxLIST_FORMAT_LEFT, 50);
+    listOfRooms->InsertColumn(1, wxT("Категория"), wxLIST_FORMAT_LEFT, 100);
+    listOfRooms->InsertColumn(2, wxT("Цена ↕"), wxLIST_FORMAT_RIGHT, 80);
+    listOfRooms->InsertColumn(3, wxT("Статус ↕"), wxLIST_FORMAT_LEFT, 90);
+    listOfRooms->InsertColumn(4, wxT("Удобства"), wxLIST_FORMAT_LEFT, 120);
     
     roomsSection->Add(listOfRooms, 1, wxEXPAND | wxALL, 5);
     topRowSizer->Add(roomsSection, 1, wxEXPAND | wxALL, 5);
     
     contentSizer->Add(topRowSizer, 1, wxEXPAND);
     
- // --- Bookings panel ---
+    // --- Bookings panel ---
     wxStaticBoxSizer* bookingsSection = CreateSection(contentPanel, wxT(" Бронирования "));
-  
+    
+    m_bookingSearch = new wxSearchCtrl(bookingsSection->GetStaticBox(), ID_SearchBookings, wxEmptyString,
+      wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    m_bookingSearch->SetDescriptiveText(wxT("Поиск бронирований..."));
+    bookingsSection->Add(m_bookingSearch, 0, wxEXPAND | wxALL, 5);
+    
     listOfBookings = new wxListCtrl(bookingsSection->GetStaticBox(), ID_ListOfBookings,
-            wxDefaultPosition, wxDefaultSize,
-  wxLC_REPORT | wxLC_SINGLE_SEL | wxBORDER_NONE);
+ wxDefaultPosition, wxDefaultSize,
+        wxLC_REPORT | wxLC_SINGLE_SEL | wxBORDER_NONE);
     listOfBookings->SetBackgroundColour(*wxWHITE);
     
-    listOfBookings->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
-    listOfBookings->InsertColumn(1, wxT("Комната"), wxLIST_FORMAT_LEFT, 80);
-    listOfBookings->InsertColumn(2, wxT("Гости"), wxLIST_FORMAT_LEFT, 250);
-    listOfBookings->InsertColumn(3, wxT("Заезд"), wxLIST_FORMAT_LEFT, 100);
-    listOfBookings->InsertColumn(4, wxT("Выезд"), wxLIST_FORMAT_LEFT, 100);
-    listOfBookings->InsertColumn(5, wxT("Статус"), wxLIST_FORMAT_LEFT, 120);
-    listOfBookings->InsertColumn(6, wxT("Сумма"), wxLIST_FORMAT_RIGHT, 100);
+    listOfBookings->InsertColumn(0, wxT("ID ↕"), wxLIST_FORMAT_LEFT, 50);
+    listOfBookings->InsertColumn(1, wxT("Комн."), wxLIST_FORMAT_LEFT, 60);
+  listOfBookings->InsertColumn(2, wxT("Гости"), wxLIST_FORMAT_LEFT, 200);
+    listOfBookings->InsertColumn(3, wxT("Заезд ↕"), wxLIST_FORMAT_LEFT, 90);
+    listOfBookings->InsertColumn(4, wxT("Выезд"), wxLIST_FORMAT_LEFT, 90);
+    listOfBookings->InsertColumn(5, wxT("Статус ↕"), wxLIST_FORMAT_LEFT, 100);
+    listOfBookings->InsertColumn(6, wxT("Сумма ↕"), wxLIST_FORMAT_RIGHT, 90);
     
     bookingsSection->Add(listOfBookings, 1, wxEXPAND | wxALL, 5);
-    contentSizer->Add(bookingsSection, 1, wxEXPAND | wxALL, 5);
+ contentSizer->Add(bookingsSection, 1, wxEXPAND | wxALL, 5);
     
     contentPanel->SetSizer(contentSizer);
     
@@ -279,7 +305,7 @@ listOfClients->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
     CreateStatusBar(4);
     SetStatusText(wxT("Готово"), 0);
     
-    // ========== LOAD DATA ==========
+  // ========== LOAD DATA ==========
     std::vector<Client> tclients;
     std::vector<Room> trooms;
     std::vector<Booking> tbookings;
@@ -289,23 +315,23 @@ listOfClients->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
     std::string loadErr;
     
     if (LoadData("data.json", tclients, trooms, tbookings, nextC, nextR, nextB, loadErr)) {
-     clients = std::move(tclients);
-    rooms = std::move(trooms);
-   bookings = std::move(tbookings);
-    IdGenerator::setNextIds(nextC, nextR, nextB);
+        clients = std::move(tclients);
+        rooms = std::move(trooms);
+        bookings = std::move(tbookings);
+        IdGenerator::setNextIds(nextC, nextR, nextB);
     } else {
         if (!loadErr.empty()) {
-      wxLogMessage(wxT("Примечание: %s"), wxString::FromUTF8(loadErr.c_str()));
+     wxLogMessage(wxT("Примечание: %s"), wxString::FromUTF8(loadErr.c_str()));
         }
     }
     
     refreshClientsList();
-    refreshRoomsList();
-    refreshBookingsList();
+refreshRoomsList();
+refreshBookingsList();
     updateStatusBar();
-    
-// ========== AUTO-SAVE TIMER ==========
- m_autoSaveTimer = new wxTimer(this, ID_AutoSaveTimer);
+ 
+    // ========== AUTO-SAVE TIMER ==========
+    m_autoSaveTimer = new wxTimer(this, ID_AutoSaveTimer);
     m_autoSaveTimer->Start(AUTOSAVE_INTERVAL_MS);
     m_dataChanged = false;
     
@@ -317,10 +343,9 @@ listOfClients->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
 // ============================================================================
 MainFrame::~MainFrame()
 {
-    // Остановка таймера
     if (m_autoSaveTimer) {
- m_autoSaveTimer->Stop();
- }
+        m_autoSaveTimer->Stop();
+  }
     SaveDataNow();
 }
 
@@ -330,8 +355,8 @@ MainFrame::~MainFrame()
 void MainFrame::OnClose(wxCloseEvent& event)
 {
     if (m_autoSaveTimer) {
- m_autoSaveTimer->Stop();
- }
+        m_autoSaveTimer->Stop();
+    }
     SaveDataNow();
     event.Skip();
 }
@@ -341,7 +366,7 @@ void MainFrame::OnClose(wxCloseEvent& event)
 // ============================================================================
 void MainFrame::OnAutoSaveTimer(wxTimerEvent& event)
 {
- if (m_dataChanged) {
+    if (m_dataChanged) {
         SaveDataNow();
         m_dataChanged = false;
     }
@@ -353,26 +378,84 @@ void MainFrame::OnAutoSaveTimer(wxTimerEvent& event)
 void MainFrame::SaveDataNow()
 {
     if (!SaveData("data.json", clients, rooms, bookings,
-         IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId())) {
-        wxLogError(wxT("Не удалось сохранить данные"));
+            IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId())) {
+     wxLogError(wxT("Не удалось сохранить данные"));
     } else {
-   // Обновляем время последнего сохранения в статус-баре
-        time_t now = time(nullptr);
-        tm* local = localtime(&now);
+   time_t now = time(nullptr);
+  tm* local = localtime(&now);
         wxString timeStr = wxString::Format(wxT("Сохранено: %02d:%02d:%02d"), 
-     local->tm_hour, local->tm_min, local->tm_sec);
-        SetStatusText(timeStr, 3);
+            local->tm_hour, local->tm_min, local->tm_sec);
+ SetStatusText(timeStr, 3);
     }
 }
 
 // ============================================================================
-// Mark data as changed (triggers auto-save on next timer tick)
+// Mark data as changed
 // ============================================================================
 void MainFrame::MarkDataChanged()
 {
     m_dataChanged = true;
-    // Немедленное сохранение для критичных операций
-    SaveDataNow();
+  SaveDataNow();
+}
+
+// ============================================================================
+// Search handlers
+// ============================================================================
+void MainFrame::OnSearchClients(wxCommandEvent& event)
+{
+    m_clientFilter = m_clientSearch->GetValue().Lower();
+    refreshClientsList();
+}
+
+void MainFrame::OnSearchRooms(wxCommandEvent& event)
+{
+    m_roomFilter = m_roomSearch->GetValue().Lower();
+refreshRoomsList();
+}
+
+void MainFrame::OnSearchBookings(wxCommandEvent& event)
+{
+    m_bookingFilter = m_bookingSearch->GetValue().Lower();
+    refreshBookingsList();
+}
+
+// ============================================================================
+// Column click handlers (sorting)
+// ============================================================================
+void MainFrame::OnClientColumnClick(wxListEvent& event)
+{
+    int col = event.GetColumn();
+    if (m_clientSortColumn == col) {
+        m_clientSortAsc = !m_clientSortAsc;
+ } else {
+      m_clientSortColumn = col;
+        m_clientSortAsc = true;
+    }
+    refreshClientsList();
+}
+
+void MainFrame::OnRoomColumnClick(wxListEvent& event)
+{
+    int col = event.GetColumn();
+  if (m_roomSortColumn == col) {
+        m_roomSortAsc = !m_roomSortAsc;
+    } else {
+        m_roomSortColumn = col;
+  m_roomSortAsc = true;
+    }
+    refreshRoomsList();
+}
+
+void MainFrame::OnBookingColumnClick(wxListEvent& event)
+{
+    int col = event.GetColumn();
+    if (m_bookingSortColumn == col) {
+    m_bookingSortAsc = !m_bookingSortAsc;
+    } else {
+        m_bookingSortColumn = col;
+        m_bookingSortAsc = true;
+    }
+    refreshBookingsList();
 }
 
 // ============================================================================
@@ -380,12 +463,12 @@ void MainFrame::MarkDataChanged()
 // ============================================================================
 void MainFrame::updateStatusBar()
 {
- int activeClients = 0, activeRooms = 0, activeBookings = 0;
+    int activeClients = 0, activeRooms = 0, activeBookings = 0;
     for (const auto& c : clients) if (c.isActive()) activeClients++;
     for (const auto& r : rooms) if (r.isActive()) activeRooms++;
     for (const auto& b : bookings) if (b.isActive()) activeBookings++;
- 
-    SetStatusText(wxString::Format(wxT("Клиентов: %d"), activeClients), 1);
+    
+  SetStatusText(wxString::Format(wxT("Клиентов: %d"), activeClients), 1);
     SetStatusText(wxString::Format(wxT("Комнат: %d | Бронирований: %d"), activeRooms, activeBookings), 2);
 }
 
@@ -395,45 +478,75 @@ void MainFrame::updateStatusBar()
 void MainFrame::OnClientDblClick(wxListEvent& event)
 {
     wxCommandEvent evt;
-  OnEditClient(evt);
+    OnEditClient(evt);
 }
 
 void MainFrame::OnRoomDblClick(wxCommandEvent& event)
 {
     wxCommandEvent evt;
-  OnEditRoom(evt);
+    OnEditRoom(evt);
 }
 
 void MainFrame::OnBookingDblClick(wxCommandEvent& event)
 {
-    // Could show booking details dialog
 }
 
 // ============================================================================
-// Refresh lists
+// Refresh lists with sorting and filtering
 // ============================================================================
 void MainFrame::refreshClientsList()
 {
     if (!listOfClients) return;
     listOfClients->DeleteAllItems();
     
+    // Build filtered & sorted list
+  std::vector<const Client*> filtered;
+ for (const auto& client : clients) {
+     if (!client.isActive()) continue;
+        
+ // Apply filter
+        if (!m_clientFilter.IsEmpty()) {
+            wxString searchStr = wxString::FromUTF8(client.getFirstName().c_str()).Lower() + " " +
+        wxString::FromUTF8(client.getPatronymic().c_str()).Lower() + " " +
+  wxString::FromUTF8(client.getLastName().c_str()).Lower() + " " +
+wxString::FromUTF8(client.getPhone().c_str()).Lower();
+            if (searchStr.Find(m_clientFilter) == wxNOT_FOUND) continue;
+        }
+        filtered.push_back(&client);
+    }
+    
+    // Sort
+    if (m_clientSortColumn >= 0) {
+        std::sort(filtered.begin(), filtered.end(), [this](const Client* a, const Client* b) {
+            int cmp = 0;
+         switch (m_clientSortColumn) {
+           case 0: cmp = a->getId() - b->getId(); break;
+       case 1: cmp = a->getFirstName().compare(b->getFirstName()); break;
+      case 2: cmp = a->getPatronymic().compare(b->getPatronymic()); break;
+  case 3: cmp = a->getLastName().compare(b->getLastName()); break;
+ case 4: cmp = a->getPhone().compare(b->getPhone()); break;
+            default: break;
+            }
+            return m_clientSortAsc ? (cmp < 0) : (cmp > 0);
+        });
+    }
+    
+    // Display
     long index = 0;
-    for (const auto& client : clients) {
-        if (!client.isActive()) continue;
+    for (const auto* client : filtered) {
+        long pos = listOfClients->InsertItem(index, wxString::Format("%d", client->getId()));
+        listOfClients->SetItem(pos, 1, wxString::FromUTF8(client->getFirstName().c_str()));
+  listOfClients->SetItem(pos, 2, wxString::FromUTF8(client->getPatronymic().c_str()));
+listOfClients->SetItem(pos, 3, wxString::FromUTF8(client->getLastName().c_str()));
+   listOfClients->SetItem(pos, 4, wxString::FromUTF8(client->getPhone().c_str()));
         
-    long pos = listOfClients->InsertItem(index, wxString::Format("%d", client.getId()));
-        listOfClients->SetItem(pos, 1, wxString::FromUTF8(client.getFirstName().c_str()));
-        listOfClients->SetItem(pos, 2, wxString::FromUTF8(client.getPatronymic().c_str()));
-        listOfClients->SetItem(pos, 3, wxString::FromUTF8(client.getLastName().c_str()));
-        listOfClients->SetItem(pos, 4, wxString::FromUTF8(client.getPhone().c_str()));
-  
         wxString typeStr;
-        if (client.getIsChild()) typeStr = wxT("Ребёнок");
-        else if (client.getIsForeigner()) typeStr = wxT("Иностр.");
-else typeStr = wxT("Взрослый");
-    listOfClients->SetItem(pos, 5, typeStr);
+ if (client->getIsChild()) typeStr = wxT("Ребёнок");
+        else if (client->getIsForeigner()) typeStr = wxT("Иностр.");
+        else typeStr = wxT("Взрослый");
+        listOfClients->SetItem(pos, 5, typeStr);
         
-        listOfClients->SetItemData(pos, static_cast<long>(client.getId()));
+        listOfClients->SetItemData(pos, static_cast<long>(client->getId()));
         ++index;
     }
     updateStatusBar();
@@ -444,30 +557,53 @@ void MainFrame::refreshRoomsList()
     if (!listOfRooms) return;
     listOfRooms->DeleteAllItems();
     
-    long index = 0;
+    std::vector<const Room*> filtered;
     for (const auto& r : rooms) {
-     if (!r.isActive()) continue;
+  if (!r.isActive()) continue;
         
-      long pos = listOfRooms->InsertItem(index, wxString::Format("%d", r.getRoomNumber()));
-        listOfRooms->SetItem(pos, 1, wxString::FromUTF8(r.getCategory().c_str()));
-        listOfRooms->SetItem(pos, 2, wxString::Format(wxT("%.2f"), r.getPricePerNight()));
-     
-        wxString statusStr = wxString::FromUTF8(RoomStatusToString(r.getStatus()).c_str());
-    listOfRooms->SetItem(pos, 3, statusStr);
- 
-        const auto& amenities = r.getAmenities();
-        wxString amenStr;
-    for (size_t i = 0; i < amenities.size() && i < 3; ++i) {
-       if (i > 0) amenStr += wxT(", ");
-          amenStr += wxString::FromUTF8(amenities[i].c_str());
+        if (!m_roomFilter.IsEmpty()) {
+ wxString searchStr = wxString::Format(wxT("%d"), r.getRoomNumber()) + " " +
+         wxString::FromUTF8(r.getCategory().c_str()).Lower() + " " +
+    wxString::FromUTF8(RoomStatusToString(r.getStatus()).c_str()).Lower();
+  if (searchStr.Lower().Find(m_roomFilter) == wxNOT_FOUND) continue;
         }
-        if (amenities.size() > 3) amenStr += wxT("...");
-        listOfRooms->SetItem(pos, 4, amenStr);
+        filtered.push_back(&r);
+    }
+ 
+    if (m_roomSortColumn >= 0) {
+    std::sort(filtered.begin(), filtered.end(), [this](const Room* a, const Room* b) {
+            int cmp = 0;
+         switch (m_roomSortColumn) {
+   case 0: cmp = a->getRoomNumber() - b->getRoomNumber(); break;
+           case 1: cmp = a->getCategory().compare(b->getCategory()); break;
+   case 2: cmp = (a->getPricePerNight() < b->getPricePerNight()) ? -1 : (a->getPricePerNight() > b->getPricePerNight() ? 1 : 0); break;
+      case 3: cmp = static_cast<int>(a->getStatus()) - static_cast<int>(b->getStatus()); break;
+        default: break;
+   }
+       return m_roomSortAsc ? (cmp < 0) : (cmp > 0);
+});
+    }
+    
+    long index = 0;
+    for (const auto* r : filtered) {
+        long pos = listOfRooms->InsertItem(index, wxString::Format("%d", r->getRoomNumber()));
+     listOfRooms->SetItem(pos, 1, wxString::FromUTF8(r->getCategory().c_str()));
+        listOfRooms->SetItem(pos, 2, wxString::Format(wxT("%.2f"), r->getPricePerNight()));
+        listOfRooms->SetItem(pos, 3, wxString::FromUTF8(RoomStatusToString(r->getStatus()).c_str()));
         
-     listOfRooms->SetItemData(pos, static_cast<long>(r.getId()));
+        const auto& amenities = r->getAmenities();
+        wxString amenStr;
+        for (size_t i = 0; i < amenities.size() && i < 3; ++i) {
+        if (i > 0) amenStr += wxT(", ");
+     amenStr += wxString::FromUTF8(amenities[i].c_str());
+        }
+      if (amenities.size() > 3) amenStr += wxT("...");
+   listOfRooms->SetItem(pos, 4, amenStr);
+        
+        listOfRooms->SetItemData(pos, static_cast<long>(r->getId()));
         ++index;
     }
- updateStatusBar();
+    updateStatusBar();
 }
 
 void MainFrame::refreshBookingsList()
@@ -475,42 +611,84 @@ void MainFrame::refreshBookingsList()
     if (!listOfBookings) return;
     listOfBookings->DeleteAllItems();
     
-    long index = 0;
+    std::vector<const Booking*> filtered;
     for (const auto& b : bookings) {
-      if (!b.isActive()) continue;
-      
-     Room* room = findRoomById(b.getRoomId());
+        if (!b.isActive()) continue;
+        
+        if (!m_bookingFilter.IsEmpty()) {
+            // Build search string from booking data
+            Room* room = findRoomById(b.getRoomId());
+wxString roomStr = room ? wxString::Format(wxT("%d"), room->getRoomNumber()) : wxT("");
+ 
+            std::string clientsStr;
+            const auto& ids = b.getClientIds();
+     for (size_t j = 0; j < ids.size(); ++j) {
+           Client* c = findClientById(ids[j]);
+         if (c) {
+                    if (!clientsStr.empty()) clientsStr += " ";
+        clientsStr += c->getFullName();
+        }
+            }
+          
+            wxString searchStr = roomStr + " " + wxString::FromUTF8(clientsStr.c_str()).Lower() + " " +
+         wxString::FromUTF8(b.getCheckInDate().toString().c_str());
+   if (searchStr.Lower().Find(m_bookingFilter) == wxNOT_FOUND) continue;
+        }
+   filtered.push_back(&b);
+    }
+    
+    if (m_bookingSortColumn >= 0) {
+        std::sort(filtered.begin(), filtered.end(), [this](const Booking* a, const Booking* b) {
+    int cmp = 0;
+     switch (m_bookingSortColumn) {
+     case 0: cmp = a->getId() - b->getId(); break;
+            case 3: // Check-in date
+ if (a->getCheckInDate().isBefore(b->getCheckInDate())) cmp = -1;
+         else if (b->getCheckInDate().isBefore(a->getCheckInDate())) cmp = 1;
+ else cmp = 0;
+           break;
+       case 5: cmp = static_cast<int>(a->getStatus()) - static_cast<int>(b->getStatus()); break;
+      case 6: cmp = (a->getTotalPrice() < b->getTotalPrice()) ? -1 : (a->getTotalPrice() > b->getTotalPrice() ? 1 : 0); break;
+ default: break;
+          }
+          return m_bookingSortAsc ? (cmp < 0) : (cmp > 0);
+        });
+    }
+    
+    long index = 0;
+    for (const auto* b : filtered) {
+        Room* room = findRoomById(b->getRoomId());
         wxString roomStr = room ? wxString::Format(wxT("%d"), room->getRoomNumber()) : wxT("—");
         
         std::string clientsStr;
-        const auto& ids = b.getClientIds();
+        const auto& ids = b->getClientIds();
         for (size_t j = 0; j < ids.size(); ++j) {
-  Client* c = findClientById(ids[j]);
-    if (c) {
-       if (!clientsStr.empty()) clientsStr += ", ";
+            Client* c = findClientById(ids[j]);
+        if (c) {
+          if (!clientsStr.empty()) clientsStr += ", ";
     clientsStr += c->getFullName();
-            }
-     }
+    }
+        }
         if (clientsStr.empty()) clientsStr = "—";
-    
- wxString statusStr;
-      switch (b.getStatus()) {
-         case BookingStatus::CONFIRMED: statusStr = wxT("Подтверждено"); break;
+        
+   wxString statusStr;
+        switch (b->getStatus()) {
+     case BookingStatus::CONFIRMED: statusStr = wxT("Подтверждено"); break;
             case BookingStatus::CHECKED_IN: statusStr = wxT("Заселён"); break;
- case BookingStatus::COMPLETED: statusStr = wxT("Завершено"); break;
-  case BookingStatus::CANCELLED: statusStr = wxT("Отменено"); break;
-        default: statusStr = wxT("—"); break;
+            case BookingStatus::COMPLETED: statusStr = wxT("Завершено"); break;
+      case BookingStatus::CANCELLED: statusStr = wxT("Отменено"); break;
+    default: statusStr = wxT("—"); break;
         }
         
-        long pos = listOfBookings->InsertItem(index, wxString::Format("%d", b.getId()));
+        long pos = listOfBookings->InsertItem(index, wxString::Format("%d", b->getId()));
         listOfBookings->SetItem(pos, 1, roomStr);
         listOfBookings->SetItem(pos, 2, wxString::FromUTF8(clientsStr.c_str()));
-    listOfBookings->SetItem(pos, 3, wxString::FromUTF8(b.getCheckInDate().toString().c_str()));
-        listOfBookings->SetItem(pos, 4, wxString::FromUTF8(b.getCheckOutDate().toString().c_str()));
-listOfBookings->SetItem(pos, 5, statusStr);
-        listOfBookings->SetItem(pos, 6, wxString::Format(wxT("%.2f"), b.getTotalPrice()));
+        listOfBookings->SetItem(pos, 3, wxString::FromUTF8(b->getCheckInDate().toString().c_str()));
+        listOfBookings->SetItem(pos, 4, wxString::FromUTF8(b->getCheckOutDate().toString().c_str()));
+        listOfBookings->SetItem(pos, 5, statusStr);
+        listOfBookings->SetItem(pos, 6, wxString::Format(wxT("%.2f"), b->getTotalPrice()));
         
-        listOfBookings->SetItemData(pos, static_cast<long>(b.getId()));
+  listOfBookings->SetItemData(pos, static_cast<long>(b->getId()));
         ++index;
     }
     updateStatusBar();
@@ -765,7 +943,7 @@ void MainFrame::OnDeleteRoom(wxCommandEvent& event)
     }
     
     if (!blocking.empty()) {
-        wxString msg = wxT("Комнату нельзя удалить — есть активные бронирования:\n");
+        wxString msg = wxT("Комнату нельзя удалять — есть активные бронирования:\n");
 for (int id : blocking) msg += wxString::Format(wxT("  Бронирование #%d\n"), id);
  wxMessageBox(msg, wxT("Ошибка удаления"), wxOK | wxICON_ERROR, this);
       return;
