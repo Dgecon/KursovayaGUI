@@ -20,47 +20,6 @@
       "roomId": 1,
       "status": 1,
       "totalPrice": 22000.0
-    },
-    {
-      "active": false,
-      "checkIn": {
-        "day": 17,
-        "month": 1,
-        "year": 2026
-      },
-      "checkOut": {
-        "day": 19,
-        "month": 1,
-        "year": 2026
-      },
-      "clientIds": [
-        11
-      ],
-      "id": 8,
-      "roomId": 6,
-      "status": 2,
-      "totalPrice": 10000.0
-    },
-    {
-      "active": true,
-      "checkIn": {
-        "day": 19,
-        "month": 1,
-        "year": 2026
-      },
-      "checkOut": {
-        "day": 1,
-        "month": 2,
-        "year": 2026
-      },
-      "clientIds": [
-        12,
-        13
-      ],
-      "id": 9,
-      "roomId": 7,
-      "status": 1,
-      "totalPrice": 26000.0
     }
   ],
   "clients": [
@@ -140,7 +99,7 @@
           "year": 2006
         },
         "code": "300 001",
-        "fio": "Игорь Алексеевич Шмыков",
+        "fio": "Игорь Петрович Шмыков",
         "givenBy": "умвд по белгородской области",
         "issue": {
           "day": 17,
@@ -150,7 +109,7 @@
         "number": 900061,
         "series": 1430
       },
-      "patronymic": "",
+      "patronymic": "Петрович",
       "phone": "89511302659",
       "visa": ""
     },
@@ -170,7 +129,7 @@
           "year": 1983
         },
         "code": "310 002",
-        "fio": "Юрий Владимирович Гагарин",
+        "fio": "Юрий Александрович Гагарин",
         "givenBy": "умвд по рязанской области",
         "issue": {
           "day": 12,
@@ -180,7 +139,7 @@
         "number": 5004201,
         "series": 1356
       },
-      "patronymic": "",
+      "patronymic": "Александрович",
       "phone": "81968430420",
       "visa": ""
     },
@@ -243,12 +202,72 @@
       "patronymic": "Александровна",
       "phone": "89561340987",
       "visa": ""
+    },
+    {
+      "active": true,
+      "birthCertificate": "",
+      "firstName": "Олег",
+      "id": 15,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "Леонидов",
+      "passport": {
+        "birth": {
+          "day": 20,
+          "month": 1,
+          "year": 1999
+        },
+        "code": "310-005",
+        "fio": "Олег Николаевич Леонидов",
+        "givenBy": "увд по туле",
+        "issue": {
+          "day": 20,
+          "month": 1,
+          "year": 2020
+        },
+        "number": 900503,
+        "series": 1430
+      },
+      "patronymic": "Николаевич",
+      "phone": "89507133353",
+      "visa": ""
+    },
+    {
+      "active": true,
+      "birthCertificate": "",
+      "firstName": "Владимир",
+      "id": 16,
+      "internationalPassport": "",
+      "isChild": false,
+      "isForeigner": false,
+      "lastName": "Никифоров",
+      "passport": {
+        "birth": {
+          "day": 20,
+          "month": 1,
+          "year": 1999
+        },
+        "code": "300-013",
+        "fio": "Владимир Викторович Никифоров",
+        "givenBy": "увд по москве",
+        "issue": {
+          "day": 20,
+          "month": 1,
+          "year": 2012
+        },
+        "number": 5000501,
+        "series": 1345
+      },
+      "patronymic": "Викторович",
+      "phone": "85678345678",
+      "visa": ""
     }
   ],
   "nextIds": {
-    "booking": 10,
-    "client": 15,
-    "room": 8
+    "booking": 11,
+    "client": 17,
+    "room": 18
   },
   "rooms": [
     {
@@ -271,22 +290,83 @@
     },
     {
       "active": true,
-      "amenities": [
-        "чайник"
-      ],
-      "category": "люкс",
-      "id": 6,
-      "pricePerNight": 5000.0,
-      "roomNumber": 539,
+      "amenities": [],
+      "category": "Эконом",
+      "id": 9,
+      "pricePerNight": 2000.0,
+      "roomNumber": 1,
       "status": "Доступна"
     },
     {
       "active": true,
       "amenities": [],
-      "category": "стандарт ",
-      "id": 7,
+      "category": "Эконом",
+      "id": 10,
       "pricePerNight": 2000.0,
-      "roomNumber": 123,
+      "roomNumber": 2,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Эконом",
+      "id": 11,
+      "pricePerNight": 2000.0,
+      "roomNumber": 3,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Стандарт",
+      "id": 12,
+      "pricePerNight": 3500.0,
+      "roomNumber": 4,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Стандарт",
+      "id": 13,
+      "pricePerNight": 3500.0,
+      "roomNumber": 5,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Стандарт",
+      "id": 14,
+      "pricePerNight": 3500.0,
+      "roomNumber": 6,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Люкс",
+      "id": 15,
+      "pricePerNight": 5000.0,
+      "roomNumber": 7,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Люкс",
+      "id": 16,
+      "pricePerNight": 5000.0,
+      "roomNumber": 8,
+      "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Люкс",
+      "id": 17,
+      "pricePerNight": 5000.0,
+      "roomNumber": 9,
       "status": "Доступна"
     }
   ],

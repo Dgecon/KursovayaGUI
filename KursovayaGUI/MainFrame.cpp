@@ -1,7 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 
-#include "Client.h"
 #include "MainFrame.h"
+#include "Client.h"
 #include "Room.h"
 #include "Booking.h"
 #include "IdGenerator.h"
@@ -9,956 +9,1217 @@
 #include "AddClientDialog.h"
 #include "AddRoomDialog.h"
 #include "AddBookingDialog.h"
-#include <vector>
 #include <wx/listctrl.h>
 #include <wx/textdlg.h>
-#include <wx/wx.h>
+#include <wx/notebook.h>
+#include <wx/statline.h>
+#include <wx/filename.h>
+#include <wx/artprov.h>
+#include <wx/scrolwin.h>
 #include <sstream>
 #include <cstdint>
 #include <algorithm>
-#include <cstdlib>
-#include <wx/filename.h>
+#include <ctime>
 
+// ============================================================================
+// IDs
+// ============================================================================
 enum IDs {
- ID_AddClient =1,
- ID_ListOfClients =2,
- ID_ListOfRooms =3,
- ID_AddRoom =4,
- ID_AddAmenity =5,
- ID_ListOfBookings =6,
- ID_AddBooking =7,
- ID_EditClient =11,
- ID_DeleteBooking =8,
- ID_DeleteRoom =9,
- ID_DeleteClient =10,
- ID_EditRoom =12,
- ID_ExportCSV =13,
- ID_ImportCSV =14,
- ID_ChangeRoomStatus =15,
- ID_CheckIn =16,
- ID_CheckOut =17
- ,ID_Help =18
-
+    ID_AddClient = wxID_HIGHEST + 1,
+    ID_EditClient,
+    ID_DeleteClient,
+    ID_AddRoom,
+    ID_EditRoom,
+    ID_DeleteRoom,
+    ID_ChangeRoomStatus,
+    ID_AddAmenity,
+    ID_AddBooking,
+    ID_DeleteBooking,
+    ID_CheckIn,
+    ID_CheckOut,
+    ID_ExportCSV,
+    ID_ImportCSV,
+    ID_Help,
+    ID_ListOfClients,
+    ID_ListOfRooms,
+    ID_ListOfBookings,
+    ID_AutoSaveTimer
 };
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-EVT_BUTTON(ID_AddClient, MainFrame::OnAddClient)
-EVT_BUTTON(ID_AddRoom, MainFrame::OnAddRoom)
-EVT_BUTTON(ID_AddAmenity, MainFrame::OnAddAmenity)
-EVT_BUTTON(ID_AddBooking, MainFrame::OnAddBooking)
-EVT_BUTTON(ID_DeleteBooking, MainFrame::OnDeleteBooking)
-EVT_BUTTON(ID_DeleteRoom, MainFrame::OnDeleteRoom)
-EVT_BUTTON(ID_DeleteClient, MainFrame::OnDeleteClient)
-EVT_BUTTON(ID_EditClient, MainFrame::OnEditClient)
-EVT_BUTTON(ID_EditRoom, MainFrame::OnEditRoom)
-EVT_BUTTON(ID_ChangeRoomStatus, MainFrame::OnChangeRoomStatus)
-EVT_BUTTON(ID_CheckIn, MainFrame::OnCheckIn)
-EVT_BUTTON(ID_CheckOut, MainFrame::OnCheckOut)
-EVT_BUTTON(ID_ExportCSV, MainFrame::OnExportCSV)
-EVT_BUTTON(ID_ImportCSV, MainFrame::OnImportCSV)
-EVT_BUTTON(ID_Help, MainFrame::OnHelp)
-EVT_CLOSE(MainFrame::OnClose)
+    EVT_BUTTON(ID_AddClient, MainFrame::OnAddClient)
+    EVT_BUTTON(ID_EditClient, MainFrame::OnEditClient)
+    EVT_BUTTON(ID_DeleteClient, MainFrame::OnDeleteClient)
+    EVT_BUTTON(ID_AddRoom, MainFrame::OnAddRoom)
+  EVT_BUTTON(ID_EditRoom, MainFrame::OnEditRoom)
+    EVT_BUTTON(ID_DeleteRoom, MainFrame::OnDeleteRoom)
+    EVT_BUTTON(ID_ChangeRoomStatus, MainFrame::OnChangeRoomStatus)
+    EVT_BUTTON(ID_AddAmenity, MainFrame::OnAddAmenity)
+    EVT_BUTTON(ID_AddBooking, MainFrame::OnAddBooking)
+    EVT_BUTTON(ID_DeleteBooking, MainFrame::OnDeleteBooking)
+  EVT_BUTTON(ID_CheckIn, MainFrame::OnCheckIn)
+    EVT_BUTTON(ID_CheckOut, MainFrame::OnCheckOut)
+    EVT_BUTTON(ID_ExportCSV, MainFrame::OnExportCSV)
+    EVT_BUTTON(ID_ImportCSV, MainFrame::OnImportCSV)
+    EVT_BUTTON(ID_Help, MainFrame::OnHelp)
+  EVT_LIST_ITEM_ACTIVATED(ID_ListOfClients, MainFrame::OnClientDblClick)
+    EVT_LISTBOX_DCLICK(ID_ListOfRooms, MainFrame::OnRoomDblClick)
+    EVT_LISTBOX_DCLICK(ID_ListOfBookings, MainFrame::OnBookingDblClick)
+    EVT_TIMER(ID_AutoSaveTimer, MainFrame::OnAutoSaveTimer)
+    EVT_CLOSE(MainFrame::OnClose)
 wxEND_EVENT_TABLE()
 
-MainFrame::MainFrame(const wxString& title)
- : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800,600))
+// ============================================================================
+// Helper: Create styled button (РєРѕРјРїР°РєС‚РЅС‹Р№ СЂР°Р·РјРµСЂ)
+// ============================================================================
+static wxButton* CreateStyledButton(wxWindow* parent, wxWindowID id, const wxString& label,
+     const wxColour& bgColor = wxNullColour,
+            const wxColour& fgColor = *wxBLACK)
 {
- wxPanel* panel = new wxPanel(this, wxID_ANY);
- // Build responsive layout using sizers
- // Left vertical toolbar with action buttons
- wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
- wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
- wxBoxSizer* centerSizer = new wxBoxSizer(wxVERTICAL);
- wxBoxSizer* rightSizer = new wxBoxSizer(wxVERTICAL);
+    wxButton* btn = new wxButton(parent, id, label, wxDefaultPosition, wxSize(-1, 28));
+if (bgColor.IsOk()) {
+        btn->SetBackgroundColour(bgColor);
+    }
+    btn->SetForegroundColour(fgColor);
+    return btn;
+}
 
- wxStaticText* clientsLabel = new wxStaticText(panel, wxID_ANY, "Клиенты");
- wxStaticText* roomsLabel = new wxStaticText(panel, wxID_ANY, "Комнаты");
- wxButton* AddClientButton = new wxButton(panel, ID_AddClient, "Добавить клиента");
- wxButton* EditClientButton = new wxButton(panel, ID_EditClient, "Редактировать клиента");
- wxButton* DeleteClientButton = new wxButton(panel, ID_DeleteClient, "Удалить клиента");
- wxButton* AddRoomButton = new wxButton(panel, ID_AddRoom, "Добавить комнату");
- wxButton* EditRoomButton = new wxButton(panel, ID_EditRoom, "Редактировать комнату");
- wxButton* DeleteRoomButton = new wxButton(panel, ID_DeleteRoom, "Удалить комнату");
- wxButton* ChangeRoomStatusButton = new wxButton(panel, ID_ChangeRoomStatus, "Изменить статус");
- wxButton* AddAmenityButton = new wxButton(panel, ID_AddAmenity, "Добавить удобства");
- wxButton* AddBookingButton = new wxButton(panel, ID_AddBooking, "Добавить бронирование");
- wxButton* DeleteBookingButton = new wxButton(panel, ID_DeleteBooking, "Удалить бронирование");
- wxButton* ExportCSVButton = new wxButton(panel, ID_ExportCSV, "Экспорт CSV");
- wxButton* ImportCSVButton = new wxButton(panel, ID_ImportCSV, "Импорт CSV");
- wxButton* CheckInButton = new wxButton(panel, ID_CheckIn, "Заселение (Check-in)");
- wxButton* CheckOutButton = new wxButton(panel, ID_CheckOut, "Выселение (Check-out)");
- wxButton* HelpButton = new wxButton(panel, ID_Help, "? Справка");
+// ============================================================================
+// Helper: Create section with title
+// ============================================================================
+static wxStaticBoxSizer* CreateSection(wxWindow* parent, const wxString& title, wxOrientation orient = wxVERTICAL)
+{
+    wxStaticBox* box = new wxStaticBox(parent, wxID_ANY, title);
+    wxFont font = box->GetFont();
+    font.SetWeight(wxFONTWEIGHT_BOLD);
+    box->SetFont(font);
+    return new wxStaticBoxSizer(box, orient);
+}
 
+// ============================================================================
+// Constructor
+// ============================================================================
+MainFrame::MainFrame(const wxString& title)
+    : wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(1200, 800))
+{
+    SetMinSize(wxSize(900, 600));
+    
+    wxPanel* mainPanel = new wxPanel(this, wxID_ANY);
+    mainPanel->SetBackgroundColour(wxColour(245, 245, 250));
+    
+    // ========== SCROLLABLE TOOLBAR PANEL (Left side) ==========
+    wxScrolledWindow* toolbarScroll = new wxScrolledWindow(mainPanel, wxID_ANY, 
+        wxDefaultPosition, wxDefaultSize, wxVSCROLL);
+    toolbarScroll->SetBackgroundColour(wxColour(52, 73, 94));
+ toolbarScroll->SetMinSize(wxSize(210, -1));
+    toolbarScroll->SetScrollRate(0, 10);  // РўРѕР»СЊРєРѕ РІРµСЂС‚РёРєР°Р»СЊРЅР°СЏ РїСЂРѕРєСЂСѓС‚РєР°
+    
+    wxBoxSizer* toolbarSizer = new wxBoxSizer(wxVERTICAL);
+    
+    // App title
+    wxStaticText* appTitle = new wxStaticText(toolbarScroll, wxID_ANY, wxT("Р“РѕСЃС‚РёРЅРёС†Р°"));
+    wxFont titleFont = appTitle->GetFont();
+    titleFont.SetPointSize(14);
+    titleFont.SetWeight(wxFONTWEIGHT_BOLD);
+    appTitle->SetFont(titleFont);
+    appTitle->SetForegroundColour(*wxWHITE);
+    toolbarSizer->Add(appTitle, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+    
+    wxStaticText* appSubtitle = new wxStaticText(toolbarScroll, wxID_ANY, wxT("РЎРёСЃС‚РµРјР° СѓРїСЂР°РІР»РµРЅРёСЏ"));
+appSubtitle->SetForegroundColour(wxColour(189, 195, 199));
+    toolbarSizer->Add(appSubtitle, 0, wxBOTTOM | wxALIGN_CENTER_HORIZONTAL, 10);
+ 
+    toolbarSizer->Add(new wxStaticLine(toolbarScroll, wxID_ANY, wxDefaultPosition, wxSize(-1, 1)), 
+     0, wxEXPAND | wxLEFT | wxRIGHT, 8);
+    toolbarSizer->AddSpacer(8);
+  
+    // --- CLIENTS section ---
+    wxStaticText* clientsHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("РљР›РР•РќРўР«"));
+    clientsHeader->SetForegroundColour(wxColour(149, 165, 166));
+    wxFont headerFont = clientsHeader->GetFont();
+    headerFont.SetPointSize(8);
+    clientsHeader->SetFont(headerFont);
+    toolbarSizer->Add(clientsHeader, 0, wxLEFT | wxBOTTOM, 8);
+    
+    wxButton* btnAddClient = CreateStyledButton(toolbarScroll, ID_AddClient, wxT("+ Р”РѕР±Р°РІРёС‚СЊ РєР»РёРµРЅС‚Р°"), wxColour(46, 204, 113), *wxWHITE);
+    wxButton* btnEditClient = CreateStyledButton(toolbarScroll, ID_EditClient, wxT("Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"));
+    wxButton* btnDelClient = CreateStyledButton(toolbarScroll, ID_DeleteClient, wxT("РЈРґР°Р»РёС‚СЊ"), wxColour(231, 76, 60), *wxWHITE);
+    
+    toolbarSizer->Add(btnAddClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnEditClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+toolbarSizer->Add(btnDelClient, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
+  
+    // --- ROOMS section ---
+    wxStaticText* roomsHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("РљРћРњРќРђРўР«"));
+    roomsHeader->SetForegroundColour(wxColour(149, 165, 166));
+  roomsHeader->SetFont(headerFont);
+    toolbarSizer->Add(roomsHeader, 0, wxLEFT | wxBOTTOM, 8);
+    
+    wxButton* btnAddRoom = CreateStyledButton(toolbarScroll, ID_AddRoom, wxT("+ Р”РѕР±Р°РІРёС‚СЊ РєРѕРјРЅР°С‚Сѓ"), wxColour(46, 204, 113), *wxWHITE);
+    wxButton* btnEditRoom = CreateStyledButton(toolbarScroll, ID_EditRoom, wxT("Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"));
+    wxButton* btnDelRoom = CreateStyledButton(toolbarScroll, ID_DeleteRoom, wxT("РЈРґР°Р»РёС‚СЊ"), wxColour(231, 76, 60), *wxWHITE);
+    wxButton* btnStatus = CreateStyledButton(toolbarScroll, ID_ChangeRoomStatus, wxT("РР·РјРµРЅРёС‚СЊ СЃС‚Р°С‚СѓСЃ"));
+    wxButton* btnAmenity = CreateStyledButton(toolbarScroll, ID_AddAmenity, wxT("Р”РѕР±Р°РІРёС‚СЊ СѓРґРѕР±СЃС‚РІР°"));
+    
+    toolbarSizer->Add(btnAddRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+  toolbarSizer->Add(btnEditRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnDelRoom, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnStatus, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnAmenity, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
+    
+    // --- BOOKINGS section ---
+    wxStaticText* bookingsHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("Р‘Р РћРќРР РћР’РђРќРРЇ"));
+    bookingsHeader->SetForegroundColour(wxColour(149, 165, 166));
+    bookingsHeader->SetFont(headerFont);
+    toolbarSizer->Add(bookingsHeader, 0, wxLEFT | wxBOTTOM, 8);
+    
+    wxButton* btnAddBooking = CreateStyledButton(toolbarScroll, ID_AddBooking, wxT("+ РќРѕРІРѕРµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"), wxColour(52, 152, 219), *wxWHITE);
+    wxButton* btnDelBooking = CreateStyledButton(toolbarScroll, ID_DeleteBooking, wxT("РЈРґР°Р»РёС‚СЊ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"));
+ wxButton* btnCheckIn = CreateStyledButton(toolbarScroll, ID_CheckIn, wxT("Р—Р°СЃРµР»РµРЅРёРµ"), wxColour(39, 174, 96), *wxWHITE);
+  wxButton* btnCheckOut = CreateStyledButton(toolbarScroll, ID_CheckOut, wxT("Р’С‹СЃРµР»РµРЅРёРµ"), wxColour(230, 126, 34), *wxWHITE);
+    
+  toolbarSizer->Add(btnAddBooking, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnDelBooking, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnCheckIn, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnCheckOut, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
+    
+    // --- IMPORT/EXPORT section ---
+    toolbarSizer->Add(new wxStaticLine(toolbarScroll, wxID_ANY, wxDefaultPosition, wxSize(-1, 1)), 
+        0, wxEXPAND | wxLEFT | wxRIGHT, 8);
+    toolbarSizer->AddSpacer(8);
+    
+    wxStaticText* dataHeader = new wxStaticText(toolbarScroll, wxID_ANY, wxT("Р”РђРќРќР«Р•"));
+    dataHeader->SetForegroundColour(wxColour(149, 165, 166));
+    dataHeader->SetFont(headerFont);
+    toolbarSizer->Add(dataHeader, 0, wxLEFT | wxBOTTOM, 8);
+    
+    wxButton* btnExport = CreateStyledButton(toolbarScroll, ID_ExportCSV, wxT("Р­РєСЃРїРѕСЂС‚ CSV"));
+    wxButton* btnImport = CreateStyledButton(toolbarScroll, ID_ImportCSV, wxT("РРјРїРѕСЂС‚ CSV"));
+    wxButton* btnHelp = CreateStyledButton(toolbarScroll, ID_Help, wxT("? РЎРїСЂР°РІРєР°"));
+    
+    toolbarSizer->Add(btnExport, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnImport, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+    toolbarSizer->Add(btnHelp, 0, wxEXPAND | wxALL, 5);
+    
+    toolbarScroll->SetSizer(toolbarSizer);
+    toolbarScroll->FitInside();  // Р’С‹С‡РёСЃР»РёС‚СЊ СЂР°Р·РјРµСЂ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РґР»СЏ РїСЂРѕРєСЂСѓС‚РєРё
+    
+    // ========== CONTENT PANEL ==========
+    wxPanel* contentPanel = new wxPanel(mainPanel, wxID_ANY);
+    contentPanel->SetBackgroundColour(wxColour(245, 245, 250));
+    
+    wxBoxSizer* contentSizer = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* topRowSizer = new wxBoxSizer(wxHORIZONTAL);
+ 
+    // --- Clients panel ---
+    wxStaticBoxSizer* clientsSection = CreateSection(contentPanel, wxT(" РљР»РёРµРЅС‚С‹ (Ctrl+Click РґР»СЏ РІС‹Р±РѕСЂР° РЅРµСЃРєРѕР»СЊРєРёС…) "));
+    
+    listOfClients = new wxListCtrl(clientsSection->GetStaticBox(), ID_ListOfClients,
+   wxDefaultPosition, wxDefaultSize,
+           wxLC_REPORT | wxBORDER_NONE);
+    listOfClients->SetBackgroundColour(*wxWHITE);
+    
+listOfClients->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
+    listOfClients->InsertColumn(1, wxT("РРјСЏ"), wxLIST_FORMAT_LEFT, 100);
+    listOfClients->InsertColumn(2, wxT("РћС‚С‡РµСЃС‚РІРѕ"), wxLIST_FORMAT_LEFT, 120);
+    listOfClients->InsertColumn(3, wxT("Р¤Р°РјРёР»РёСЏ"), wxLIST_FORMAT_LEFT, 120);
+    listOfClients->InsertColumn(4, wxT("РўРµР»РµС„РѕРЅ"), wxLIST_FORMAT_LEFT, 120);
+    listOfClients->InsertColumn(5, wxT("РўРёРї"), wxLIST_FORMAT_LEFT, 80);
+    
+    clientsSection->Add(listOfClients, 1, wxEXPAND | wxALL, 5);
+    topRowSizer->Add(clientsSection, 1, wxEXPAND | wxALL, 5);
+    
+    // --- Rooms panel ---
+    wxStaticBoxSizer* roomsSection = CreateSection(contentPanel, wxT(" РљРѕРјРЅР°С‚С‹ "));
+    
+    listOfRooms = new wxListCtrl(roomsSection->GetStaticBox(), ID_ListOfRooms,
+          wxDefaultPosition, wxDefaultSize,
+      wxLC_REPORT | wxLC_SINGLE_SEL | wxBORDER_NONE);
+    listOfRooms->SetBackgroundColour(*wxWHITE);
+    
+    listOfRooms->InsertColumn(0, wxT("в„–"), wxLIST_FORMAT_LEFT, 50);
+    listOfRooms->InsertColumn(1, wxT("РљР°С‚РµРіРѕСЂРёСЏ"), wxLIST_FORMAT_LEFT, 120);
+    listOfRooms->InsertColumn(2, wxT("Р¦РµРЅР°/РЅРѕС‡СЊ"), wxLIST_FORMAT_RIGHT, 100);
+    listOfRooms->InsertColumn(3, wxT("РЎС‚Р°С‚СѓСЃ"), wxLIST_FORMAT_LEFT, 110);
+  listOfRooms->InsertColumn(4, wxT("РЈРґРѕР±СЃС‚РІР°"), wxLIST_FORMAT_LEFT, 150);
+    
+    roomsSection->Add(listOfRooms, 1, wxEXPAND | wxALL, 5);
+    topRowSizer->Add(roomsSection, 1, wxEXPAND | wxALL, 5);
+    
+    contentSizer->Add(topRowSizer, 1, wxEXPAND);
+    
+ // --- Bookings panel ---
+    wxStaticBoxSizer* bookingsSection = CreateSection(contentPanel, wxT(" Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ "));
+  
+    listOfBookings = new wxListCtrl(bookingsSection->GetStaticBox(), ID_ListOfBookings,
+            wxDefaultPosition, wxDefaultSize,
+  wxLC_REPORT | wxLC_SINGLE_SEL | wxBORDER_NONE);
+    listOfBookings->SetBackgroundColour(*wxWHITE);
+    
+    listOfBookings->InsertColumn(0, wxT("ID"), wxLIST_FORMAT_LEFT, 50);
+    listOfBookings->InsertColumn(1, wxT("РљРѕРјРЅР°С‚Р°"), wxLIST_FORMAT_LEFT, 80);
+    listOfBookings->InsertColumn(2, wxT("Р“РѕСЃС‚Рё"), wxLIST_FORMAT_LEFT, 250);
+    listOfBookings->InsertColumn(3, wxT("Р—Р°РµР·Рґ"), wxLIST_FORMAT_LEFT, 100);
+    listOfBookings->InsertColumn(4, wxT("Р’С‹РµР·Рґ"), wxLIST_FORMAT_LEFT, 100);
+    listOfBookings->InsertColumn(5, wxT("РЎС‚Р°С‚СѓСЃ"), wxLIST_FORMAT_LEFT, 120);
+    listOfBookings->InsertColumn(6, wxT("РЎСѓРјРјР°"), wxLIST_FORMAT_RIGHT, 100);
+    
+    bookingsSection->Add(listOfBookings, 1, wxEXPAND | wxALL, 5);
+    contentSizer->Add(bookingsSection, 1, wxEXPAND | wxALL, 5);
+    
+    contentPanel->SetSizer(contentSizer);
+    
+    // ========== MAIN LAYOUT ==========
+    wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
+    mainSizer->Add(toolbarScroll, 0, wxEXPAND);
+    mainSizer->Add(contentPanel, 1, wxEXPAND);
+    mainPanel->SetSizer(mainSizer);
+    
+    // ========== STATUS BAR ==========
+    CreateStatusBar(4);
+    SetStatusText(wxT("Р“РѕС‚РѕРІРѕ"), 0);
+    
+    // ========== LOAD DATA ==========
+    std::vector<Client> tclients;
+    std::vector<Room> trooms;
+    std::vector<Booking> tbookings;
+    int nextC = IdGenerator::getNextClientId();
+    int nextR = IdGenerator::getNextRoomId();
+    int nextB = IdGenerator::getNextBookingId();
+    std::string loadErr;
+    
+    if (LoadData("data.json", tclients, trooms, tbookings, nextC, nextR, nextB, loadErr)) {
+     clients = std::move(tclients);
+    rooms = std::move(trooms);
+   bookings = std::move(tbookings);
+    IdGenerator::setNextIds(nextC, nextR, nextB);
+    } else {
+        if (!loadErr.empty()) {
+      wxLogMessage(wxT("РџСЂРёРјРµС‡Р°РЅРёРµ: %s"), wxString::FromUTF8(loadErr.c_str()));
+        }
+    }
+    
+    refreshClientsList();
+    refreshRoomsList();
+    refreshBookingsList();
+    updateStatusBar();
+    
+// ========== AUTO-SAVE TIMER ==========
+ m_autoSaveTimer = new wxTimer(this, ID_AutoSaveTimer);
+    m_autoSaveTimer->Start(AUTOSAVE_INTERVAL_MS);
+    m_dataChanged = false;
+    
+    Centre();
+}
 
- EditClientButton->Bind(wxEVT_BUTTON, &MainFrame::OnEditClient, this, ID_EditClient);
+// ============================================================================
+// Destructor
+// ============================================================================
+MainFrame::~MainFrame()
+{
+    // РћСЃС‚Р°РЅРѕРІРєР° С‚Р°Р№РјРµСЂР°
+    if (m_autoSaveTimer) {
+ m_autoSaveTimer->Stop();
+ }
+    SaveDataNow();
+}
 
- CheckInButton->SetBackgroundColour(wxColour(180,255,180));
- CheckOutButton->SetBackgroundColour(wxColour(255,200,180));
+// ============================================================================
+// OnClose
+// ============================================================================
+void MainFrame::OnClose(wxCloseEvent& event)
+{
+    if (m_autoSaveTimer) {
+ m_autoSaveTimer->Stop();
+ }
+    SaveDataNow();
+    event.Skip();
+}
 
- // Add controls to left sizer (toolbar)
- leftSizer->Add(AddClientButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(EditClientButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(DeleteClientButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(AddRoomButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(EditRoomButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(DeleteRoomButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(ChangeRoomStatusButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(AddAmenityButton,0, wxEXPAND | wxALL,4);
- leftSizer->AddSpacer(10);
- leftSizer->Add(AddBookingButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(DeleteBookingButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(CheckInButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(CheckOutButton,0, wxEXPAND | wxALL,4);
- leftSizer->AddSpacer(20);
- leftSizer->Add(ExportCSVButton,0, wxEXPAND | wxALL,4);
- leftSizer->Add(ImportCSVButton,0, wxEXPAND | wxALL,4);
- leftSizer->AddSpacer(6);
- leftSizer->Add(HelpButton,0, wxEXPAND | wxALL,4);
+// ============================================================================
+// Auto-save timer handler
+// ============================================================================
+void MainFrame::OnAutoSaveTimer(wxTimerEvent& event)
+{
+ if (m_dataChanged) {
+        SaveDataNow();
+        m_dataChanged = false;
+    }
+}
 
- // create clients list control and bookings list before adding to sizers
- listOfClients = new wxListCtrl(panel, ID_ListOfClients, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES);
- // setup columns: ID, First, Last, Phone
- listOfClients->InsertColumn(0, "ID", wxLIST_FORMAT_LEFT,50);
- listOfClients->InsertColumn(1, "Имя", wxLIST_FORMAT_LEFT,120);
- listOfClients->InsertColumn(2, "Фамилия", wxLIST_FORMAT_LEFT,120);
- listOfClients->InsertColumn(3, "Телефон", wxLIST_FORMAT_LEFT,120);
+// ============================================================================
+// Save data immediately
+// ============================================================================
+void MainFrame::SaveDataNow()
+{
+    if (!SaveData("data.json", clients, rooms, bookings,
+         IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId())) {
+        wxLogError(wxT("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ"));
+    } else {
+   // РћР±РЅРѕРІР»СЏРµРј РІСЂРµРјСЏ РїРѕСЃР»РµРґРЅРµРіРѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ СЃС‚Р°С‚СѓСЃ-Р±Р°СЂРµ
+        time_t now = time(nullptr);
+        tm* local = localtime(&now);
+        wxString timeStr = wxString::Format(wxT("РЎРѕС…СЂР°РЅРµРЅРѕ: %02d:%02d:%02d"), 
+     local->tm_hour, local->tm_min, local->tm_sec);
+        SetStatusText(timeStr, 3);
+    }
+}
 
- listOfBookings = new wxListBox(panel, ID_ListOfBookings, wxDefaultPosition, wxDefaultSize);
+// ============================================================================
+// Mark data as changed (triggers auto-save on next timer tick)
+// ============================================================================
+void MainFrame::MarkDataChanged()
+{
+    m_dataChanged = true;
+    // РќРµРјРµРґР»РµРЅРЅРѕРµ СЃРѕС…СЂР°РЅРµРЅРёРµ РґР»СЏ РєСЂРёС‚РёС‡РЅС‹С… РѕРїРµСЂР°С†РёР№
+    SaveDataNow();
+}
 
- // center: clients list (expand)
- centerSizer->Add(clientsLabel,0, wxLEFT | wxTOP,4);
- centerSizer->Add(listOfClients,1, wxEXPAND | wxALL,4);
+// ============================================================================
+// Update status bar
+// ============================================================================
+void MainFrame::updateStatusBar()
+{
+ int activeClients = 0, activeRooms = 0, activeBookings = 0;
+    for (const auto& c : clients) if (c.isActive()) activeClients++;
+    for (const auto& r : rooms) if (r.isActive()) activeRooms++;
+    for (const auto& b : bookings) if (b.isActive()) activeBookings++;
+ 
+    SetStatusText(wxString::Format(wxT("РљР»РёРµРЅС‚РѕРІ: %d"), activeClients), 1);
+    SetStatusText(wxString::Format(wxT("РљРѕРјРЅР°С‚: %d | Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёР№: %d"), activeRooms, activeBookings), 2);
+}
 
- // right: rooms label + list
- listOfRooms = new wxListBox(panel, ID_ListOfRooms, wxDefaultPosition, wxDefaultSize);
- rightSizer->Add(roomsLabel,0, wxLEFT | wxTOP,4);
- rightSizer->Add(listOfRooms,1, wxEXPAND | wxALL,4);
+// ============================================================================
+// Double-click handlers
+// ============================================================================
+void MainFrame::OnClientDblClick(wxListEvent& event)
+{
+    wxCommandEvent evt;
+  OnEditClient(evt);
+}
 
- // put sizers into main sizer (top row)
- mainSizer->Add(leftSizer,0, wxEXPAND | wxALL,4);
- mainSizer->Add(centerSizer,1, wxEXPAND | wxALL,4);
- mainSizer->Add(rightSizer,1, wxEXPAND | wxALL,4);
+void MainFrame::OnRoomDblClick(wxCommandEvent& event)
+{
+    wxCommandEvent evt;
+  OnEditRoom(evt);
+}
 
- // outer sizer: contains top row and bookings area below spanning full width
- wxBoxSizer* outerSizer = new wxBoxSizer(wxVERTICAL);
- outerSizer->Add(mainSizer,1, wxEXPAND | wxALL,0);
+void MainFrame::OnBookingDblClick(wxCommandEvent& event)
+{
+    // Could show booking details dialog
+}
 
- // Bookings area: label + list that spans full width and is taller
- wxStaticText* bookingsLabel = new wxStaticText(panel, wxID_ANY, "Бронирования");
- outerSizer->Add(bookingsLabel,0, wxLEFT | wxTOP,4);
- // make bookings list larger: give it proportion to be taller
- outerSizer->Add(listOfBookings,2, wxEXPAND | wxALL,4);
+// ============================================================================
+// Refresh lists
+// ============================================================================
+void MainFrame::refreshClientsList()
+{
+    if (!listOfClients) return;
+    listOfClients->DeleteAllItems();
+    
+    long index = 0;
+    for (const auto& client : clients) {
+        if (!client.isActive()) continue;
+        
+    long pos = listOfClients->InsertItem(index, wxString::Format("%d", client.getId()));
+        listOfClients->SetItem(pos, 1, wxString::FromUTF8(client.getFirstName().c_str()));
+        listOfClients->SetItem(pos, 2, wxString::FromUTF8(client.getPatronymic().c_str()));
+        listOfClients->SetItem(pos, 3, wxString::FromUTF8(client.getLastName().c_str()));
+        listOfClients->SetItem(pos, 4, wxString::FromUTF8(client.getPhone().c_str()));
+  
+        wxString typeStr;
+        if (client.getIsChild()) typeStr = wxT("Р РµР±С‘РЅРѕРє");
+        else if (client.getIsForeigner()) typeStr = wxT("РРЅРѕСЃС‚СЂ.");
+else typeStr = wxT("Р’Р·СЂРѕСЃР»С‹Р№");
+    listOfClients->SetItem(pos, 5, typeStr);
+        
+        listOfClients->SetItemData(pos, static_cast<long>(client.getId()));
+        ++index;
+    }
+    updateStatusBar();
+}
 
- panel->SetSizer(outerSizer);
- panel->Layout();
+void MainFrame::refreshRoomsList()
+{
+    if (!listOfRooms) return;
+    listOfRooms->DeleteAllItems();
+    
+    long index = 0;
+    for (const auto& r : rooms) {
+     if (!r.isActive()) continue;
+        
+      long pos = listOfRooms->InsertItem(index, wxString::Format("%d", r.getRoomNumber()));
+        listOfRooms->SetItem(pos, 1, wxString::FromUTF8(r.getCategory().c_str()));
+        listOfRooms->SetItem(pos, 2, wxString::Format(wxT("%.2f"), r.getPricePerNight()));
+     
+        wxString statusStr = wxString::FromUTF8(RoomStatusToString(r.getStatus()).c_str());
+    listOfRooms->SetItem(pos, 3, statusStr);
+ 
+        const auto& amenities = r.getAmenities();
+        wxString amenStr;
+    for (size_t i = 0; i < amenities.size() && i < 3; ++i) {
+       if (i > 0) amenStr += wxT(", ");
+          amenStr += wxString::FromUTF8(amenities[i].c_str());
+        }
+        if (amenities.size() > 3) amenStr += wxT("...");
+        listOfRooms->SetItem(pos, 4, amenStr);
+        
+     listOfRooms->SetItemData(pos, static_cast<long>(r.getId()));
+        ++index;
+    }
+ updateStatusBar();
+}
 
- std::vector<Client> tclients;
- std::vector<Room> trooms;
- std::vector<Booking> tbookings;
- int nextC = IdGenerator::getNextClientId();
- int nextR = IdGenerator::getNextRoomId();
- int nextB = IdGenerator::getNextBookingId();
- std::string loadErr;
- if (LoadData("data.json", tclients, trooms, tbookings, nextC, nextR, nextB, loadErr)) {
- clients = std::move(tclients);
- rooms = std::move(trooms);
- bookings = std::move(tbookings);
- IdGenerator::setNextIds(nextC, nextR, nextB);
+void MainFrame::refreshBookingsList()
+{
+    if (!listOfBookings) return;
+    listOfBookings->DeleteAllItems();
+    
+    long index = 0;
+    for (const auto& b : bookings) {
+      if (!b.isActive()) continue;
+      
+     Room* room = findRoomById(b.getRoomId());
+        wxString roomStr = room ? wxString::Format(wxT("%d"), room->getRoomNumber()) : wxT("вЂ”");
+        
+        std::string clientsStr;
+        const auto& ids = b.getClientIds();
+        for (size_t j = 0; j < ids.size(); ++j) {
+  Client* c = findClientById(ids[j]);
+    if (c) {
+       if (!clientsStr.empty()) clientsStr += ", ";
+    clientsStr += c->getFullName();
+            }
+     }
+        if (clientsStr.empty()) clientsStr = "вЂ”";
+    
+ wxString statusStr;
+      switch (b.getStatus()) {
+         case BookingStatus::CONFIRMED: statusStr = wxT("РџРѕРґС‚РІРµСЂР¶РґРµРЅРѕ"); break;
+            case BookingStatus::CHECKED_IN: statusStr = wxT("Р—Р°СЃРµР»С‘РЅ"); break;
+ case BookingStatus::COMPLETED: statusStr = wxT("Р—Р°РІРµСЂС€РµРЅРѕ"); break;
+  case BookingStatus::CANCELLED: statusStr = wxT("РћС‚РјРµРЅРµРЅРѕ"); break;
+        default: statusStr = wxT("вЂ”"); break;
+        }
+        
+        long pos = listOfBookings->InsertItem(index, wxString::Format("%d", b.getId()));
+        listOfBookings->SetItem(pos, 1, roomStr);
+        listOfBookings->SetItem(pos, 2, wxString::FromUTF8(clientsStr.c_str()));
+    listOfBookings->SetItem(pos, 3, wxString::FromUTF8(b.getCheckInDate().toString().c_str()));
+        listOfBookings->SetItem(pos, 4, wxString::FromUTF8(b.getCheckOutDate().toString().c_str()));
+listOfBookings->SetItem(pos, 5, statusStr);
+        listOfBookings->SetItem(pos, 6, wxString::Format(wxT("%.2f"), b.getTotalPrice()));
+        
+        listOfBookings->SetItemData(pos, static_cast<long>(b.getId()));
+        ++index;
+    }
+    updateStatusBar();
+}
+
+// ============================================================================
+// Find helpers
+// ============================================================================
+Room* MainFrame::findRoomById(int roomId)
+{
+    for (auto& room : rooms) {
+        if (room.getId() == roomId) return &room;
+    }
+    return nullptr;
+}
+
+Client* MainFrame::findClientById(int clientId)
+{
+    for (auto& client : clients) {
+        if (client.getId() == clientId) return &client;
+    }
+    return nullptr;
+}
+
+// ============================================================================
+// Add Client
+// ============================================================================
+void MainFrame::OnAddClient(wxCommandEvent& event)
+{
+    AddClientDialog dlg(this);
+    if (dlg.ShowModal() != wxID_OK) return;
+    
+    std::string first = std::string(dlg.getFirstName().ToUTF8().data());
+    std::string last = std::string(dlg.getLastName().ToUTF8().data());
+    std::string phone = std::string(dlg.getPhone().ToUTF8().data());
+    std::string patronymic = std::string(dlg.getPatronymic().ToUTF8().data());
+    Passport passport = dlg.getPassport();
+    
+  bool isChild = dlg.isChild();
+    bool isForeigner = dlg.isForeigner();
+    std::string birthCert = dlg.getBirthCertificate();
+    std::string visa = dlg.getVisa();
+    std::string intlPass = dlg.getInternationalPassport();
+ 
+    int clientId = IdGenerator::generateClientId();
+    clients.emplace_back(clientId, first, last, phone, passport, true, isChild, isForeigner, birthCert, visa, intlPass, patronymic);
+    
+    refreshClientsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+ SetStatusText(wxT("РљР»РёРµРЅС‚ РґРѕР±Р°РІР»РµРЅ"), 0);
+}
+
+// ============================================================================
+// Edit Client
+// ============================================================================
+void MainFrame::OnEditClient(wxCommandEvent& event)
+{
+    if (!listOfClients) return;
+    
+    long sel = listOfClients->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+        wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РєР»РёРµРЅС‚Р° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+}
+  
+    int clientId = static_cast<int>(listOfClients->GetItemData(sel));
+    Client* client = findClientById(clientId);
+    if (!client) { wxLogError(wxT("РљР»РёРµРЅС‚ РЅРµ РЅР°Р№РґРµРЅ")); return; }
+    
+    AddClientDialog dlg(this);
+    dlg.setValues(*client);
+    if (dlg.ShowModal() != wxID_OK) return;
+ 
+    client->setFirstName(std::string(dlg.getFirstName().ToUTF8().data()));
+    client->setLastName(std::string(dlg.getLastName().ToUTF8().data()));
+    client->setPhone(std::string(dlg.getPhone().ToUTF8().data()));
+    client->setPatronymic(std::string(dlg.getPatronymic().ToUTF8().data()));
+    client->setPassport(dlg.getPassport());
+    client->setIsChild(dlg.isChild());
+    client->setIsForeigner(dlg.isForeigner());
+    client->setBirthCertificate(dlg.getBirthCertificate());
+    client->setVisa(dlg.getVisa());
+    client->setInternationalPassport(dlg.getInternationalPassport());
+    
+    refreshClientsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("РљР»РёРµРЅС‚ РѕР±РЅРѕРІР»С‘РЅ"), 0);
+}
+
+// ============================================================================
+// Delete Client
+// ============================================================================
+void MainFrame::OnDeleteClient(wxCommandEvent& event)
+{
+    if (!listOfClients) return;
+    
+    long sel = listOfClients->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РєР»РёРµРЅС‚Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+
+ int clientId = static_cast<int>(listOfClients->GetItemData(sel));
+    
+    std::vector<int> blocking;
+    for (const auto& b : bookings) {
+        if (!b.isActive()) continue;
+  const auto& ids = b.getClientIds();
+      if (std::find(ids.begin(), ids.end(), clientId) != ids.end()) {
+       auto st = b.getStatus();
+            if (st == BookingStatus::CONFIRMED || st == BookingStatus::CHECKED_IN) {
+     blocking.push_back(b.getId());
+            }
+        }
+    }
+    
+    if (!blocking.empty()) {
+        wxString msg = wxT("РљР»РёРµРЅС‚Р° РЅРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ вЂ” РµСЃС‚СЊ Р°РєС‚РёРІРЅС‹Рµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ:\n");
+        for (int id : blocking) msg += wxString::Format(wxT("  Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ #%d\n"), id);
+        wxMessageBox(msg, wxT("РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+ 
+    if (wxMessageBox(wxT("РџРѕРґС‚РІРµСЂРґРёС‚СЊ СѓРґР°Р»РµРЅРёРµ РєР»РёРµРЅС‚Р°?"), wxT("РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ"), wxYES_NO | wxICON_QUESTION, this) != wxYES) {
+        return;
+    }
+    
+    for (auto it = clients.begin(); it != clients.end(); ) {
+        if (it->getId() == clientId) {
+            it = clients.erase(it);
  } else {
- if (!loadErr.empty()) wxLogError(loadErr);
- }
+    ++it;
+      }
+    }
+    
+    for (auto it = bookings.begin(); it != bookings.end(); ) {
+        const auto& ids = it->getClientIds();
+    if (std::find(ids.begin(), ids.end(), clientId) != ids.end()) {
+            it = bookings.erase(it);
+        } else {
+            ++it;
+        }
+    }
+    
+    refreshClientsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("РљР»РёРµРЅС‚ СѓРґР°Р»С‘РЅ"), 0);
+}
 
- refreshClientsList();
+// ============================================================================
+// Add Room
+// ============================================================================
+void MainFrame::OnAddRoom(wxCommandEvent& event)
+{
+    AddRoomDialog dlg(this);
+    if (dlg.ShowModal() != wxID_OK) return;
+    
+ wxString wxRoomNumber = dlg.getRoomNumber();
+ wxString wxCategory = dlg.getCategory();
+    wxString wxPrice = dlg.getPrice();
+    
+    long roomNumber = 0;
+    double price = 0.0;
+    
+    if (!wxRoomNumber.ToLong(&roomNumber)) {
+     wxMessageBox(wxT("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РЅРѕРјРµСЂ РєРѕРјРЅР°С‚С‹."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    if (!wxPrice.ToDouble(&price)) {
+        wxMessageBox(wxT("РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ С†РµРЅР°."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    
+    std::string category = std::string(wxCategory.ToUTF8().data());
+    std::vector<std::string> amenities;
+ 
+    int roomId = IdGenerator::generateRoomId();
+rooms.emplace_back(roomId, static_cast<int>(roomNumber), category, price, RoomStatus::AVAILABLE, amenities);
+    
+    refreshRoomsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("РљРѕРјРЅР°С‚Р° РґРѕР±Р°РІР»РµРЅР°"), 0);
+}
+
+// ============================================================================
+// Edit Room
+// ============================================================================
+void MainFrame::OnEditRoom(wxCommandEvent& event)
+{
+    if (!listOfRooms) return;
+    
+    long sel = listOfRooms->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+        wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РєРѕРјРЅР°С‚Сѓ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+
+    int roomId = static_cast<int>(listOfRooms->GetItemData(sel));
+    Room* room = findRoomById(roomId);
+    if (!room) { wxLogError(wxT("РљРѕРјРЅР°С‚Р° РЅРµ РЅР°Р№РґРµРЅР°")); return; }
+    
+    AddRoomDialog dlg(this);
+    dlg.setValues(room->getRoomNumber(), wxString::FromUTF8(room->getCategory().c_str()), room->getPricePerNight());
+    if (dlg.ShowModal() != wxID_OK) return;
+    
+    long roomNumber = 0;
+    double price = 0.0;
+    
+    if (!dlg.getRoomNumber().ToLong(&roomNumber)) {
+        wxMessageBox(wxT("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РЅРѕРјРµСЂ РєРѕРјРЅР°С‚С‹."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    if (!dlg.getPrice().ToDouble(&price)) {
+        wxMessageBox(wxT("РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ С†РµРЅР°."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    
+    room->setRoomNumber(static_cast<int>(roomNumber));
+    room->setCategory(std::string(dlg.getCategory().ToUTF8().data()));
+    room->setPricePerNight(price);
+    
+    refreshRoomsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("РљРѕРјРЅР°С‚Р° РѕР±РЅРѕРІР»РµРЅР°"), 0);
+}
+
+// ============================================================================
+// Delete Room
+// ============================================================================
+void MainFrame::OnDeleteRoom(wxCommandEvent& event)
+{
+    if (!listOfRooms) return;
+    
+    long sel = listOfRooms->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+    wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РєРѕРјРЅР°С‚Сѓ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+    
+    int roomId = static_cast<int>(listOfRooms->GetItemData(sel));
+    
+    std::vector<int> blocking;
+    for (const auto& b : bookings) {
+        if (!b.isActive()) continue;
+        if (b.getRoomId() == roomId) {
+  auto st = b.getStatus();
+        if (st == BookingStatus::CONFIRMED || st == BookingStatus::CHECKED_IN) {
+        blocking.push_back(b.getId());
+    }
+        }
+    }
+    
+    if (!blocking.empty()) {
+        wxString msg = wxT("РљРѕРјРЅР°С‚Сѓ РЅРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ вЂ” РµСЃС‚СЊ Р°РєС‚РёРІРЅС‹Рµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ:\n");
+for (int id : blocking) msg += wxString::Format(wxT("  Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ #%d\n"), id);
+ wxMessageBox(msg, wxT("РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ"), wxOK | wxICON_ERROR, this);
+      return;
+    }
+    
+    if (wxMessageBox(wxT("РџРѕРґС‚РІРµСЂРґРёС‚СЊ СѓРґР°Р»РµРЅРёРµ РєРѕРјРЅР°С‚С‹?"), wxT("РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ"), wxYES_NO | wxICON_QUESTION, this) != wxYES) {
+        return;
+    }
+    
+    for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+        if (it->getId() == roomId) {
+ rooms.erase(it);
+        break;
+      }
+    }
+    
+    for (auto it = bookings.begin(); it != bookings.end(); ) {
+        if (it->getRoomId() == roomId) {
+      it = bookings.erase(it);
+        } else {
+            ++it;
+    }
+    }
+    
+    refreshRoomsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("РљРѕРјРЅР°С‚Р° СѓРґР°Р»РµРЅР°"), 0);
+}
+
+// ============================================================================
+// Change Room Status
+// ============================================================================
+void MainFrame::OnChangeRoomStatus(wxCommandEvent& event)
+{
+  if (!listOfRooms) return;
+    
+    long sel = listOfRooms->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+        wxMessageBox(wxT("Р’С‹Р±РµСЂРёС‚Рµ РєРѕРјРЅР°С‚Сѓ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+      return;
+    }
+  
+    int roomId = static_cast<int>(listOfRooms->GetItemData(sel));
+    Room* room = findRoomById(roomId);
+    if (!room) { wxLogError(wxT("РљРѕРјРЅР°С‚Р° РЅРµ РЅР°Р№РґРµРЅР°")); return; }
+    
+    std::vector<RoomStatus> statuses = { RoomStatus::AVAILABLE, RoomStatus::BOOKED, RoomStatus::OCCUPIED, RoomStatus::MAINTENANCE, RoomStatus::CLEANING };
+    wxArrayString choices;
+    for (auto s : statuses) {
+   choices.Add(wxString::FromUTF8(RoomStatusToString(s).c_str()));
+    }
+    
+    wxSingleChoiceDialog dlg(this, wxT("Р’С‹Р±РµСЂРёС‚Рµ РЅРѕРІС‹Р№ СЃС‚Р°С‚СѓСЃ РєРѕРјРЅР°С‚С‹:"), wxT("РР·РјРµРЅРёС‚СЊ СЃС‚Р°С‚СѓСЃ"), choices);
+    
+    int curIndex = 0;
+    for (size_t i = 0; i < statuses.size(); ++i) {
+        if (statuses[i] == room->getStatus()) { curIndex = static_cast<int>(i); break; }
+    }
+ dlg.SetSelection(curIndex);
+    
+    if (dlg.ShowModal() == wxID_OK) {
+        int selIdx = dlg.GetSelection();
+        if (selIdx >= 0 && selIdx < static_cast<int>(statuses.size())) {
+            room->setStatus(statuses[selIdx]);
  refreshRoomsList();
- refreshBookingsList();
+            MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+        SetStatusText(wxT("РЎС‚Р°С‚СѓСЃ РєРѕРјРЅР°С‚С‹ РёР·РјРµРЅС‘РЅ"), 0);
+  }
+    }
 }
 
-MainFrame::~MainFrame() {
- if (!SaveData("data.json", clients, rooms, bookings,
- IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId()))
- {
- wxLogError("Не удалось сохранить данные при закрытии");
- }
+// ============================================================================
+// Add Amenity
+// ============================================================================
+void MainFrame::OnAddAmenity(wxCommandEvent& event)
+{
+    if (!listOfRooms) return;
+    
+    long sel = listOfRooms->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+   wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РєРѕРјРЅР°С‚Сѓ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+    
+    int roomId = static_cast<int>(listOfRooms->GetItemData(sel));
+    Room* room = findRoomById(roomId);
+    if (!room) { wxLogError(wxT("РљРѕРјРЅР°С‚Р° РЅРµ РЅР°Р№РґРµРЅР°")); return; }
+    
+    wxTextEntryDialog dlg(this, wxT("Р’РІРµРґРёС‚Рµ СѓРґРѕР±СЃС‚РІРѕ РґР»СЏ РєРѕРјРЅР°С‚С‹:"), wxT("РќРѕРІРѕРµ СѓРґРѕР±СЃС‚РІРѕ"));
+    if (dlg.ShowModal() != wxID_OK) return;
+    
+    std::string amenity = std::string(dlg.GetValue().ToUTF8().data());
+    if (!amenity.empty()) {
+      room->addAmenity(amenity);
+        refreshRoomsList();
+        MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+      SetStatusText(wxT("РЈРґРѕР±СЃС‚РІРѕ РґРѕР±Р°РІР»РµРЅРѕ"), 0);
+    }
 }
 
-void MainFrame::OnClose(wxCloseEvent& event) {
- // Save data
- if (!SaveData("data.json", clients, rooms, bookings,
- IdGenerator::getNextClientId(), IdGenerator::getNextRoomId(), IdGenerator::getNextBookingId()))
- {
- wxLogError("Не удалось сохранить данные");
- }
-
- event.Skip();
-}
-
-void MainFrame::OnAddBooking(wxCommandEvent& event) {
- if (!listOfBookings) {
- wxLogError("listOfBookings == nullptr");
- return;
- }
-
- long selRoom = listOfRooms->GetSelection();
- if (selRoom == wxNOT_FOUND) {
- wxMessageBox("Пожалуйстa, выберите комнату.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
-
- // collect selected client items from list control
- std::vector<long> selectedItems;
- long item = -1;
- for (item = listOfClients->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); item != -1; item = listOfClients->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) {
- selectedItems.push_back(item);
- }
- if (selectedItems.empty()) {
- wxMessageBox("Пожалуйстa, выберите одного или нескольких клиентов.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
-
- void* roomData = listOfRooms->GetClientData(selRoom);
- if (!roomData) { wxLogError("Нет client data для выбранной комнаты"); return; }
- int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(roomData));
- Room* room = findRoomById(roomId);
- if (!room) { wxLogError("Не найденa комната по ID"); return; }
-
- // collect client ids
- std::vector<int> clientIds;
- for (auto idx : selectedItems) {
- int cid = static_cast<int>(listOfClients->GetItemData(idx));
- Client* c = findClientById(cid);
- if (c && c->isActive()) clientIds.push_back(cid);
- }
- if (clientIds.empty()) {
- wxMessageBox("Не выбраны действительные клиенты.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // Show dialog to pick dates
- AddBookingDialog dlg(this);
- if (dlg.ShowModal() != wxID_OK) return;
- Date ci = dlg.getCheckIn();
- Date co = dlg.getCheckOut();
-
- // validate dates
- if (!ci.isValid() || !co.isValid() || !ci.isBefore(co)) {
- wxMessageBox("Неверные даты бронирования: проверьте корректность дат (заезд < отъезда).", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // Check for overlapping active bookings for this room
+// ============================================================================
+// Add Booking
+// ============================================================================
+void MainFrame::OnAddBooking(wxCommandEvent& event)
+{
+  long selRoom = listOfRooms->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (selRoom == -1) {
+    wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РєРѕРјРЅР°С‚Сѓ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+  }
+    
+    std::vector<int> clientIds;
+    long item = -1;
+    while ((item = listOfClients->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != -1) {
+        int clientId = static_cast<int>(listOfClients->GetItemData(item));
+        Client* client = findClientById(clientId);
+ if (client && client->isActive()) {
+            clientIds.push_back(clientId);
+        }
+    }
+    
+    if (clientIds.empty()) {
+        wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РѕРґРЅРѕРіРѕ РёР»Рё РЅРµСЃРєРѕР»СЊРєРёС… РєР»РёРµРЅС‚РѕРІ.\n\nРСЃРїРѕР»СЊР·СѓР№С‚Рµ Ctrl+Click РґР»СЏ РІС‹Р±РѕСЂР° РЅРµСЃРєРѕР»СЊРєРёС… РіРѕСЃС‚РµР№."), 
+            wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+    
+    int roomId = static_cast<int>(listOfRooms->GetItemData(selRoom));
+    Room* room = findRoomById(roomId);
+    if (!room) { wxLogError(wxT("РљРѕРјРЅР°С‚Р° РЅРµ РЅР°Р№РґРµРЅР°")); return; }
+    
+    AddBookingDialog dlg(this);
+if (dlg.ShowModal() != wxID_OK) return;
+    
+    Date ci = dlg.getCheckIn();
+    Date co = dlg.getCheckOut();
+    
+    if (!ci.isValid() || !co.isValid() || !ci.isBefore(co)) {
+ wxMessageBox(wxT("РќРµРІРµСЂРЅС‹Рµ РґР°С‚С‹ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    
  for (const auto& b : bookings) {
- if (!b.isActive()) continue;
- if (b.getRoomId() != roomId) continue;
- if (Booking::datesOverlap(ci, co, b.getCheckInDate(), b.getCheckOutDate())) {
- wxMessageBox("Выбранные даты пересекаются с существующими бронированиями для этой комнаты.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- }
-
- // don't allow booking when room under maintenance
- if (room->getStatus() == RoomStatus::MAINTENANCE) {
- wxMessageBox("Невозможно создать бронь — комната на тех. обслуживании.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // compute total price and insert booking
- int days = std::abs(ci.DifferenceInDays(co));
- double total = days * room->getPricePerNight();
-
- int bookingId = IdGenerator::generateBookingId();
+        if (!b.isActive()) continue;
+      if (b.getRoomId() != roomId) continue;
+      if (Booking::datesOverlap(ci, co, b.getCheckInDate(), b.getCheckOutDate())) {
+      wxMessageBox(wxT("Р’С‹Р±СЂР°РЅРЅС‹Рµ РґР°С‚С‹ РїРµСЂРµСЃРµРєР°СЋС‚СЃСЏ СЃ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµРј."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+            return;
+        }
+    }
+    
+    if (room->getStatus() == RoomStatus::MAINTENANCE) {
+        wxMessageBox(wxT("РљРѕРјРЅР°С‚Р° РЅР° С‚РµС…РЅРёС‡РµСЃРєРѕРј РѕР±СЃР»СѓР¶РёРІР°РЅРёРё."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+     return;
+    }
+    
+    int days = std::abs(ci.DifferenceInDays(co));
+    double total = days * room->getPricePerNight();
+    
+    int bookingId = IdGenerator::generateBookingId();
  bookings.emplace_back(bookingId, room->getId(), clientIds, ci, co, true);
  bookings.back().setTotalPrice(total);
-
- // try to mark room as BOOKED if transition allowed; otherwise leave status and log
- if (room->canTransition(RoomStatus::BOOKED)) {
- if (!room->setStatus(RoomStatus::BOOKED)) {
- wxLogWarning("Не удалось установить статус комнаты в BOOKED для комнаты %d.", room->getId());
- }
- } else {
- wxLogMessage("Комната %d не может перейти в BOOKED (текущее состояние: %s)", room->getId(), RoomStatusToString(room->getStatus()).c_str());
- }
- updateRoomStatusBasedOnBookings(room->getId());
-
- wxMessageBox("Бронирование успешно создано.", "Готово", wxOK | wxICON_INFORMATION, this);
+    
+    if (room->canTransition(RoomStatus::BOOKED)) {
+        room->setStatus(RoomStatus::BOOKED);
+    }
+    updateRoomStatusBasedOnBookings(room->getId());
+    
  refreshRoomsList();
- refreshBookingsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ СЃРѕР·РґР°РЅРѕ"), 0);
+    
+    wxString guestsInfo;
+    for (size_t i = 0; i < clientIds.size(); ++i) {
+        Client* c = findClientById(clientIds[i]);
+        if (c) {
+ if (!guestsInfo.IsEmpty()) guestsInfo += wxT(", ");
+         guestsInfo += wxString::FromUTF8(c->getFullName().c_str());
+        }
+  }
+    
+    wxMessageBox(wxString::Format(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ СЃРѕР·РґР°РЅРѕ!\n\nР“РѕСЃС‚Рё (%zu): %s\nРЎСѓРјРјР°: %.2f"), 
+     clientIds.size(), guestsInfo, total), 
+ wxT("РЈСЃРїРµС€РЅРѕ"), wxOK | wxICON_INFORMATION, this);
 }
 
-void MainFrame::OnDeleteBooking(wxCommandEvent& event) {
- if (!listOfBookings) {
- wxLogError("listOfBookings == nullptr");
- return;
+// ============================================================================
+// Delete Booking
+// ============================================================================
+void MainFrame::OnDeleteBooking(wxCommandEvent& event)
+{
+    if (!listOfBookings) return;
+    
+    long sel = listOfBookings->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+  wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+    
+    int bookingId = static_cast<int>(listOfBookings->GetItemData(sel));
+    
+    int deletedRoomId = -1;
+    for (auto& b : bookings) {
+        if (b.getId() == bookingId) {
+            deletedRoomId = b.getRoomId();
+   b.setActive(false);
+     break;
  }
- long sel = listOfBookings->GetSelection();
- if (sel == wxNOT_FOUND) {
- wxMessageBox("Пожалуйста, выберите бронирование для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
- void* data = listOfBookings->GetClientData(sel);
- if (!data) {
- wxLogError("Нет client data для выбранной строки");
- return;
- }
- int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
-
- int deletedRoomId = -1;
- // Soft-delete booking by id
- for (auto& b : bookings) {
- if (b.getId() == bookingId) {
- deletedRoomId = b.getRoomId();
- b.setActive(false);
- break;
- }
- }
-
- // after soft-delete, update room status depending on remaining bookings
- if (deletedRoomId != -1) updateRoomStatusBasedOnBookings(deletedRoomId);
-
- refreshRoomsList();
- refreshBookingsList();
+    }
+    
+ if (deletedRoomId != -1) {
+        updateRoomStatusBasedOnBookings(deletedRoomId);
+    }
+    
+    refreshRoomsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ СѓРґР°Р»РµРЅРѕ"), 0);
 }
 
-void MainFrame::OnAddRoom(wxCommandEvent& event) {
- AddRoomDialog dlg(this);
- if (dlg.ShowModal() != wxID_OK) return;
-
- wxString wxRoomNumber = dlg.getRoomNumber();
- wxString wxCategory = dlg.getCategory();
- wxString wxPrice = dlg.getPrice();
-
- long roomNumber =0;
- double price =0.0;
-
- bool okNumber = wxRoomNumber.ToLong(&roomNumber);
- bool okPrice = wxPrice.ToDouble(&price);
-
- if (!okNumber) {
- wxMessageBox("Некорректный номер комнаты.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- if (!okPrice) {
- wxMessageBox("Некорректная цена.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- std::string category = std::string(wxCategory.ToUTF8().data());
- std::vector<std::string> amenities;
-
- int roomId = IdGenerator::generateRoomId();
- rooms.emplace_back(roomId, static_cast<int>(roomNumber), category, price, RoomStatus::AVAILABLE, amenities);
-
- refreshRoomsList();
-}
-
-void MainFrame::OnDeleteRoom(wxCommandEvent& event) {
- if (!listOfRooms) {
- wxLogError("listOfRooms == nullptr");
- return;
- }
-
- long sel = listOfRooms->GetSelection();
- if (sel == wxNOT_FOUND) {
- wxMessageBox("Пожалуйста, выберите комнату для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
-
- void* data = listOfRooms->GetClientData(sel);
- if (!data) {
- wxLogError("Нет client data для выбранной строки");
- return;
- }
-
- int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
-
- // Check for blocking active bookings
- std::vector<int> blocking;
- for (const auto& b : bookings) {
- if (!b.isActive()) continue;
- if (b.getRoomId() == roomId) {
- auto st = b.getStatus();
- if (st == BookingStatus::CONFIRMED || st == BookingStatus::CHECKED_IN) {
- blocking.push_back(b.getId());
- }
- }
- }
- if (!blocking.empty()) {
- wxString msg = "Комнату нельзя удалить — есть активные бронирования:\n";
- for (int id : blocking) msg += wxString::Format(" Бронирование #%d\n", id);
- wxMessageBox(msg, "Ошибка удаления", wxOK | wxICON_ERROR, this);
- return;
- }
-
- if (wxMessageBox("Подтвердить удаление комнаты?", "Подтверждение", wxYES_NO | wxICON_QUESTION, this) != wxYES) {
- return;
- }
-
- // Find room index in vector and erase it
- bool removed = false;
- for (auto it = rooms.begin(); it != rooms.end(); ++it) {
- if (it->getId() == roomId) {
- rooms.erase(it);
- removed = true;
- break;
- }
- }
-
- if (!removed) {
- wxLogError("Не найден объект комнаты с id=%d при попытке удаления", roomId);
- wxMessageBox("Не найден объект комнаты для удаления. Проверьте логи.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // Remove related bookings (erase those that reference this room)
- for (auto it = bookings.begin(); it != bookings.end(); ) {
- if (it->getRoomId() == roomId) it = bookings.erase(it);
- else ++it;
- }
-
- // Remove matching items from the list control
- for (int i = (int)listOfRooms->GetCount() -1; i >=0; --i) {
- void* cd = listOfRooms->GetClientData(i);
- if (!cd) continue;
- int id = static_cast<int>(reinterpret_cast<std::intptr_t>(cd));
- if (id == roomId) listOfRooms->Delete(i);
- }
-
- refreshRoomsList();
- refreshBookingsList();
-}
-
-void MainFrame::OnAddAmenity(wxCommandEvent& event) {
- if (!listOfRooms) {
- wxLogError("listOfRooms == nullptr");
- return;
- }
-
- long sel = listOfRooms->GetSelection();
- if (sel == wxNOT_FOUND) {
- wxMessageBox("Пожалуйста, выберите комнату.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
-
- void* data = listOfRooms->GetClientData(sel);
- if (!data) {
- wxLogError("Нет client data для выбранной строки");
- return;
- }
- int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
- Room* room = findRoomById(roomId);
- if (!room) {
- wxLogError("Не могу найти комнату по ID");
- return;
- }
-
- wxTextEntryDialog dlgAmenity(this, "Введите удобство для комнаты:", "Новое удобство");
- if (dlgAmenity.ShowModal() != wxID_OK) return;
-
- wxString wxAmenity = dlgAmenity.GetValue();
- std::string amenity = std::string(wxAmenity.ToUTF8().data());
-
- room->addAmenity(amenity);
- refreshRoomsList();
-}
-
-void MainFrame::OnAddClient(wxCommandEvent& event) {
- AddClientDialog dlg(this);
- if (dlg.ShowModal() != wxID_OK) return;
-
- wxString wxFirst = dlg.getFirstName();
- wxString wxLast = dlg.getLastName();
- wxString wxPhone = dlg.getPhone();
- Passport passport = dlg.getPassport();
- wxString wxPatronymic = dlg.getPatronymic();
-
- std::string first = std::string(wxFirst.ToUTF8().data());
- std::string last = std::string(wxLast.ToUTF8().data());
- std::string phone = std::string(wxPhone.ToUTF8().data());
- std::string patronymic = std::string(wxPatronymic.ToUTF8().data());
-
- // additional fields
- bool isChild = dlg.isChild();
- bool isForeigner = dlg.isForeigner();
- std::string birthCert = dlg.getBirthCertificate();
- std::string visa = dlg.getVisa();
- std::string intlPass = dlg.getInternationalPassport();
-
- int clientId = IdGenerator::generateClientId();
- clients.emplace_back(clientId, first, last, phone, passport, true, isChild, isForeigner, birthCert, visa, intlPass, patronymic);
-
- refreshClientsList();
-}
-
-void MainFrame::OnDeleteClient(wxCommandEvent& event) {
- if (!listOfClients) {
- wxLogError("listOfClients == nullptr");
- return;
- }
-
- // get selected items
- std::vector<long> sels;
- long it = -1;
- for (it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); it != -1; it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) sels.push_back(it);
- if (sels.empty()) {
- wxMessageBox("Пожалуйста, выберите клиента для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
- if (sels.size() >1) {
- wxMessageBox("Пожалуйста, выберите только одного клиента для удаления.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
- long sel = sels[0];
- int clientId = static_cast<int>(listOfClients->GetItemData(sel));
-
- // Check for active bookings
- std::vector<int> blocking;
- for (const auto& b : bookings) {
- if (!b.isActive()) continue;
- auto ids = b.getClientIds();
- if (std::find(ids.begin(), ids.end(), clientId) != ids.end()) {
- auto st = b.getStatus();
- if (st == BookingStatus::CONFIRMED || st == BookingStatus::CHECKED_IN) {
- blocking.push_back(b.getId());
- }
- }
- }
- if (!blocking.empty()) {
- wxString msg = "Клиента нельзя удалить — есть активные бронирования:\n";
- for (int id : blocking) msg += wxString::Format(" Бронирование #%d\n", id);
- wxMessageBox(msg, "Ошибка удаления", wxOK | wxICON_ERROR, this);
- return;
- }
-
- if (wxMessageBox("Подтвердить удаление клиента?", "Подтверждение", wxYES_NO | wxICON_QUESTION, this) != wxYES) {
- return;
- }
-
- // Remove all clients with this id (handle duplicates from import)
- bool anyRemoved = false;
- for (auto it = clients.begin(); it != clients.end(); ) {
- if (it->getId() == clientId) {
- it = clients.erase(it);
- anyRemoved = true;
- } else ++it;
- }
- if (!anyRemoved) {
- wxLogError("Не найден клиент с id=%d для удаления", clientId);
- wxMessageBox("Не удалось найти клиента для удаления. Проверьте логи.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // Remove related bookings (erase those that reference this client)
- for (auto it = bookings.begin(); it != bookings.end(); ) {
- auto ids = it->getClientIds();
- if (std::find(ids.begin(), ids.end(), clientId) != ids.end()) {
- it = bookings.erase(it);
- } else ++it;
- }
-
- // Remove matching items from the list control
- for (long i = (long)listOfClients->GetItemCount() -1; i >=0; --i) {
- long iddata = listOfClients->GetItemData(i);
- if (static_cast<int>(iddata) == clientId) listOfClients->DeleteItem(i);
- }
-
- refreshClientsList();
- refreshBookingsList();
-}
-void MainFrame::OnEditClient(wxCommandEvent& event) {
- if (!listOfClients) {
- wxLogError("listOfClients == nullptr");
- return;
- }
-
- std::vector<long> sels;
- long it = -1;
- for (it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); it != -1; it = listOfClients->GetNextItem(it, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) sels.push_back(it);
- if (sels.empty()) {
- wxMessageBox("Пожалуйста, выберите клиента для редактирования.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
- if (sels.size() >1) {
- wxMessageBox("Пожалуйста, выберите только одного клиента для редактирования.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
-
- long sel = sels[0];
- int clientId = static_cast<int>(listOfClients->GetItemData(sel));
- Client* client = findClientById(clientId);
- if (!client) { wxLogError("Клиент не найден"); return; }
-
- AddClientDialog dlg(this);
- dlg.setValues(*client);
- if (dlg.ShowModal() != wxID_OK) return;
-
- // update client fields: first, last, phone, passport
- client->setFirstName(std::string(dlg.getFirstName().ToUTF8().data()));
- client->setLastName(std::string(dlg.getLastName().ToUTF8().data()));
- client->setPhone(std::string(dlg.getPhone().ToUTF8().data()));
- client->setPatronymic(std::string(dlg.getPatronymic().ToUTF8().data()));
- Passport p = dlg.getPassport();
- client->setPassport(p);
- // update new fields: child/foreigner flags and documents
- client->setIsChild(dlg.isChild());
- client->setIsForeigner(dlg.isForeigner());
- client->setBirthCertificate(dlg.getBirthCertificate());
- client->setVisa(dlg.getVisa());
- client->setInternationalPassport(dlg.getInternationalPassport());
-
- refreshClientsList();
-}
-void MainFrame::OnEditRoom(wxCommandEvent& event) {
- long sel = listOfRooms->GetSelection();
- if (sel == wxNOT_FOUND) { wxMessageBox("Пожалуйста, выберите комнату для редактирования.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
- void* data = listOfRooms->GetClientData(sel);
- if (!data) { wxLogError("Нет client data для выбранной строки"); return; }
- int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
- Room* room = findRoomById(roomId);
- if (!room) { wxLogError("Не могу найти комнату по ID"); return; }
-
- AddRoomDialog dlg(this);
- dlg.setValues(room->getRoomNumber(), wxString::FromUTF8(room->getCategory().c_str()), room->getPricePerNight());
- if (dlg.ShowModal() != wxID_OK) return;
-
- wxString wxRoomNumber = dlg.getRoomNumber();
- wxString wxCategory = dlg.getCategory();
- wxString wxPrice = dlg.getPrice();
-
- long roomNumber =0; double price =0.0;
- bool okNumber = wxRoomNumber.ToLong(&roomNumber);
- bool okPrice = wxPrice.ToDouble(&price);
- if (!okNumber) { wxMessageBox("Некорректный номер комнаты.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
- if (!okPrice) { wxMessageBox("Некорректная цена.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
-
- // update mutable fields
- room->setPricePerNight(price);
- room->setRoomNumber(static_cast<int>(roomNumber));
- room->setCategory(std::string(wxCategory.ToUTF8().data()));
-
- refreshRoomsList();
-}
-
-void MainFrame::OnCheckIn(wxCommandEvent& event) {
- if (!listOfBookings) { wxLogError("listOfBookings == nullptr"); return; }
- long sel = listOfBookings->GetSelection();
- if (sel == wxNOT_FOUND) { wxMessageBox("Пожалуйста, выберите бронирование для заселения.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
- void* data = listOfBookings->GetClientData(sel);
- if (!data) { wxLogError("Нет client data для выбранной строки"); return; }
- int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
- Booking* booking = nullptr;
- for (auto& b : bookings) if (b.getId() == bookingId) { booking = &b; break; }
- if (!booking) { wxLogError("Бронирование не найдено"); return; }
- if (!booking->isActive()) { wxMessageBox("Бронирование не активно.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
- if (booking->getStatus() == BookingStatus::CHECKED_IN) { wxMessageBox("Клиент уже заселен.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
- if (booking->getStatus() == BookingStatus::CANCELLED || booking->getStatus() == BookingStatus::COMPLETED) { wxMessageBox("Нельзя заселить по отменённой/завершённой броне.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
-
- // ensure today's date is within booking range: use system date
- time_t t = time(nullptr);
- tm local = *localtime(&t);
- Date today(local.tm_mday, local.tm_mon +1, local.tm_year +1900);
- if (today.isBefore(booking->getCheckInDate())) {
- wxMessageBox("Даты бронирования ещё не наступили. Невозможно заселить раньше заезда.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- if (booking->getCheckOutDate().isBefore(today) || booking->getCheckOutDate().equals(today) ) {
- wxMessageBox("Дата отъезда уже наступила или бронь завершена.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- Room* room = findRoomById(booking->getRoomId());
+// ============================================================================
+// Check-In
+// ============================================================================
+void MainFrame::OnCheckIn(wxCommandEvent& event)
+{
+    if (!listOfBookings) return;
+    
+    long sel = listOfBookings->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+  if (sel == -1) {
+        wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РґР»СЏ Р·Р°СЃРµР»РµРЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+    
+    int bookingId = static_cast<int>(listOfBookings->GetItemData(sel));
+    Booking* booking = nullptr;
+    for (auto& b : bookings) {
+        if (b.getId() == bookingId) { booking = &b; break; }
+    }
+    
+    if (!booking) { wxLogError(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РЅРµ РЅР°Р№РґРµРЅРѕ")); return; }
+    if (!booking->isActive()) { wxMessageBox(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РЅРµ Р°РєС‚РёРІРЅРѕ."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this); return; }
+    if (booking->getStatus() == BookingStatus::CHECKED_IN) { wxMessageBox(wxT("РљР»РёРµРЅС‚ СѓР¶Рµ Р·Р°СЃРµР»С‘РЅ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this); return; }
+    if (booking->getStatus() == BookingStatus::CANCELLED || booking->getStatus() == BookingStatus::COMPLETED) {
+        wxMessageBox(wxT("РќРµР»СЊР·СЏ Р·Р°СЃРµР»РёС‚СЊ РїРѕ РѕС‚РјРµРЅС‘РЅРЅРѕР№/Р·Р°РІРµСЂС€С‘РЅРЅРѕР№ Р±СЂРѕРЅРµ."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+    return;
+    }
+    
+    time_t t = time(nullptr);
+    tm local = *localtime(&t);
+    Date today(local.tm_mday, local.tm_mon + 1, local.tm_year + 1900);
+    
+    if (today.isBefore(booking->getCheckInDate())) {
+        wxMessageBox(wxT("Р”Р°С‚Р° Р·Р°РµР·РґР° РµС‰С‘ РЅРµ РЅР°СЃС‚СѓРїРёР»Р°."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+ 
+    Room* room = findRoomById(booking->getRoomId());
  if (room && room->getStatus() == RoomStatus::MAINTENANCE) {
- wxMessageBox("Комната находится на техническом обслуживании — заселение невозможно.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
-
- if (wxMessageBox("Подтвердить заселение?", "Подтверждение", wxYES_NO | wxICON_QUESTION, this) != wxYES) return;
-
- // set booking status and update room (with checks)
- BookingStatus prevStatus = booking->getStatus();
- if (!booking->setStatus(BookingStatus::CHECKED_IN)) {
- wxMessageBox("Невозможно перейти в состояние CHECKED_IN для бронирования (проверьте правило переходов).", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- if (room) {
- if (!room->setStatus(RoomStatus::OCCUPIED)) {
- // rollback booking status
- booking->setStatus(prevStatus);
- wxMessageBox("Не удалось перевести комнату в состояние OCCUPIED. Операция отменена.", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- }
- wxMessageBox("Заселение выполнено.", "Готово", wxOK | wxICON_INFORMATION, this);
- refreshRoomsList();
- refreshBookingsList();
+        wxMessageBox(wxT("РљРѕРјРЅР°С‚Р° РЅР° С‚РµС…РЅРёС‡РµСЃРєРѕРј РѕР±СЃР»СѓР¶РёРІР°РЅРёРё."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this);
+     return;
+    }
+    
+    if (wxMessageBox(wxT("РџРѕРґС‚РІРµСЂРґРёС‚СЊ Р·Р°СЃРµР»РµРЅРёРµ?"), wxT("РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ"), wxYES_NO | wxICON_QUESTION, this) != wxYES) {
+        return;
+    }
+    
+    booking->setStatus(BookingStatus::CHECKED_IN);
+    if (room) {
+        room->setStatus(RoomStatus::OCCUPIED);
+    }
+    
+    refreshRoomsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("Р—Р°СЃРµР»РµРЅРёРµ РІС‹РїРѕР»РЅРµРЅРѕ"), 0);
+    wxMessageBox(wxT("Р—Р°СЃРµР»РµРЅРёРµ РІС‹РїРѕР»РЅРµРЅРѕ СѓСЃРїРµС€РЅРѕ!"), wxT("РЈСЃРїРµС€РЅРѕ"), wxOK | wxICON_INFORMATION, this);
 }
 
-void MainFrame::OnCheckOut(wxCommandEvent& event) {
- if (!listOfBookings) { wxLogError("listOfBookings == nullptr"); return; }
- long sel = listOfBookings->GetSelection();
- if (sel == wxNOT_FOUND) { wxMessageBox("Пожалуйста, выберите бронирование для выселения.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
- void* data = listOfBookings->GetClientData(sel);
- if (!data) { wxLogError("Нет client data для выбранной строки"); return; }
- int bookingId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
- Booking* booking = nullptr;
- for (auto& b : bookings) if (b.getId() == bookingId) { booking = &b; break; }
- if (!booking) { wxLogError("Бронирование не найдено"); return; }
- if (!booking->isActive()) { wxMessageBox("Бронирование не активно.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
- if (booking->getStatus() == BookingStatus::COMPLETED) { wxMessageBox("Бронирование уже завершено.", "Информация", wxOK | wxICON_INFORMATION, this); return; }
- if (booking->getStatus() == BookingStatus::CANCELLED) { wxMessageBox("Нельзя выселить по отменённой броне.", "Ошибка", wxOK | wxICON_ERROR, this); return; }
-
- if (wxMessageBox("Подтвердить выселение?", "Подтверждение", wxYES_NO | wxICON_QUESTION, this) != wxYES) return;
-
- // perform check-out: mark booking completed and set room to CLEANING, with checks
- if (!booking->setStatus(BookingStatus::COMPLETED)) {
- wxMessageBox("Не удалось пометить бронь как COMPLETED (проверьте правило переходов).", "Ошибка", wxOK | wxICON_ERROR, this);
- return;
- }
- Room* roomAfter = findRoomById(booking->getRoomId());
- if (roomAfter) {
- if (!roomAfter->setStatus(RoomStatus::CLEANING)) {
- wxLogWarning("Не удалось перевести комнату %d в CLEANING после выселения.", roomAfter->getId());
- }
- }
-
- wxMessageBox("Выселение выполнено.", "Готово", wxOK | wxICON_INFORMATION, this);
- refreshRoomsList();
- refreshBookingsList();
+// ============================================================================
+// Check-Out
+// ============================================================================
+void MainFrame::OnCheckOut(wxCommandEvent& event)
+{
+    if (!listOfBookings) return;
+    
+    long sel = listOfBookings->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (sel == -1) {
+        wxMessageBox(wxT("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РґР»СЏ РІС‹СЃРµР»РµРЅРёСЏ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+    
+    int bookingId = static_cast<int>(listOfBookings->GetItemData(sel));
+    Booking* booking = nullptr;
+    for (auto& b : bookings) {
+ if (b.getId() == bookingId) { booking = &b; break; }
+    }
+    
+    if (!booking) { wxLogError(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РЅРµ РЅР°Р№РґРµРЅРѕ")); return; }
+    if (!booking->isActive()) { wxMessageBox(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РЅРµ Р°РєС‚РёРІРЅРѕ."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this); return; }
+    if (booking->getStatus() == BookingStatus::COMPLETED) { wxMessageBox(wxT("Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ СѓР¶Рµ Р·Р°РІРµСЂС€РµРЅРѕ."), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this); return; }
+    if (booking->getStatus() == BookingStatus::CANCELLED) { wxMessageBox(wxT("РќРµР»СЊР·СЏ РІС‹СЃРµР»РёС‚СЊ РїРѕ РѕС‚РјРµРЅС‘РЅРЅРѕР№ Р±СЂРѕРЅРµ."), wxT("РћС€РёР±РєР°"), wxOK | wxICON_ERROR, this); return; }
+    
+    if (wxMessageBox(wxT("РџРѕРґС‚РІРµСЂРґРёС‚СЊ РІС‹СЃРµР»РµРЅРёРµ?"), wxT("РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ"), wxYES_NO | wxICON_QUESTION, this) != wxYES) {
+        return;
+    }
+    
+    booking->setStatus(BookingStatus::COMPLETED);
+    Room* room = findRoomById(booking->getRoomId());
+    if (room) {
+        room->setStatus(RoomStatus::CLEANING);
+    }
+    
+    refreshRoomsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    SetStatusText(wxT("Р’С‹СЃРµР»РµРЅРёРµ РІС‹РїРѕР»РЅРµРЅРѕ"), 0);
+    wxMessageBox(wxT("Р’С‹СЃРµР»РµРЅРёРµ РІС‹РїРѕР»РЅРµРЅРѕ СѓСЃРїРµС€РЅРѕ!"), wxT("РЈСЃРїРµС€РЅРѕ"), wxOK | wxICON_INFORMATION, this);
 }
 
-void MainFrame::refreshRoomsList() {
- if (!listOfRooms) return;
- listOfRooms->Clear();
- for (const auto& r : rooms) {
- if (!r.isActive()) continue;
- wxString display = wxString::Format("ID:%d, Номер:%d, Категория:%s, Цена:%.2f, Статус:%s",
- r.getId(),
- r.getRoomNumber(),
- wxString::FromUTF8(r.getCategory().c_str()),
- r.getPricePerNight(),
- wxString::FromUTF8(RoomStatusToString(r.getStatus()).c_str()));
- listOfRooms->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(r.getId())));
- }
- listOfRooms->Refresh();
- listOfRooms->Update();
+// ============================================================================
+// Export CSV
+// ============================================================================
+void MainFrame::OnExportCSV(wxCommandEvent& event)
+{
+    wxFileDialog dlg(this, wxT("Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ РґР»СЏ СЌРєСЃРїРѕСЂС‚Р°"),
+    wxEmptyString, "clients.csv",
+             "CSV files (*.csv)|*.csv", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+ 
+    if (dlg.ShowModal() != wxID_OK) return;
+    
+    wxFileName fn(dlg.GetPath());
+    wxString wxdir = fn.GetPath();
+    std::string dir = std::string(wxdir.ToUTF8().data());
+    std::string err;
+    
+    if (!ExportToCSV(dir, clients, rooms, bookings, err)) {
+        wxMessageBox(wxString::FromUTF8(err.c_str()), wxT("РћС€РёР±РєР° СЌРєСЃРїРѕСЂС‚Р°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    
+    wxString openCmd = wxString::Format("explorer \"%s\"", wxdir);
+    wxExecute(openCmd);
+    
+    SetStatusText(wxT("Р­РєСЃРїРѕСЂС‚ Р·Р°РІРµСЂС€С‘РЅ"), 0);
+    wxMessageBox(wxT("Р­РєСЃРїРѕСЂС‚ Р·Р°РІРµСЂС€С‘РЅ СѓСЃРїРµС€РЅРѕ!"), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
 }
 
-void MainFrame::refreshClientsList() {
- if (!listOfClients) return;
- listOfClients->DeleteAllItems();
- long index =0;
- for (const auto& client : clients) {
- if (!client.isActive()) continue;
- wxString first = wxString::FromUTF8(client.getFirstName().c_str());
- wxString last = wxString::FromUTF8(client.getLastName().c_str());
- wxString phone = wxString::FromUTF8(client.getPhone().c_str());
- wxString idstr = wxString::Format("%d", client.getId());
- long pos = listOfClients->InsertItem(index, idstr);
- listOfClients->SetItem(pos,1, first);
- listOfClients->SetItem(pos,2, last);
- listOfClients->SetItem(pos,3, phone);
- // store client id in item data
- listOfClients->SetItemData(pos, static_cast<long>(client.getId()));
- ++index;
- }
- listOfClients->Refresh();
- listOfClients->Update();
-}
-
-void MainFrame::refreshBookingsList() {
- if (!listOfBookings) return;
- listOfBookings->Clear();
- for (size_t i =0; i < bookings.size(); ++i) {
- const Booking& b = bookings[i];
- if (!b.isActive()) continue;
- Room* room = findRoomById(b.getRoomId());
- wxString roomInfo = room ? wxString::Format("Room %d", room->getRoomNumber()) : "Room not found";
-
- std::string clientsStr;
- std::vector<int> ids = b.getClientIds();
- for (size_t j =0; j < ids.size(); ++j) {
- Client* c = findClientById(ids[j]);
- if (c) {
- if (!clientsStr.empty()) clientsStr += ", ";
- clientsStr += c->getFullName();
- }
- }
- if (clientsStr.empty()) clientsStr = "Clients not found";
-
- wxString display = wxString::Format("Booking #%d: %s, %s, %s - %s, %.2f",
- b.getId(),
- roomInfo,
- wxString::FromUTF8(clientsStr.c_str()),
- wxString::FromUTF8(b.getCheckInDate().toString().c_str()),
- wxString::FromUTF8(b.getCheckOutDate().toString().c_str()),
- b.getTotalPrice());
-
- listOfBookings->Append(display, reinterpret_cast<void*>(static_cast<std::intptr_t>(b.getId())));
- }
- listOfBookings->Refresh();
- listOfBookings->Update();
-}
-
-Room* MainFrame::findRoomById(int roomId) {
- for (auto& room : rooms) {
- if (room.getId() == roomId) return &room;
- }
- return nullptr;
-}
-
-Client* MainFrame::findClientById(int clientId) {
- for (auto& client : clients) {
- if (client.getId() == clientId) return &client;
- }
- return nullptr;
-}
-
-void MainFrame::OnExportCSV(wxCommandEvent& event) {
- // Let user pick a target file (any file in desired folder) so they can use file search
- wxFileDialog dlg(this, "Выберите файл в папке для экспорта (будут созданы clients.csv, rooms.csv, bookings.csv в той же папке)",
- wxEmptyString, "clients.csv",
- "CSV files (*.csv)|*.csv", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
- if (dlg.ShowModal() != wxID_OK) return;
-
+// ============================================================================
+// Import CSV
+// ============================================================================
+void MainFrame::OnImportCSV(wxCommandEvent& event)
+{
+    wxFileDialog dlg(this, wxT("Р’С‹Р±РµСЂРёС‚Рµ CSV-С„Р°Р№Р» РёР· РїР°РїРєРё"),
+           wxEmptyString, wxEmptyString,
+   "CSV files (*.csv)|*.csv", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    
+    if (dlg.ShowModal() != wxID_OK) return;
+    
  wxFileName fn(dlg.GetPath());
- wxString wxdir = fn.GetPath();
+    wxString wxdir = fn.GetPath();
  std::string dir = std::string(wxdir.ToUTF8().data());
- std::string err;
- if (!ExportToCSV(dir, clients, rooms, bookings, err)) {
- wxMessageBox(wxString::FromUTF8(err.c_str()), "Ошибка экспорта", wxOK | wxICON_ERROR, this);
- return;
- }
-
- // Open folder in Explorer so user can see files (use native path)
- wxString openCmd = wxString::Format("explorer \"%s\"", wxdir);
- wxExecute(openCmd);
-
- wxMessageBox("Экспорт завершён", "Информация", wxOK | wxICON_INFORMATION, this);
-}
-
-
-void MainFrame::OnImportCSV(wxCommandEvent& event) {
- // Let user pick any CSV file in folder to import all CSVs from that folder (searchable)
- wxFileDialog dlg(this, "Выберите CSV-файл из папки с файлами (clients.csv/rooms.csv/bookings.csv)",
- wxEmptyString, wxEmptyString,
- "CSV files (*.csv)|*.csv", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
- if (dlg.ShowModal() != wxID_OK) return;
-
- wxFileName fn(dlg.GetPath());
- wxString wxdir = fn.GetPath();
- std::string dir = std::string(wxdir.ToUTF8().data());
-
- std::string err;
+    
+    std::string err;
  int nextC = IdGenerator::getNextClientId();
- int nextR = IdGenerator::getNextRoomId();
- int nextB = IdGenerator::getNextBookingId();
- if (!ImportFromCSV(dir, clients, rooms, bookings, nextC, nextR, nextB, err)) {
- wxMessageBox(wxString::FromUTF8(err.c_str()), "Ошибка импорта", wxOK | wxICON_ERROR, this);
- return;
- }
- IdGenerator::setNextIds(nextC, nextR, nextB);
- refreshClientsList();
- refreshRoomsList();
- refreshBookingsList();
- wxMessageBox("Импорт завершён", "Информация", wxOK | wxICON_INFORMATION, this);
+    int nextR = IdGenerator::getNextRoomId();
+    int nextB = IdGenerator::getNextBookingId();
+    
+    if (!ImportFromCSV(dir, clients, rooms, bookings, nextC, nextR, nextB, err)) {
+        wxMessageBox(wxString::FromUTF8(err.c_str()), wxT("РћС€РёР±РєР° РёРјРїРѕСЂС‚Р°"), wxOK | wxICON_ERROR, this);
+        return;
+    }
+    
+    IdGenerator::setNextIds(nextC, nextR, nextB);
+    refreshClientsList();
+    refreshRoomsList();
+    refreshBookingsList();
+    MarkDataChanged();  // РЎРѕС…СЂР°РЅРµРЅРёРµ!
+    
+    SetStatusText(wxT("РРјРїРѕСЂС‚ Р·Р°РІРµСЂС€С‘РЅ"), 0);
+    wxMessageBox(wxT("РРјРїРѕСЂС‚ Р·Р°РІРµСЂС€С‘РЅ СѓСЃРїРµС€РЅРѕ!"), wxT("РРЅС„РѕСЂРјР°С†РёСЏ"), wxOK | wxICON_INFORMATION, this);
 }
 
-void MainFrame::OnChangeRoomStatus(wxCommandEvent& event) {
- if (!listOfRooms) {
- wxLogError("listOfRooms == nullptr");
- return;
- }
- long sel = listOfRooms->GetSelection();
- if (sel == wxNOT_FOUND) {
- wxMessageBox("Выберите комнату.", "Информация", wxOK | wxICON_INFORMATION, this);
- return;
- }
- void* data = listOfRooms->GetClientData(sel);
- if (!data) { wxLogError("no client data for room list item"); return; }
- int roomId = static_cast<int>(reinterpret_cast<std::intptr_t>(data));
- Room* room = findRoomById(roomId);
- if (!room) { wxLogError("room not found by id"); return; }
-
- // build choices
- std::vector<RoomStatus> statuses = { RoomStatus::AVAILABLE, RoomStatus::BOOKED, RoomStatus::OCCUPIED, RoomStatus::MAINTENANCE, RoomStatus::CLEANING };
- wxArrayString choices;
- for (auto s : statuses) choices.Add(wxString::FromUTF8(RoomStatusToString(s).c_str()));
-
- wxSingleChoiceDialog dlg(this, "Выберите новый статус комнаты:", "Изменить статус", choices);
- // preselect current
- int curIndex =0;
- for (size_t i=0;i<statuses.size();++i) if (statuses[i] == room->getStatus()) { curIndex = (int)i; break; }
- dlg.SetSelection(curIndex);
-
- if (dlg.ShowModal() == wxID_OK) {
- int selIdx = dlg.GetSelection();
- if (selIdx >=0 && selIdx < (int)statuses.size()) {
- room->setStatus(statuses[selIdx]);
- refreshRoomsList();
- }
- }
+// ============================================================================
+// Help
+// ============================================================================
+void MainFrame::OnHelp(wxCommandEvent& event)
+{
+    wxString helpText =
+        wxT("РЎРџР РђР’РљРђ РџРћ РџР РР›РћР–Р•РќРР®\n")
+        wxT("Р‘Р«РЎРўР Р«Р™ РЎРўРђР Рў:\n")
+ wxT("1. Р”РѕР±Р°РІСЊС‚Рµ РєР»РёРµРЅС‚РѕРІ (РєРЅРѕРїРєР° '+ Р”РѕР±Р°РІРёС‚СЊ РєР»РёРµРЅС‚Р°')\n")
+   wxT("2. Р”РѕР±Р°РІСЊС‚Рµ РєРѕРјРЅР°С‚С‹ (РєРЅРѕРїРєР° '+ Р”РѕР±Р°РІРёС‚СЊ РєРѕРјРЅР°С‚Сѓ')\n")
+        wxT("3. Р’С‹Р±РµСЂРёС‚Рµ РєР»РёРµРЅС‚РѕРІ Рё РєРѕРјРЅР°С‚Сѓ, СЃРѕР·РґР°Р№С‚Рµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ\n")
+     wxT("4. РСЃРїРѕР»СЊР·СѓР№С‚Рµ 'Р—Р°СЃРµР»РµРЅРёРµ' Рё 'Р’С‹СЃРµР»РµРЅРёРµ' РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ\n\n")
+      wxT("РњРќРћР–Р•РЎРўР’Р•РќРќР«Р™ Р’Р«Р‘РћР  Р“РћРЎРўР•Р™:\n")
+        wxT("вЂў Ctrl + Click вЂ” РґРѕР±Р°РІРёС‚СЊ/СѓР±СЂР°С‚СЊ РєР»РёРµРЅС‚Р°\n")
+        wxT("вЂў Shift + Click вЂ” РІС‹Р±СЂР°С‚СЊ РґРёР°РїР°Р·РѕРЅ РєР»РёРµРЅС‚РѕРІ\n")
+        wxT("вЂў РњРѕР¶РЅРѕ Р·Р°СЃРµР»РёС‚СЊ РЅРµСЃРєРѕР»СЊРєРёС… РіРѕСЃС‚РµР№ РІ РѕРґРЅСѓ РєРѕРјРЅР°С‚Сѓ\n\n")
+        wxT("РђР’РўРћРЎРћРҐР РђРќР•РќРР•:\n")
+        wxT("вЂў Р”Р°РЅРЅС‹Рµ СЃРѕС…СЂР°РЅСЏСЋС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РєР°Р¶РґС‹Рµ 30 СЃРµРє\n")
+ wxT("вЂў РўР°РєР¶Рµ СЃРѕС…СЂР°РЅСЏСЋС‚СЃСЏ РїРѕСЃР»Рµ РєР°Р¶РґРѕРіРѕ РёР·РјРµРЅРµРЅРёСЏ\n")
+        wxT("вЂў Р’СЂРµРјСЏ РїРѕСЃР»РµРґРЅРµРіРѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ вЂ” РІ СЃС‚Р°С‚СѓСЃ-Р±Р°СЂРµ\n\n")
+      wxT("Р“РћР РЇР§РР• РљР›РђР’РРЁР:\n")
+        wxT("вЂў Р”РІРѕР№РЅРѕР№ РєР»РёРє вЂ” СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРё\n\n")
+        wxT("в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ\n")
+        wxT("Р’РµСЂСЃРёСЏ 1.1 | В© 2024");
+    
+    wxMessageBox(helpText, wxT("РЎРїСЂР°РІРєР°"), wxOK | wxICON_INFORMATION, this);
 }
 
-void MainFrame::updateRoomStatusBasedOnBookings(int roomId) {
- Room* room = findRoomById(roomId);
- if (!room) return;
- // compute today's date
- time_t t = time(nullptr);
- tm local = *localtime(&t);
- Date today(local.tm_mday, local.tm_mon +1, local.tm_year +1900);
-
- // don't override maintenance
- if (room->getStatus() == RoomStatus::MAINTENANCE) return;
-
- // Find active bookings for this room, determine priority: CHECKED_IN -> OCCUPIED
- Booking* mostRecentCompleted = nullptr;
- bool hasFutureConfirmed = false;
- for (auto& b : bookings) {
- if (!b.isActive()) continue;
- if (b.getRoomId() != roomId) continue;
- if (b.getStatus() == BookingStatus::CHECKED_IN) {
- room->setStatus(RoomStatus::OCCUPIED);
- return;
- }
- if (b.getStatus() == BookingStatus::CONFIRMED) {
- // if booking starts today or later
- if (b.getCheckInDate().equals(today) || b.getCheckInDate().isAfter(today)) hasFutureConfirmed = true;
- }
- if (b.getStatus() == BookingStatus::COMPLETED) {
- mostRecentCompleted = const_cast<Booking*>(&b);
- }
- }
-
- if (hasFutureConfirmed) {
- if (!room->setStatus(RoomStatus::BOOKED)) {
- wxLogWarning("Не удалось установить ROOM BOOKED для комнаты %d", room->getId());
- }
- return;
- }
-
- // if most recent booking is completed and room is not available, mark for cleaning
- if (mostRecentCompleted) {
- if (!room->setStatus(RoomStatus::CLEANING)) {
- // if cannot set to CLEANING, ensure at least AVAILABLE
- wxLogWarning("Не удалось установить CLEANING для комнаты %d; проверяю доступность.", room->getId());
- }
- return;
- }
-
- // otherwise make available
- if (!room->setStatus(RoomStatus::AVAILABLE)) {
- wxLogWarning("Не удалось установить AVAILABLE для комнаты %d", room->getId());
- }
-}
-void MainFrame::OnHelp(wxCommandEvent& event) {
- // Brief help text with CSV schema reference
- wxString helpText =
- "Справка по приложению:\n\n"
- "- Чтобы создать клиента/комнату/бронирование, используйте соответствующие кнопки слева.\n"
- "- Для множественного выбора клиентов используйте Ctrl/Shift при клике на списке клиентов.\n"
- "- Экспорт/импорт CSV: сохраняются/читаются файлы clients.csv, rooms.csv, bookings.csv в выбранной папке.\n\n"
- "CSV схема (clients.csv): id,firstName,lastName,phone,active,passport_series,passport_number,passport_givenBy,"
- "passport_issue_day,passport_issue_month,passport_issue_year,passport_code,passport_fio,passport_birth_day,passport_birth_month,passport_birth_year,"
- "isChild,isForeigner,birthCertificate,visa,internationalPassport\n"
- "Если при импорте обнаружены несовместимости, приложение покажет предупреждения.";
-
- wxMessageBox(helpText, "Справка", wxOK | wxICON_INFORMATION, this);
+// ============================================================================
+// Update room status based on bookings
+// ============================================================================
+void MainFrame::updateRoomStatusBasedOnBookings(int roomId)
+{
+    Room* room = findRoomById(roomId);
+    if (!room) return;
+    
+    time_t t = time(nullptr);
+    tm local = *localtime(&t);
+    Date today(local.tm_mday, local.tm_mon + 1, local.tm_year + 1900);
+    
+  if (room->getStatus() == RoomStatus::MAINTENANCE) return;
+    
+    bool hasCheckedIn = false;
+    bool hasFutureConfirmed = false;
+    bool hasCompleted = false;
+    
+for (const auto& b : bookings) {
+        if (!b.isActive()) continue;
+  if (b.getRoomId() != roomId) continue;
+        
+      if (b.getStatus() == BookingStatus::CHECKED_IN) {
+   hasCheckedIn = true;
+      }
+        if (b.getStatus() == BookingStatus::CONFIRMED) {
+ if (b.getCheckInDate().equals(today) || b.getCheckInDate().isAfter(today)) {
+ hasFutureConfirmed = true;
+     }
+        }
+     if (b.getStatus() == BookingStatus::COMPLETED) {
+    hasCompleted = true;
+        }
+    }
+    
+    if (hasCheckedIn) {
+  room->setStatus(RoomStatus::OCCUPIED);
+    } else if (hasFutureConfirmed) {
+      room->setStatus(RoomStatus::BOOKED);
+    } else if (hasCompleted) {
+        room->setStatus(RoomStatus::CLEANING);
+    } else {
+        room->setStatus(RoomStatus::AVAILABLE);
+    }
 }
