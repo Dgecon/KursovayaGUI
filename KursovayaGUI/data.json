@@ -20,6 +20,26 @@
       "roomId": 1,
       "status": 1,
       "totalPrice": 22000.0
+    },
+    {
+      "active": true,
+      "checkIn": {
+        "day": 22,
+        "month": 1,
+        "year": 2026
+      },
+      "checkOut": {
+        "day": 24,
+        "month": 1,
+        "year": 2026
+      },
+      "clientIds": [
+        16
+      ],
+      "id": 11,
+      "roomId": 18,
+      "status": 1,
+      "totalPrice": 20000.0
     }
   ],
   "clients": [
@@ -265,9 +285,9 @@
     }
   ],
   "nextIds": {
-    "booking": 11,
+    "booking": 12,
     "client": 17,
-    "room": 18
+    "room": 19
   },
   "rooms": [
     {
@@ -368,6 +388,15 @@
       "pricePerNight": 5000.0,
       "roomNumber": 9,
       "status": "Доступна"
+    },
+    {
+      "active": true,
+      "amenities": [],
+      "category": "Президентский",
+      "id": 18,
+      "pricePerNight": 10000.0,
+      "roomNumber": 10,
+      "status": "Забронирована"
     }
   ],
   "version": 1

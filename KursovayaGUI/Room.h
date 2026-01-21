@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <cstdint>
 #include "RoomStatus.h"
+#include "Money.h"
 
 class Room
 {
@@ -9,19 +11,28 @@ private:
     int id; // уникальный ID комнаты
     int roomNumber; // номер комнаты
     std::string category;
-    double pricePerNight;
+    Money pricePerNight;
     RoomStatus status;
     std::vector<std::string> amenities;
     bool active = true;
 public:
+    Room(int id, int roomNumber, const std::string& category, Money pricePerNight,
+        RoomStatus status, const std::vector<std::string>& amenities, bool active = true);
+
+    // Back-compat constructor for existing code that still passes double.
     Room(int id, int roomNumber, const std::string& category, double pricePerNight,
         RoomStatus status, const std::vector<std::string>& amenities, bool active = true);
+
     int getId() const { return id; }
     int getRoomNumber() const;
     std::string getCategory() const;
-    double getPricePerNight() const;
+
+    Money getPricePerNight() const;
+    double getPricePerNightDouble() const; // only for UI formatting/back-compat
+
     RoomStatus getStatus() const;
     std::vector<std::string> getAmenities() const;
+    void setPricePerNight(Money price);
     void setPricePerNight(double price);
 
     // Try to change room status. Returns true if transition is allowed and applied.

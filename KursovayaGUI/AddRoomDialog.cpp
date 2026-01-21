@@ -36,8 +36,9 @@ wxString AddRoomDialog::getRoomNumber() const { return m_roomNumber->GetValue();
 wxString AddRoomDialog::getCategory() const { return m_category->GetValue(); }
 wxString AddRoomDialog::getPrice() const { return m_price->GetValue(); }
 
-void AddRoomDialog::setValues(int roomNumber, const wxString& category, double price) {
+void AddRoomDialog::setValues(int roomNumber, const wxString& category, Money price)
+{
     m_roomNumber->SetValue(wxString::Format(wxT("%d"), roomNumber));
     m_category->SetValue(category);
-    m_price->SetValue(wxString::Format(wxT("%.2f"), price));
+    m_price->SetValue(wxString::FromUTF8(price.ToString().c_str()));
 }

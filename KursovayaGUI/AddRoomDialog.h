@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wx/wx.h>
+#include "Money.h"
 
 class AddRoomDialog : public wxDialog
 {
@@ -12,7 +13,7 @@ public:
  wxString getPrice() const;
 
  // prefill values for editing
- void setValues(int roomNumber, const wxString& category, double price);
+ void setValues(int roomNumber, const wxString& category, Money price);
 
 private:
  wxTextCtrl* m_roomNumber;

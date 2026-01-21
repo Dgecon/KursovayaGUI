@@ -5,6 +5,7 @@
 #include "RoomStatus.h"
 #include "Date.h"
 #include "Passport.h"
+#include "Money.h"
 #include <fstream>
 #include <cstdio>
 #include <nlohmann/json.hpp>
@@ -55,7 +56,6 @@ bool SaveData(const std::string& path,
  {"phone", c.getPhone()},
  {"passport", jp},
  {"active", c.isActive()},
- // new fields
  {"isChild", c.getIsChild()},
  {"isForeigner", c.getIsForeigner()},
  {"birthCertificate", c.getBirthCertificate()},
@@ -70,7 +70,8 @@ bool SaveData(const std::string& path,
  {"id", r.getId()},
  {"roomNumber", r.getRoomNumber()},
  {"category", r.getCategory()},
- {"pricePerNight", r.getPricePerNight()},
+ // store as classic rubles with2 decimals for back-compat
+ {"pricePerNight", r.getPricePerNightDouble()},
  {"status", RoomStatusToStr(r.getStatus())},
  {"amenities", r.getAmenities()},
  {"active", r.isActive()}
@@ -88,7 +89,8 @@ bool SaveData(const std::string& path,
  {"checkIn", { {"day", ci.getDay()}, {"month", ci.getMonth()}, {"year", ci.getYear()} }},
  {"checkOut", { {"day", co.getDay()}, {"month", co.getMonth()}, {"year", co.getYear()} }},
  {"status", (int)b.getStatus()},
- {"totalPrice", b.getTotalPrice()},
+ // store as rubles (double) for back-compat
+ {"totalPrice", b.getTotalPriceDouble()},
  {"active", b.isActive()}
  });
  }
@@ -183,12 +185,12 @@ bool LoadData(const std::string& path,
  int id = jr.value("id",0);
  int roomNumber = jr.value("roomNumber",0);
  std::string category = jr.value("category", std::string());
- double price = jr.value("pricePerNight",0.0);
+ double priceD = jr.value("pricePerNight",0.0);
  RoomStatus status = RoomStatusFromStr(jr.value("status", std::string()));
  std::vector<std::string> amenities;
  if (jr.contains("amenities")) for (auto& a : jr["amenities"]) amenities.push_back(a.get<std::string>());
  bool active = jr.value("active", true);
- rooms.emplace_back(id, roomNumber, category, price, status, amenities, active);
+ rooms.emplace_back(id, roomNumber, category, priceD, status, amenities, active);
  }
  }
 
@@ -283,8 +285,9 @@ bool ExportToCSV(const std::string& dir,
  rf << "id,roomNumber,category,pricePerNight,status,amenities,active\n";
  for (const auto& r: rooms) {
  std::stringstream ss;
- ss << r.getId() << ',' << r.getRoomNumber() << ',' << escapeCsv(r.getCategory()) << ',' << std::fixed << std::setprecision(2) << r.getPricePerNight() << ',' << escapeCsv(RoomStatusToString(r.getStatus())) << ',';
- // amenities as semicolon-separated inside quotes
+ ss << r.getId() << ',' << r.getRoomNumber() << ',' << escapeCsv(r.getCategory())
+ << ',' << std::fixed << std::setprecision(2) << r.getPricePerNightDouble() << ','
+ << escapeCsv(RoomStatusToString(r.getStatus())) << ',';
  ss << '"';
  bool first=true;
  for (auto &a: r.getAmenities()) { if (!first) ss<<";"; ss<<a; first=false; }
@@ -303,7 +306,8 @@ bool ExportToCSV(const std::string& dir,
  for (int id: b.getClientIds()) { if (!first) ss<<";"; ss<<id; first=false; }
  ss << '"' << ',' << b.getCheckInDate().getDay() << ',' << b.getCheckInDate().getMonth() << ',' << b.getCheckInDate().getYear()
  << ',' << b.getCheckOutDate().getDay() << ',' << b.getCheckOutDate().getMonth() << ',' << b.getCheckOutDate().getYear()
- << ',' << (int)b.getStatus() << ',' << std::fixed << std::setprecision(2) << b.getTotalPrice() << ',' << (b.isActive()?"1":"0");
+ << ',' << (int)b.getStatus() << ',' << std::fixed << std::setprecision(2) << b.getTotalPriceDouble()
+ << ',' << (b.isActive()?"1":"0");
  bf << ss.str() << '\n';
  }
  bf.close();

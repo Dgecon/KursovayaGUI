@@ -5,6 +5,7 @@
 #include <vector>
 #include "Date.h"
 #include "BookingStatus.h"
+#include "Money.h"
 
 class Booking {
 private:
@@ -14,7 +15,7 @@ private:
     Date checkInDate;
     Date checkOutDate;
     BookingStatus status;
-    double totalPrice = 0.0;
+    Money totalPrice = Money::FromKopeks(0);
     bool active = true;
 
 public:
@@ -27,7 +28,9 @@ public:
     Date getCheckInDate() const;
     Date getCheckOutDate() const;
     BookingStatus getStatus() const;
-    double getTotalPrice() const;
+
+    Money getTotalPrice() const;
+    double getTotalPriceDouble() const; // only for UI formatting/back-compat
 
     // Try to change booking status. Returns true if transition is allowed and applied.
     // Allowed transitions (typical):
@@ -38,7 +41,9 @@ public:
     bool setStatus(BookingStatus newStatus);
     bool canTransition(BookingStatus newStatus) const;
 
+    void setTotalPrice(Money p);
     void setTotalPrice(double p);
+
     bool isActive() const;
     void setActive(bool v);
 

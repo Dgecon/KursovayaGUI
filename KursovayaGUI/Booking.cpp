@@ -2,7 +2,8 @@
 #include <sstream>
 
 Booking::Booking(int bookingId, int roomId, const std::vector<int>& clientIds, const Date& checkIn, const Date& checkOut, bool active)
-: id(bookingId), roomId(roomId), clientIds(clientIds), checkInDate(checkIn), checkOutDate(checkOut), status(BookingStatus::CONFIRMED), totalPrice(0.0), active(active)
+ : id(bookingId), roomId(roomId), clientIds(clientIds), checkInDate(checkIn), checkOutDate(checkOut),
+ status(BookingStatus::CONFIRMED), totalPrice(Money::FromKopeks(0)), active(active)
 {
 }
 
@@ -12,7 +13,8 @@ std::vector<int> Booking::getClientIds() const { return clientIds; }
 Date Booking::getCheckInDate() const { return checkInDate; }
 Date Booking::getCheckOutDate() const { return checkOutDate; }
 BookingStatus Booking::getStatus() const { return status; }
-double Booking::getTotalPrice() const { return totalPrice; }
+Money Booking::getTotalPrice() const { return totalPrice; }
+double Booking::getTotalPriceDouble() const { return totalPrice.ToDouble(); }
 
 bool Booking::canTransition(BookingStatus newStatus) const {
  if (status == newStatus) return true;
@@ -35,7 +37,13 @@ bool Booking::setStatus(BookingStatus newStatus) {
  return true;
 }
 
-void Booking::setTotalPrice(double p) { totalPrice = p; }
+void Booking::setTotalPrice(Money p) { totalPrice = p; }
+void Booking::setTotalPrice(double p)
+{
+ const auto kopeks = static_cast<Money::storage_type>(p *100.0 + (p >=0 ?0.5 : -0.5));
+ totalPrice = Money::FromKopeks(kopeks);
+}
+
 bool Booking::isActive() const { return active; }
 void Booking::setActive(bool v) { active = v; }
 
